@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <header class="header">
+        <nav class="menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            <div class="logo">
+                <img src="../imagenes/foto.jpg" alt="Logo" class="imagen">
+            </div>
+            <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="inicio.html">Inicio</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="metodologias.html">Metodologías</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        
+        <!-- Formulario para registrar metodologías -->
+        <section class="seccion-general" id="formulario-seccion">
+            <h2>Registrar Nueva Metodología de Aprendizaje</h2>
+            
+            <form action="#" class="formulario" id="formulario">
+
+                <!-- Código automatico -->
+                <div class="formulario_grupo" id="grupo_codigo">
+                    <label class="formulario_label">Código Automatico</label>
+                    <div class="formulario_grupo-input">
+                        <input type="text" class="formulario_input" name="codigo" id="codigo" readonly placeholder="Auto-generado">
+                    </div>
+                </div>
+
+                <!-- Nombre de la Metodología -->
+                <div class="formulario_grupo" id="grupo_nombre">
+                    <label class="formulario_label">Nombre de la Metodología</label>
+                    <div class="formulario_grupo-input">
+                        <input type="text" class="formulario_input" name="nombre" id="nombre" placeholder="Ej. Aprendizaje Basado en Proyectos">
+                        <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                    </div>
+                    <p class="formulario_input-error">El nombre de la metodología es obligatoria.</p>
+                </div>
+
+                <!-- Descripción metodologia -->
+                <div class="formulario_grupo" id="grupo_descripcion" style="grid-column: span 2;">
+                    <label class="formulario_label">Descripcin</label>
+                    <div class="formulario_grupo-input">
+                        <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la metodología..."></textarea>
+                    </div>
+                </div>
+</body>
+</html
