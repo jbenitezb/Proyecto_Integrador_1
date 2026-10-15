@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Sistema de Desarrollo Curricular y Docente</title>
+    <link rel="stylesheet" href="ejemplo_html_css Proyecln_1.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav_menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            
+            <div class="logo">
+                <img src="../ejemplo proyect_Int1CSS_HTML/images-removebg-preview.png" alt="Logo Institucional" class="imagen_logo">
+                <span class="logo_texto"></span>
+            </div>
+
+            <!-- Opciones del menú (adaptables a hamburguesa en móvil) -->
+            <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="#inicio">INICIO</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="#perfil">PERFIL</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="#cursos">CURSOS</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- parte principal -->
+    <main id="perfil">
+        
+        <section class="seccion-perfil-contenedor">
+            <h1 class="perfil_titulo">PERFIL</h1>
+            
+            <div class="perfil_grid-layout">
+                
+                <!-- Parte izquierda: Imagen y cambiar foto -->
+                <aside class="perfil_columna-foto">
+                    <div class="perfil_cuadro-imagen">
+                        <img src="../ejemplo proyect_Int1CSS_HTML/Captura de pantalla 2026-10-14 024450.png" alt="Foto de perfil" class="perfil_img-usuario">
+                    </div>
+                    <button class="btn_enviar perfil_btn-cambiar">CAMBIAR IMAGEN</button>
+                </aside>
+
+                <!-- Parte derecha: Formulario de Perfil -->
+                <div class="perfil_columna-formulario">
+                    <form action="#" class="formulario" id="formulario">
+                        
+                        <div class="formulario__grupo" id="grupo__nombre">
+                            <label class="formulario__label" for="nombre">NOMBRE</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="NOMBRE">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__apellidos">
+                            <label class="formulario__label" for="apellidos">APELLIDOS</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" class="formulario__input" name="apellidos" id="apellidos" placeholder="APELLIDOS">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__identificacion">
+                            <label class="formulario__label" for="identificacion">IDENTIFICACIÓN</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" class="formulario__input" name="identificacion" id="identificacion" placeholder="IDENTIFICACIÓN">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__correo">
+                            <label class="formulario__label" for="correo">CORREO</label>
+                            <div class="formulario__grupo-input">
+                                <input type="email" class="formulario__input" name="correo" id="correo" placeholder="CORREO">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__telefono">
+                            <label class="formulario__label" for="telefono">TELÉFONO</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" class="formulario__input" name="telefono" id="telefono" placeholder="TELÉFONO">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__fechanac">
+                            <label class="formulario__label" for="fechanac">FECHA DE NACIMIENTO</label>
+                            <div class="formulario__grupo-input">
+                                <input type="date" class="formulario__input" name="fechanac" id="fechanac">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__sexo">
+                            <label class="formulario__label" for="sexo">SEXO</label>
+                            <div class="formulario__grupo-input">
+                                <select class="formulario__input" name="sexo" id="sexo">
+                                    <option value="">SEXO</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__edad">
+                            <label class="formulario__label" for="edad">EDAD (CALCULADA)</label>
+                            <div class="formulario__grupo-input">
+                                <input type="text" class="formulario__input input-calculado" name="edad" id="edad" placeholder="EDAD (CALCULADA)" readonly>
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__password">
+                            <label class="formulario__label" for="password">CONTRASEÑA</label>
+                            <div class="formulario__grupo-input">
+                                <input type="password" class="formulario__input" name="password" id="password" placeholder="CONTRASEÑA">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo" id="grupo__password2">
+                            <label class="formulario__label" for="password2">CONFIRMAR CONTRASEÑA</label>
+                            <div class="formulario__grupo-input">
+                                <input type="password" class="formulario__input" name="password2" id="password2" placeholder="CONFIRMAR CONTRASEÑA">
+                            </div>
+                        </div>
+
+                        <div class="formulario__grupo formulario__grupo-acciones">
+                            <button type="button" class="btn_cancelar">CANCELAR</button>
+                            <input class="btn_enviar" type="submit" value="GUARDAR">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Fooder color tomado de ejemplo de de la pagina genral de la U -->
+    <footer class="footer_referencia">
+        <div class="footer_columna">
+            <h3>REDES SOCIALES</h3>
+            <div class="footer_redes">
+                <a href="#">f</a>
+                <a href="#">𝕏</a>
+                <a href="#">▶</a>
+                <a href="#">in</a>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>BUSCAR</h3>
+            <div class="footer_buscador">
+                <input type="text" placeholder="Buscar...">
+                <button>🔍</button>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>VÍNCULOS DE INTERÉS</h3>
+            <ul>
+                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">> Centro de Asistencia</a></li>
+             
+            </ul>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
