@@ -1,0 +1,316 @@
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Roboto, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 1rem;
+    line-height: 1.30;
+}
+
+/* parte de menú de navegaci;on */
+.nav_menu {
+    background-color: #084599;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 2px solid #03265A;
+    position: relative;
+}
+.imagen_logo {
+    height: 60px;       
+    width: auto;      
+    object-fit: contain;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo_texto {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.opciones {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.enlace_menu {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.enlace_menu:hover, .enlace_activo {
+    border-bottom: 2px solid #ffffff;
+}
+
+.btn_header {
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn_idioma {
+    background-color: #084599; 
+    color: #ffffff;
+    border: none;              
+    border-radius: 20px;
+}
+
+.btn_idioma:hover {
+    background-color: #03265A; 
+    color: #ffffff;
+}
+
+.btn_salir {
+    background-color: #DC2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn_salir:hover {
+    background-color: #B91C1C;
+}
+
+#check {
+    display: none;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+/* parte general de perfil */
+.seccion-perfil-contenedor {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.perfil_titulo {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #084599;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.perfil_grid-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.perfil_columna-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.perfil_cuadro-imagen {
+    width: 150px;
+    height: 180px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil_img-usuario {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Formulario */
+.formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.formulario__label {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.formulario__input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.formulario__input:focus {
+    border-color: #084599;
+}
+
+.input-calculado {
+    background-color: #e2e8f0;
+    color: #718096;
+    cursor: not-allowed;
+}
+
+.formulario__grupo-acciones {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn_enviar {
+    padding: 8px 20px;
+    background-color: #084599;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn_cancelar {
+    padding: 8px 20px;
+    background-color: #cbd5e0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Footer color tomado de la página general de la U  */
+.footer_referencia {
+    background-color: #222222;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 40px 10%;
+    margin-top: 50px;
+}
+
+.footer_columna h3 {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.footer_redes {
+    display: flex;
+    gap: 15px;
+}
+
+.footer_redes a {
+    color: white;
+    text-decoration: none;
+    background: #333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.footer_buscador {
+    display: flex;
+    background: white;
+    border-radius: 3px;
+    overflow: hidden;
+    max-width: 250px;
+}
+
+.footer_buscador input {
+    border: none;
+    padding: 6px;
+    width: 100%;
+    outline: none;
+}
+
+.footer_buscador button {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 0 10px;
+}
+
+.footer_columna ul {
+    list-style: none;
+}
+
+.footer_columna ul li {
+    margin-bottom: 8px;
+}
+
+.footer_columna ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.footer_columna ul li a:hover {
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+    .checkbtn {
+        display: block;
+    }
+    .opciones {
+        position: fixed;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: #084599;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        gap: 25px;
+    }
+    #check:checked ~ .opciones {
+        left: 0;
+    }
+    .perfil_grid-layout, .formulario, .footer_referencia {
+        grid-template-columns: 1fr;
+    }
+}
