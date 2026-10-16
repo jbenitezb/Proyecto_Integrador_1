@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
+    
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -16,19 +17,43 @@
             </label>
             <div class="logo">
                 <img src="../imagenes/foto.jpg" alt="Logo" class="imagen">
+                <span class="logo_texto"></span>
             </div>
-            <ul class="opciones">
-                <li class="elemento_menu"><a class="enlace_menu" href="inicio.html">Inicio</a></li>
-                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="metodologias.html">Metodologías</a></li>
+           <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="metodologias.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
             </ul>
         </nav>
+
     </header>
 
     <main id="inicio">
-        
-        <!-- Formulario para registrar metodologías -->
-        <section class="seccion-general" id="formulario-seccion">
-            <h2>Registrar Nueva Metodología de Aprendizaje</h2>
+
+        <div class="seccion-catalogo-contenedor">
+            
+            <!-- Barra lateral de navegación de catálogos -->
+            <aside class="catalogo_sidebar">
+                <ul class="catalogo_menu-lateral">
+                    <li><a href="escuelas.html">ESCUELAS</a></li>
+                    <li><a href="carreras.html">CARRERAS</a></li>
+                    <li><a href="estado_curso.html">ESTADO CURSO</a></li>
+                    <li><a href="area_sfia.html">ÁREA SFIA</a></li>
+                    <li><a href="tematica.html">TEMÁTICA</a></li>
+                    <li><a href="metodologias.html" class="enlace_activo_sidebar">METODOLOGÍAS</a></li>
+                    <li><a href="nivel.html">NIVEL</a></li>
+                    <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
+                    <li><a href="moneda.html">MONEDA</a></li>
+                </ul>
+            </aside>
+
+
+        <!--Formulario de Registro de Metodología (HU-50) -->
+            <section class="catalogo_contenido">
+                <h2 class="catalogo_titulo-seccion">Registrar Nueva Metodología de Aprendizaje</h2>
             
             <form action="#" class="formulario" id="formulario">
 
@@ -51,14 +76,14 @@
                 </div>
 
                 <!-- Descripción metodologia -->
-                <div class="formulario_grupo" id="grupo_descripcion" style="grid-column: span 2;">
+              <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion">
                     <label class="formulario_label">Descripcin</label>
                     <div class="formulario_grupo-input">
                         <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la metodología..."></textarea>
                     </div>
                 </div>
 
-                <!-- Mensaje para obligacin completar campos -->
+                    <!-- Mensaje para obligacin completar campos -->
                         <div class="formulario_mensaje" id="formulario_mensaje">
                             <p><b>ERROR:</b> Tiene que completar los campos, son obligatorios.</p>
                         </div>
@@ -71,7 +96,7 @@
                         </div>
 
                     </form>
-                </div>
+            
 
             </div>
         </section>
@@ -105,4 +130,4 @@
     </footer>
 
 </body>
-</html
+</html>
