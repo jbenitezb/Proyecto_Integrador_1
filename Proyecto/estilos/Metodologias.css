@@ -167,7 +167,7 @@ body {
     background-color: #ffffff;
 }
 
-/* titulo de la parte de contenidos *
+/* titulo de la parte de contenidos */
 .catalogo_titulo-seccion {
     font-size: 1.3rem;
     margin-bottom: 25px;
@@ -274,4 +274,113 @@ body {
 
 .btn_cancelar:hover {
     background-color: #a0aec0;
+}
+
+/* Footer */
+.footer_referencia {
+    background-color: #222222;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 40px 10%;
+}
+
+.footer_columna h3 {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.footer_redes {
+    display: flex;
+    gap: 15px;
+}
+
+.footer_redes a {
+    color: white;
+    text-decoration: none;
+    background: #333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.footer_buscador {
+    display: flex;
+    background: white;
+    border-radius: 3px;
+    overflow: hidden;
+    max-width: 250px;
+}
+
+.footer_buscador input {
+    border: none;
+    padding: 6px;
+    width: 100%;
+    outline: none;
+}
+
+.footer_buscador button {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 0 10px;
+}
+
+.footer_columna ul {
+    list-style: none;
+}
+
+.footer_columna ul li {
+    margin-bottom: 8px;
+}
+
+.footer_columna ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.footer_columna ul li a:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .checkbtn {
+        display: block;
+    }
+    .opciones {
+        position: fixed;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: #084599;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        gap: 25px;
+    }
+    #check:checked ~ .opciones {
+        left: 0;
+    }
+    .seccion-catalogo-contenedor {
+        flex-direction: column;
+    }
+    .catalogo_sidebar {
+        width: 100%;
+        height: auto;
+    }
+    .formulario, .footer_referencia {
+        grid-template-columns: 1fr;
+    }
+    .formulario__grupo-acciones {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
