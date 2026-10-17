@@ -1,0 +1,277 @@
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Roboto, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 1rem;
+    line-height: 1.30;
+}
+
+/* Parte de menú de navegación */
+.header {
+    background-color: #084599;
+    border-bottom: 2px solid #03265A;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: relative;
+}
+
+.imagen {
+    height: 60px;      
+    width: auto;      
+    object-fit: contain;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo_texto {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.opciones {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.enlace_menu {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.enlace_menu:hover, .enlace_activo {
+    border-bottom: 2px solid #ffffff;
+}
+
+.btn_header {
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn_idioma {
+    background-color: #084599; 
+    color: #ffffff;
+    border: none;                             
+    border-radius: 20px;
+}
+
+.btn_idioma:hover {
+    background-color: #03265A; 
+    color: #ffffff;
+}
+
+.btn_salir {
+    background-color: #DC2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn_salir:hover {
+    background-color: #B91C1C;
+}
+
+#check {
+    display: none;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+
+
+/* Parte principal */
+.seccion-catalogo-contenedor {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 92px);
+    align-items: stretch;
+}
+
+/* Barra lateral estática, azul */
+.catalogo_sidebar {
+    width: 250px;
+    background-color: #084599;
+    border-right: 2px solid #03265A;
+    flex-shrink: 0;
+}
+
+.catalogo_menu-lateral {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 30px 15px;
+    position: sticky;
+    top: 0;
+}
+
+/* Enlaces del menú lateral azul */
+.catalogo_menu-lateral li a {
+    display: block;
+    padding: 12px 15px;
+    background: transparent;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: #ffffff; /* Texto blanco sobre azul */
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.catalogo_menu-lateral li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.enlace_activo_sidebar {
+    background: #03265A !important;
+    color: #fff !important;
+    border: 1px solid #03265A !important;
+    font-weight: bold;
+}
+
+/* Sección derecha el formulario de contenido */
+.catalogo_contenido {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+/* titulo de la parte de contenidos *
+.catalogo_titulo-seccion {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #084599;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Formulario */
+.formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.formulario_grupo {
+    grid-column: span 1;
+}
+
+.formulario_label {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.formulario_input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.formulario_input:focus {
+    border-color: #084599;
+}
+
+/* elementos de ancho del formulario */
+.formulario_grupo-descripcion,
+.formulario_mensaje,
+.formulario__grupo-acciones {
+    grid-column: span 2;
+}
+
+.formulario_input-error {
+    font-size: 0.75rem;
+    color: #DC2626;
+    margin-top: 4px;
+    display: none;
+}
+
+.formulario_mensaje {
+    background-color: #FEE2E2;
+    border: 1px solid #DC2626;
+    color: #991B1B;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.formulario_mensaje-exito {
+    color: #059669;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: none;
+}
+
+.formulario__grupo-acciones {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn_enviar {
+    padding: 8px 20px;
+    background-color: #084599;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn_enviar:hover {
+    background-color: #03265A;
+}
+
+.btn_cancelar {
+    padding: 8px 20px;
+    background-color: #cbd5e0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn_cancelar:hover {
+    background-color: #a0aec0;
+}
