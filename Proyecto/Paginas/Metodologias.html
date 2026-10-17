@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
-    
+    <link rel="stylesheet" href="Metodologias.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -72,7 +72,7 @@
                         <input type="text" class="formulario_input" name="nombre" id="nombre" placeholder="Ej. Aprendizaje Basado en Proyectos">
                         <i class="formulario_validacion-estado bx bx-x-circle"></i>
                     </div>
-                    <p class="formulario_input-error">El nombre de la metodología es obligatoria.</p>
+                    <p class="formulario_input-error">El nombre de la metodología es obligatoria (mínimo 3 caracteres).</p>
                 </div>
 
                 <!-- Descripción metodologia -->
@@ -93,11 +93,37 @@
                             <p class="formulario_mensaje-exito" id="formulario_mensaje-exito">¡Metodología registrada con éxito!</p>
                             <button type="button" class="btn_cancelar">CANCELAR</button>
                             <input class="btn_enviar" type="submit" value="GUARDAR METODOLOGÍA">
-                        </div>
+                           </div>
 
                     </form>
 
-            </div>
+           </section>
+
+            <!--Hu-51 (Listado y Tabla) -->
+            <section class="catalogo_contenido" style="margin-top: 40px;">
+                <h2 class="catalogo_titulo-seccion">Listado de Metodologías de Aprendizaje</h2>
+                
+                <div class="catalogo_acciones-superior" style="margin-bottom: 20px; display: flex; gap: 10px;">
+                    <input type="text" id="buscadorMetodologias" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
+                </div>
+
+                <table class="tabla_datos" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                    <thead>
+                        <tr style="background-color: #064590; color: white; text-align: left;">
+                            <th style="padding: 12px; border: 1px solid #ccc;">Código</th>
+                            <th style="padding: 12px; border: 1px solid #ccc;">Nombre</th>
+                            <th style="padding: 12px; border: 1px solid #ccc;">Descripción</th>
+                            <th style="padding: 12px; border: 1px solid #ccc; text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaMetodologiasBody">
+                        <!-- Los datos se cargan automáticamente desde el localStorage -->
+                    </tbody>
+                </table>
+            </section>
+
+
+         </div>
 
     </main>
 
@@ -126,6 +152,6 @@
             </ul>
         </div>
     </footer>
-
+        <script src="Metodologias.js"></script>
 </body>
 </html>
