@@ -310,7 +310,18 @@ body {
     #check:checked ~ .opciones {
         left: 0;
     }
+        .seccion-catalogo-contenedor {
+        flex-direction: column;
+    }
+    .catalogo_sidebar {
+        width: 100%;
+        height: auto;
+    }
     .perfil_grid-layout, .formulario, .footer_referencia {
         grid-template-columns: 1fr;
+    }
+    .formulario__grupo-acciones {
+        flex-direction: column;
+        align-items: stretch;
     }
 }
