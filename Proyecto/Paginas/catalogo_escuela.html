@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo-Escuela</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="../estilos/area_sfia.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <header class="header">
@@ -30,7 +31,7 @@
 
     </header>
 
-    <main id="inicio">
+    <main id="escuelas">
 
         <div class="seccion-catalogo-contenedor">
 
@@ -51,52 +52,41 @@
 
             <!-- Contenido del registro de escuelas -->
             <section class="contenido-principal">
+                <h1 class="seccion_titulo">ESCUELAS</h1>
 
-                <h2 class="catalogo_titulo-seccion">REGISTRO DE ESCUELAS</h2>
+                <div class="panel" id="panel_formulario">
+                    <h2 class="panel_titulo">Registrar escuela</h2>
+                    <form class="formulario" id="formulario_escuelas">
 
-                <div class="perfil_grid-layout">
-                    <div class="perfil_columna-formulario">
+                        <div class="campo">
+                            <label class="etiqueta" for="codigo">CÓDIGO</label>
+                            <input type="text" class="entrada" id="codigo" name="codigo" placeholder="Ej. SOF" maxlength="20">
+                        </div>
 
-                       <form action="#" class="formulario" id="formulario_escuelas">
-                            <div class="formulario__grupo" id="grupo__codigo">
-                                <label class="formulario__label" for="codigo">
-                                    CÓDIGO DE LA ESCUELA
-                                </label>
-                                <div class="formulario__grupo-input">
-                                    <input type="text" class="formulario__input" name="codigo" id="codigo" placeholder="Ej. SOF" required>
-                                </div>
-                            </div>
+                        <div class="campo">
+                            <label class="etiqueta" for="nombre">NOMBRE</label>
+                            <input type="text" class="entrada" id="nombre" name="nombre" placeholder="NOMBRE" maxlength="100">
+                        </div>
 
-                            <div class="formulario__grupo" id="grupo__nombre">
-                                <label class="formulario__label" for="nombre">
-                                    NOMBRE DE LA ESCUELA
-                                </label>
+                        <div class="campo campo_completo">
+                            <label class="etiqueta" for="director">DIRECTOR</label>
+                            <select class="entrada" id="director" name="director">
+                                <option value="">Seleccione un director</option>
+                                <option value="1">Director 1</option>
+                                <option value="2">Director 2</option>
+                                <option value="3">Director 3</option>
+                                <option value="4">Director 4</option>
+                            </select>
+                        </div>
 
-                                <div class="formulario__grupo-input">
-                                    <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="Ingrese el nombre de la escuela" required>
-                                </div>
-                            </div>
+                        <p class="error campo_completo" id="error_formulario"></p>
 
-                            <div class="formulario__grupo" id="grupo__director">
-                                
-                                <label class="formulario__label" for="director">Seleccione un Director:</label>
+                        <div class="acciones_formulario">
+                            <button type="reset" class="btn_cancelar">CANCELAR</button>
+                            <button type="submit" class="btn_enviar">GUARDAR</button>
+                        </div>
 
-                                <select id="" name="">
-                                    <option value="">Director 1</option>
-                                    <option value="">Director 2</option>
-                                    <option value="">Director 3</option>
-                                    <option value="">Director 4</option>
-                                </select>
-                            </div>
-
-                            <div class="formulario__grupo formulario__grupo-acciones">
-
-                                <button type="reset" class="btn_cancelar">CANCELAR</button>
-                                <button type="submit" class="btn_enviar" > GUARDAR </button>
-
-                            </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </section>
         </div>
