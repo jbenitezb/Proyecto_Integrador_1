@@ -38,6 +38,43 @@
         <section class="seccion_contenedor">
             <h1 class="seccion_titulo">ÁREA SFIA</h1>
 
+            <div id="aviso" class="aviso oculto"></div>
+
+            <div class="barra_herramientas">
+                <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" onclick="abrirFormulario()">REGISTRAR</button>
+                </div>
+            </div>
+
+            <div class="panel oculto" id="panel_formulario">
+                <h2 class="panel_titulo" id="titulo_formulario">Registrar área SFIA</h2>
+                <form class="formulario" id="formulario" onsubmit="guardarArea(event)">
+
+                    <div class="campo">
+                        <label class="etiqueta" for="codigo">CÓDIGO</label>
+                        <input type="text" class="entrada" id="codigo" placeholder="CÓDIGO" maxlength="20">
+                    </div>
+
+                    <div class="campo">
+                        <label class="etiqueta" for="nombre">NOMBRE</label>
+                        <input type="text" class="entrada" id="nombre" placeholder="NOMBRE" maxlength="100">
+                    </div>
+
+                    <div class="campo campo_completo">
+                        <label class="etiqueta" for="descripcion">DESCRIPCIÓN</label>
+                        <textarea class="entrada" id="descripcion" placeholder="DESCRIPCIÓN" rows="3" maxlength="500"></textarea>
+                    </div>
+
+                    <p class="error campo_completo" id="error_formulario"></p>
+
+                    <div class="acciones_formulario">
+                        <button type="button" class="btn_cancelar" onclick="cerrarFormulario()">CANCELAR</button>
+                        <button type="submit" class="btn_enviar">GUARDAR</button>
+                    </div>
+
+                </form>
+            </div>
+
             <div class="tabla_contenedor">
                 <table class="tabla">
                     <thead>
@@ -45,7 +82,6 @@
                             <th>CÓDIGO</th>
                             <th>NOMBRE</th>
                             <th>DESCRIPCIÓN</th>
-                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody id="cuerpo_tabla"></tbody>
@@ -56,32 +92,6 @@
 
     </main>
 
-    <footer class="footer_referencia">
-        <div class="footer_columna">
-            <h3>REDES SOCIALES</h3>
-            <div class="footer_redes">
-                <a href="#">f</a>
-                <a href="#">𝕏</a>
-                <a href="#">▶</a>
-                <a href="#">in</a>
-            </div>
-        </div>
-        <div class="footer_columna">
-            <h3>BUSCAR</h3>
-            <div class="footer_buscador">
-                <input type="text" placeholder="Buscar...">
-                <button>🔍</button>
-            </div>
-        </div>
-        <div class="footer_columna">
-            <h3>VÍNCULOS DE INTERÉS</h3>
-            <ul>
-                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
-                <li><a href="#">> Centro de Asistencia</a></li>
-            </ul>
-        </div>
-    </footer>
-
-    <script src="area_sfia.js"></script>
+    <script src="/Proyecto/Js/area_sfia.js"></script>
 </body>
 </html>
