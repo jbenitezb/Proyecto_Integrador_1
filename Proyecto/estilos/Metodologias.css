@@ -194,3 +194,115 @@
 .footer_columna ul li a:hover {
     color: white;
 }
+<<<<<<< HEAD
+=======
+
+@media (max-width: 768px) {
+    .checkbtn {
+        display: block;
+    }
+    .opciones {
+        position: fixed;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: #084599;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        gap: 25px;
+    }
+    #check:checked ~ .opciones {
+        left: 0;
+    }
+    /*evitar espacios blancos*/
+       body, html {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    .seccion-catalogo-contenedor {
+        flex-direction: column;
+        width: 100%;
+    }
+    .catalogo_contenedor-principal {
+        width: 100%;
+        padding: 10px;
+    }
+    .catalogo_sidebar {
+        width: 100%;
+        height: auto;
+    }
+    .formulario, .footer_referencia {
+        grid-template-columns: 1fr;
+    }
+    .formulario__grupo-acciones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+     .tabla_datos {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+}
+
+    /*Hu-51*/
+    /* Contenedor principal */
+    .catalogo_contenedor-principal {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px; /* Separación limpia entre formulario y tabla */
+        padding: 20px;
+    }
+    /* Tabla de datos */
+    .tabla_datos {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 0.9rem;
+        background-color: #ffffff;
+    }
+    /* Encabezados de tabla */
+    .tabla_datos th {
+        background-color: #084599; /* Azul institucional CENFOTEC */
+        color: #ffffff;
+        text-align: left;
+        padding: 12px 15px;
+        border: 1px solid #d1d5db;
+        font-weight: bold;
+    }
+    /* Celdas de tabla */
+    .tabla_datos td {
+        padding: 12px 15px;
+        border: 1px solid #e5e7eb;
+        color: #333333;
+    }
+
+    /* Cambio de color cuando se pasa el mouse */
+    .tabla_datos tbody tr:hover {
+        background-color: #f8fafc;
+    }
+
+    /* Columna de las accones */
+    .tabla_datos th:last-child,
+    .tabla_datos td:last-child {
+        text-align: center;
+    }
+
+    /* Buscador de la tabla */
+    .catalogo_acciones-superior {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .catalogo_acciones-superior .formulario_input {
+        max-width: 320px;
+    }
+
+
+>>>>>>> c3faaa6e73d3e550c00e2269d36b48fef17869d7
