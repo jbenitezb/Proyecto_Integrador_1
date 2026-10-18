@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const tablaMetodologiasBody = document.getElementById('tablaMetodologiasBody');
     const buscadorMetodologias = document.getElementById('buscadorMetodologias');
 
+//HU-52: Parte de control de estado para registro o edición de la tabla
+    const tituloFormulario = document.querySelector('.catalogo_contenido .catalogo_titulo-seccion');
+    const btnEnviar = formulario.querySelector('.btn_enviar');
+    let indiceEditando = null; // Si es null, registra nuevo (HU-50). Si tiene número, modifica (HU-52).
+
     // Generar código automático consecutivo basado en los registros almacenados (LocalStorage)
     function generarCodigoAutomatico() {
         let metodologiasGuardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
@@ -32,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tablaMetodologiasBody.innerHTML = '';
 
         // Filtrado seguro para evitar errores si hay datos vacíos
-        let metodologiasFiltradas = metodologiasGuardadas.filter(m => {
+        let metodologiasFiltradas = metodologiasGuardadas.map((item, originalIndex) => ({ ...item, originalIndex })) 
+        .filter(m => {
             const codigo = (m.codigo || '').toLowerCase();
             const nombre = (m.nombre || '').toLowerCase();
             return codigo.includes(filtro.toLowerCase()) || nombre.includes(filtro.toLowerCase());
@@ -52,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td style="padding: 12px; border: 1px solid #e5e7eb;">${metodologia.nombre || ''}</td>
                 <td style="padding: 12px; border: 1px solid #e5e7eb;">${metodologia.descripcion || ''}</td>
                 <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center;"></td>
+               <button type="button" class="btn_editar" data-index="${metodologia.originalIndex}" style="background-color: #084599; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Modificar</button>
+                </td>
             `;
             tablaMetodologiasBody.appendChild(tr);
         });
@@ -64,6 +72,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (buscadorMetodologias) {
         buscadorMetodologias.addEventListener('input', (e) => {
             cargarTablaMetodologias(e.target.value);
+        });
+    }
+
+    // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
+    if (tablaMetodologiasBody) {
+        tablaMetodologiasBody.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn_editar')) {
+                const index = parseInt(e.target.getAttribute('data-index'), 10);
+                let guardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
+                const metodologiaAEditar = guardadas[index];
+
+                if (metodologiaAEditar) {
+                    // Pasar datos a los inputs superiores
+                    inputCodigo.value = metodologiaAEditar.codigo;
+                    inputCodigo.readOnly = true; // El código no cambia al editar
+                    inputNombre.value = metodologiaAEditar.nombre;
+                    inputDescripcion.value = metodologiaAEditar.descripcion;
+
+                    // Cambiar estados a modo edición (HU-52)
+                    indiceEditando = index;
+                    if (tituloFormulario) tituloFormulario.textContent = 'Modificar Metodología de Aprendizaje';
+                    if (btnEnviar) btnEnviar.value = 'ACTUALIZAR METODOLOGÍA';
+
+                    // Subir suavemente la vista hacia el formulario
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
         });
     }
 
@@ -102,7 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!formIsValid) {
             if (divMensajeError) divMensajeError.style.display = 'block'; 
         } else {
-            // Se guarda en LocalStorage
+            // Carga datos actuales desde localStorage para validar si se edita o crea.
+              let guardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
+            //52
+                if (indiceEditando !== null) {
+                // Actualiza el registro existente
+                guardadas[indiceEditando].nombre = valorNombre;
+                guardadas[indiceEditando].descripcion = valorDescripcion;
+
+             if (mensajeExito) {
+                    mensajeExito.textContent = '¡Metodología modificada con éxito!';
+                    mensajeExito.style.display = 'block';
+                }
+            } else {
             const nuevaMetodologia = {
                 codigo: inputCodigo.value,
                 nombre: valorNombre,
@@ -110,26 +157,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 fechaRegistro: new Date().toISOString()
             };
         
-            let guardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
+          
             guardadas.push(nuevaMetodologia);
+             if (mensajeExito) {
+                    mensajeExito.textContent = '¡Metodología registrada con éxito!';
+                    mensajeExito.style.display = 'block';
+                }
+            } 
+
             localStorage.setItem('lista_metodologias', JSON.stringify(guardadas));
 
-            if (mensajeExito) mensajeExito.style.display = 'block';
+          
             if (divMensajeError) divMensajeError.style.display = 'none';
 
                 // Actualiza la tabla de inmediato con el nuevo registro
-            cargarTablaMetodologias();
+            cargarTablaMetodologias(buscadorMetodologias ? buscadorMetodologias.value : '');
 
-            // Se limpia  el formulario y actualiza.
+            // Se limpia  el formulario y sale del modo edición al cancelar.
             setTimeout(() => {
                 formulario.reset();
+                indiceEditando = null; // Regresar a modo registro normal
+                if (tituloFormulario) tituloFormulario.textContent = 'Registrar Nueva Metodología de Aprendizaje';
+                if (btnEnviar) btnEnviar.value = 'GUARDAR METODOLOGÍA';
                 inputCodigo.value = generarCodigoAutomatico();
+                inputCodigo.readOnly = true;
                 inputNombre.style.borderColor = '#ccc';
                 inputDescripcion.style.borderColor = '#ccc';
                 if (mensajeExito) mensajeExito.style.display = 'none';
             }, 2000);
         }
     });
+
 });  
         
         
