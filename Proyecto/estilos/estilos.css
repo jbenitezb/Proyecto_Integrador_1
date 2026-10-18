@@ -111,20 +111,45 @@ body {
 
 
 /* Parte principal */
+
+/* Área principal debajo del header */
+#inicio-catalogos {
+    width: 100%;
+}
+
+/* Distribución horizontal del menú y el contenido */
 .seccion-catalogo-contenedor {
     display: flex;
     width: 100%;
-    height: 77vh;
+    min-height: 0;
     align-items: stretch;
 }
 
-/* Barra lateral estática, azul */
+/* Barra lateral */
 .catalogo_sidebar {
     width: 250px;
     background-color: #03265A;
     border-right: 2px solid #03265A;
     flex-shrink: 0;
 }
+
+/* Lista del menú lateral */
+.catalogo_menu-lateral {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 30px 15px;
+}
+
+/* Contenido a la derecha del menú */
+.contenido-principal {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+    background-color: #ffffff;
+}
+
 
 .catalogo_menu-lateral {
     list-style: none;
@@ -236,4 +261,37 @@ body {
 
 .footer_columna ul li a:hover { 
   color: white; 
+}
+
+
+/* Contenido a la derecha del menú */
+.contenido-principal {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+    background-color: #ffffff;
+}
+
+
+/* Área que contiene el menú y el contenido */
+.seccion-catalogo-contenedor {
+    display: flex;
+    width: 100%;
+    min-height: 77vh;
+    align-items: stretch;
+}
+
+/* Menú lateral */
+.catalogo_sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background-color: #03265A;
+}
+
+/* Área de trabajo */
+.seccion_contenedor {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+    background-color: #ffffff;
 }

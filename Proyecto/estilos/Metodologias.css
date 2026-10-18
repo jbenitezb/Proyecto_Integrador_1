@@ -194,61 +194,6 @@
 .footer_columna ul li a:hover {
     color: white;
 }
-<<<<<<< HEAD
-=======
-
-@media (max-width: 768px) {
-    .checkbtn {
-        display: block;
-    }
-    .opciones {
-        position: fixed;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: #084599;
-        top: 70px;
-        left: -100%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: 0.4s;
-        gap: 25px;
-    }
-    #check:checked ~ .opciones {
-        left: 0;
-    }
-    /*evitar espacios blancos*/
-       body, html {
-        overflow-x: hidden;
-        width: 100%;
-    }
-    .seccion-catalogo-contenedor {
-        flex-direction: column;
-        width: 100%;
-    }
-    .catalogo_contenedor-principal {
-        width: 100%;
-        padding: 10px;
-    }
-    .catalogo_sidebar {
-        width: 100%;
-        height: auto;
-    }
-    .formulario, .footer_referencia {
-        grid-template-columns: 1fr;
-    }
-    .formulario__grupo-acciones {
-        flex-direction: column;
-        align-items: stretch;
-    }
-     .tabla_datos {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-}
-
     /*Hu-51*/
     /* Contenedor principal */
     .catalogo_contenedor-principal {
@@ -303,6 +248,3 @@
     .catalogo_acciones-superior .formulario_input {
         max-width: 320px;
     }
-
-
->>>>>>> c3faaa6e73d3e550c00e2269d36b48fef17869d7
