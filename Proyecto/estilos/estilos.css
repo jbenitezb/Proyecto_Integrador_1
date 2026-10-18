@@ -1,0 +1,239 @@
+/* Estilos globales */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: Arial, Roboto, sans-serif; 
+}
+
+body { 
+  background-color: #ffffff; 
+  color: #333333; 
+  font-size: 1rem; 
+  line-height: 1.30; 
+}
+
+/* Header y Navegación Superior */
+.header { 
+  background-color: #084599; 
+  border-bottom: 2px solid #03265A; 
+}
+
+.menu { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 30px; 
+  position: relative; 
+}
+
+.imagen { 
+  height: 60px; 
+  width: auto; 
+  object-fit: contain; 
+}
+
+.logo { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+.logo_texto { 
+  font-weight: bold; 
+  color: #ffffff; 
+  font-size: 1.1rem; 
+}
+
+.opciones { 
+  display: flex; 
+  list-style: none; 
+  gap: 20px; 
+  align-items: center; 
+}
+
+.enlace_menu { 
+  color: #ffffff; 
+  text-decoration: none; 
+  padding: 5px 10px; 
+  font-weight: bold; 
+  font-size: 0.9rem; 
+  transition: 0.3s; 
+}
+
+.enlace_menu:hover, .enlace_activo { 
+  border-bottom: 2px solid #ffffff; 
+}
+
+/* Botones dentro del Header */
+.btn_header { 
+  padding: 8px 16px; 
+  font-weight: bold; 
+  font-size: 0.85rem; 
+  cursor: pointer; 
+  transition: 0.3s; 
+}
+
+.btn_idioma { 
+  background-color: #084599; 
+  color: #ffffff; 
+  border: none; 
+  border-radius: 20px; 
+}
+
+.btn_idioma:hover { 
+  background-color: #03265A; 
+  color: #ffffff; 
+}
+
+.btn_salir { 
+  background-color: #DC2626; 
+  color: #ffffff; 
+  border: none; 
+  border-radius: 8px; 
+}
+
+.btn_salir:hover { 
+  background-color: #B91C1C; 
+}
+
+
+#check { 
+  display: none; 
+}
+
+.checkbtn { 
+  font-size: 30px; 
+  color: white; 
+  cursor: pointer; 
+  display: none; 
+}
+
+
+/* Parte principal */
+.seccion-catalogo-contenedor {
+    display: flex;
+    width: 100%;
+    height: 77vh;
+    align-items: stretch;
+}
+
+/* Barra lateral estática, azul */
+.catalogo_sidebar {
+    width: 250px;
+    background-color: #03265A;
+    border-right: 2px solid #03265A;
+    flex-shrink: 0;
+}
+
+.catalogo_menu-lateral {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 30px 15px;
+    position: sticky;
+    top: 0;
+}
+
+/* Enlaces del menú lateral azul */
+.catalogo_menu-lateral li a {
+
+    display: inline-block; 
+    padding: 12px 15px; 
+    background: transparent;
+    border-bottom: 2px solid transparent; 
+    text-decoration: none;
+    color: #ffffff; 
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+
+
+.catalogo_menu-lateral li a:hover {
+    background-color: transparent; 
+    border-bottom: 2px solid #ffffff;
+}
+
+
+.enlace_activo_sidebar {
+    background: #03265A ;
+    color: #fff ;
+    border: 1px solid #03265A;
+    font-weight: bold;
+}
+
+
+/* Footer */
+.footer_referencia { 
+  background-color: #222222; 
+  color: #fff; 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 30px; 
+  padding: 40px 10%; 
+}
+
+.footer_columna h3 { 
+  font-size: 0.9rem; 
+  margin-bottom: 15px; 
+  letter-spacing: 1px; 
+}
+.footer_redes {
+    display: flex;
+    gap: 15px;
+}
+
+.footer_redes a {
+    color: white;
+    text-decoration: none;
+    background: #333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.footer_buscador { 
+  display: flex; 
+  background: white; 
+  border-radius: 3px; 
+  overflow: hidden; 
+  max-width: 250px; 
+}
+
+.footer_buscador input { 
+  border: none; 
+  padding: 6px; 
+  width: 100%; 
+  outline: none; 
+}
+
+.footer_buscador button { 
+  background: #000; 
+  color: white; 
+  border: none; 
+  padding: 0 10px; 
+}
+
+.footer_columna ul { 
+  list-style: none; 
+}
+
+.footer_columna ul li { 
+  margin-bottom: 8px; 
+}
+
+.footer_columna ul li a { 
+  color: #ccc; 
+  text-decoration: none; 
+  font-size: 0.85rem; 
+}
+
+.footer_columna ul li a:hover { 
+  color: white; 
+}
