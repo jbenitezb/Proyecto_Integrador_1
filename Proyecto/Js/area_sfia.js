@@ -1,4 +1,5 @@
 var areas = JSON.parse(localStorage.getItem('area_sfia')) || [];
+var editando = null;
 
 function guardar() {
     localStorage.setItem('area_sfia', JSON.stringify(areas));
@@ -15,33 +16,51 @@ function aviso(texto, tipo) {
 }
 
 function listar() {
+    var buscado = document.getElementById('buscar').value.toLowerCase();
     var html = '';
     var total = 0;
 
     for (var i = 0; i < areas.length; i++) {
         var a = areas[i];
+        var linea = (a.codigo + ' ' + a.nombre + ' ' + a.descripcion).toLowerCase();
+        if (linea.indexOf(buscado) === -1) continue;
         total++;
         html += '<tr>' +
             '<td class="codigo">' + esc(a.codigo) + '</td>' +
             '<td>' + esc(a.nombre) + '</td>' +
             '<td>' + esc(a.descripcion) + '</td>' +
+            '<td><button type="button" class="btn_tabla" onclick="editar(' + i + ')">EDITAR</button></td>' +
             '</tr>';
     }
 
     if (total === 0) {
-        html = '<tr><td class="vacio" colspan="3">No hay áreas para mostrar.</td></tr>';
+        html = '<tr><td class="vacio" colspan="4">No hay áreas para mostrar.</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-    document.getElementById('conteo').textContent = 'Total: ' + areas.length + ' áreas';
+    document.getElementById('conteo').textContent = 'Mostrando ' + total + ' de ' + areas.length + ' áreas';
 }
 
 function abrirFormulario() {
+    editando = null;
+    document.getElementById('titulo_formulario').textContent = 'Registrar área SFIA';
     document.getElementById('formulario').reset();
+    document.getElementById('codigo').readOnly = false;
     document.getElementById('error_formulario').textContent = '';
     document.getElementById('aviso').className = 'aviso oculto';
     document.getElementById('panel_formulario').classList.remove('oculto');
     document.getElementById('codigo').focus();
+}
+
+function editar(i) {
+    abrirFormulario();
+    editando = i;
+    document.getElementById('titulo_formulario').textContent = 'Modificar área SFIA';
+    document.getElementById('codigo').value = areas[i].codigo;
+    document.getElementById('nombre').value = areas[i].nombre;
+    document.getElementById('descripcion').value = areas[i].descripcion;
+    document.getElementById('codigo').readOnly = true;
+    document.getElementById('nombre').focus();
 }
 
 function cerrarFormulario() {
@@ -62,7 +81,7 @@ function guardarArea(evento) {
     }
 
     for (var i = 0; i < areas.length; i++) {
-        if (areas[i].codigo === codigo) {
+        if (areas[i].codigo === codigo && i !== editando) {
             error.textContent = 'Ya existe un área con este código.';
             return;
         }
@@ -70,8 +89,13 @@ function guardarArea(evento) {
 
     var area = { codigo: codigo, nombre: nombre, descripcion: descripcion };
 
-    areas.push(area);
-    aviso('Área registrada correctamente.', 'exito');
+    if (editando === null) {
+        areas.push(area);
+        aviso('Área registrada correctamente.', 'exito');
+    } else {
+        areas[editando] = area;
+        aviso('Área modificada correctamente.', 'exito');
+    }
 
     guardar();
     listar();

@@ -11,53 +11,42 @@
 </head>
 <body>
 
+ 
     <header class="header">
-        <nav class="menu">
+        <nav class="nav_menu">
             <input type="checkbox" id="check">
             <label for="check" class="checkbtn">
                 <i class="bx bx-menu"></i>
             </label>
+
             <div class="logo">
-                <img src="../Imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
+                <img src="/Proyecto/Imagenes/images-removebg-preview.png" alt="Logo Institucional" class="imagen_logo">
                 <span class="logo_texto"></span>
             </div>
-           <ul class="opciones">
-                <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
-                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
-                <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
-                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+
+            <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="#inicio">INICIO</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="#perfil">PERFIL</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="#area_sfia">ÁREA SFIA</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="#cursos">CURSOS</a></li>
                 <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
                 <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
             </ul>
         </nav>
-
     </header>
 
     <main id="area_sfia">
 
-        <div class="seccion-catalogo-contenedor">
-            
-            <!-- Barra lateral de navegación de catálogos -->
-            <nav class="catalogo_sidebar" aria-label="Filtros del catálogo">
-                <ul class="catalogo_menu-lateral">
-                    <li><a href="catalogo_escuela.html">ESCUELAS</a></li>
-                    <li><a href="carreras.html">CARRERAS</a></li>
-                    <li><a href="estado_curso.html">ESTADO CURSO</a></li>
-                    <li><a href="area_sfia.html">ÁREA SFIA</a></li>
-                    <li><a href="tematica.html">TEMÁTICA</a></li>
-                    <li><a href="catalogo_metodologias.html">METODOLOGÍAS</a></li>
-                    <li><a href="nivel.html">NIVEL</a></li>
-                    <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
-                    <li><a href="moneda.html">MONEDA</a></li>
-                </ul>
-            </nav>
-
-        <section class="contenido-principal">
+        <section class="seccion_contenedor">
             <h1 class="seccion_titulo">ÁREA SFIA</h1>
 
             <div id="aviso" class="aviso oculto"></div>
 
             <div class="barra_herramientas">
+                <div class="buscador">
+                    <label class="etiqueta" for="buscar">BUSCAR</label>
+                    <input type="search" class="entrada" id="buscar" placeholder="Código, nombre o descripción" oninput="listar()">
+                </div>
                 <div class="acciones_barra">
                     <button type="button" class="btn_enviar" onclick="abrirFormulario()">REGISTRAR</button>
                 </div>
@@ -99,6 +88,7 @@
                             <th>CÓDIGO</th>
                             <th>NOMBRE</th>
                             <th>DESCRIPCIÓN</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody id="cuerpo_tabla"></tbody>
@@ -106,20 +96,17 @@
             </div>
             <p class="conteo" id="conteo"></p>
         </section>
-        </div>
+
     </main>
 
-     <footer class="footer_referencia">
+    <footer class="footer_referencia">
         <div class="footer_columna">
             <h3>REDES SOCIALES</h3>
             <div class="footer_redes">
-                <div class="footer_redes">
-                    <a href="https://www.facebook.com/UCenfotec">f</a>
-                    <a href="https://x.com/ucenfotec">𝕏</a>
-                    <a href="https://www.youtube.com/@UniversidadCenfotec/videos">▶</a>
-                    <a href="https://www.instagram.com/ucenfotec">回</a>
-                    <a href="https://www.linkedin.com/school/universidad-cenfotec/">in</a>
-                </div>
+                <a href="#">f</a>
+                <a href="#">𝕏</a>
+                <a href="#">▶</a>
+                <a href="#">in</a>
             </div>
         </div>
         <div class="footer_columna">
