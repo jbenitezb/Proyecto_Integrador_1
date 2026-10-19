@@ -52,47 +52,85 @@
 
             <!-- Contenido del registro de escuelas -->
             <section class="contenido-principal">
-                <h1 class="seccion_titulo">ESCUELAS</h1>
+            <h1 class="seccion_titulo">ESCUELAS</h1>
 
-                <div class="panel" id="panel_formulario">
-                    <h2 class="panel_titulo">Registrar escuela</h2>
-                    <form class="formulario" id="formulario_escuelas">
+            <div id="aviso" class="aviso oculto"></div>
 
-                        <div class="campo">
-                            <label class="etiqueta" for="codigo">CÓDIGO</label>
-                            <input type="text" class="entrada" id="codigo" name="codigo" placeholder="Ej. SOF" maxlength="20">
-                        </div>
-
-                        <div class="campo">
-                            <label class="etiqueta" for="nombre">NOMBRE</label>
-                            <input type="text" class="entrada" id="nombre" name="nombre" placeholder="NOMBRE" maxlength="100">
-                        </div>
-
-                        <div class="campo campo_completo">
-                            <label class="etiqueta" for="director">DIRECTOR</label>
-                            <select class="entrada" id="director" name="director">
-                                <option value="">Seleccione un director</option>
-                                <option value="1">Director 1</option>
-                                <option value="2">Director 2</option>
-                                <option value="3">Director 3</option>
-                                <option value="4">Director 4</option>
-                            </select>
-                        </div>
-
-                        <p class="error campo_completo" id="error_formulario"></p>
-
-                        <div class="acciones_formulario">
-                            <button type="reset" class="btn_cancelar">CANCELAR</button>
-                            <button type="submit" class="btn_enviar">GUARDAR</button>
-                        </div>
-
-                    </form>
+            <div class="barra_herramientas">
+                <div class="buscador">
+                    <label class="etiqueta" for="buscador">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscador" placeholder="Buscar por código, nombre o director...">
                 </div>
-            </section>
+                <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
+                </div>
+            </div>
+
+            <div class="panel oculto" id="panel_formulario">
+                <h2 class="panel_titulo" id="titulo_formulario">Registrar escuela</h2>
+                <form class="formulario" id="formulario">
+                    <div class="campo">
+                        <label class="etiqueta" for="codigo">CÓDIGO</label>
+                        <input type="text" class="entrada" id="codigo" placeholder="Ej. SOF" maxlength="20">
+                    </div>
+
+                    <div class="campo">
+                        <label class="etiqueta" for="nombre">NOMBRE</label>
+                        <input type="text" class="entrada" id="nombre" placeholder="NOMBRE" maxlength="100">
+                    </div>
+
+                    <div class="campo campo_completo">
+                        <label class="etiqueta" for="director">DIRECTOR</label>
+                        <select class="entrada" id="director">
+                            <option value="">Seleccione un director</option>
+                            <option value="Director 1">Director 1</option>
+                            <option value="Director 2">Director 2</option>
+                            <option value="Director 3">Director 3</option>
+                            <option value="Director 4">Director 4</option>
+                        </select>
+                    </div>
+
+                    <p class="error campo_completo" id="error_formulario"></p>
+
+                    <div class="acciones_formulario">
+                        <button type="button" class="btn_cancelar" id="btn_cancelar">CANCELAR</button>
+                        <button type="submit" class="btn_enviar" id="btn_guardar">GUARDAR</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="tabla_contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>NOMBRE</th>
+                            <th>DIRECTOR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo_tabla"></tbody>
+                </table>
+            </div>
+            <p class="conteo" id="conteo"></p>
+        </section>
         </div>
     </main>
 
     <footer class="footer_referencia">
+        
+        <div class="footer_columna">
+            <p><strong>WhatsApp General: </strong></p>
+            <p>+506 6000 8050</p>
+            <p><strong>Correo electrónico: </strong></p>
+            <p>info@ucenfotec.ac.cr</p>
+            <p><strong>Dirección:</strong></p>
+            <p>
+                Barrio Francisco Peralta, sobre Avenida Central y Calle 33, 
+                10104 San José, Provincia de San José, Costa Rica.
+            </p>
+        </div>
+
         <div class="footer_columna">
             <h3>REDES SOCIALES</h3>
             <div class="footer_redes">
@@ -120,6 +158,7 @@
             </ul>
         </div>
     </footer>
-    
+
+     <script src="../Js/escuelas.js"></script>
 </body>
 </html>

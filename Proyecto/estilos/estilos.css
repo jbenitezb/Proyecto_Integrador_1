@@ -195,14 +195,17 @@ main {
 
 
 /* Footer */
-.footer_referencia { 
-  background-color: #222222; 
-  color: #fff; 
-  display: grid; 
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 30px; 
-  padding: 40px 10%; 
+
+.footer_referencia {
+    background-color: #222222;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+    padding: 40px 4%;
+    align-items: start;
 }
+
 
 .footer_columna h3 { 
   font-size: 0.9rem; 
