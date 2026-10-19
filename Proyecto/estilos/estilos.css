@@ -6,21 +6,20 @@
   font-family: Arial, Roboto, sans-serif; 
 }
 
-body { 
-  background-color: #ffffff; 
-  color: #333333; 
-  font-size: 1rem; 
-  line-height: 1.30; 
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;   /* header / main / footer en columna */
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 1rem;
+    line-height: 1.30;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* El main ocupa TODO el espacio sobrante: el footer queda pegado abajo */
 main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header y Navegación Superior */
@@ -119,9 +118,6 @@ main {
   display: none; 
 }
 
-
-/* Parte principal */
-
 /* Área principal debajo del header */
 #inicio-catalogos {
     width: 100%;
@@ -195,7 +191,6 @@ main {
 
 
 /* Footer */
-
 .footer_referencia {
     background-color: #222222;
     color: #fff;
@@ -204,14 +199,15 @@ main {
     gap: 25px;
     padding: 40px 4%;
     align-items: start;
+    width: 100%;
+    margin-top: 0;
 }
 
-
-.footer_columna h3 { 
-  font-size: 0.9rem; 
-  margin-bottom: 15px; 
-  letter-spacing: 1px; 
+.footer_columna {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
+
 .footer_redes {
     display: flex;
     gap: 15px;
@@ -277,9 +273,6 @@ main {
     padding: 30px;
     background-color: #ffffff;
 }
-
-
-/* Área que contiene el menú y el contenido (rellena el main, sin alturas fijas) */
 .seccion-catalogo-contenedor {
     display: flex;
     flex: 1;
@@ -292,6 +285,7 @@ main {
     width: 250px;
     flex-shrink: 0;
     background-color: #03265A;
+    align-self: stretch;
 }
 
 /* Área de trabajo */

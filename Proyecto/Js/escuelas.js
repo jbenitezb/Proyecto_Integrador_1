@@ -39,6 +39,8 @@ function listar() {
             '<td>' + esc(e.nombre) + '</td>' +
             '<td>' + esc(e.director) + '</td>' +
             '</tr>';
+
+        
     }
 
     if (mostradas === 0) {

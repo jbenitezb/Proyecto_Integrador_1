@@ -1,12 +1,18 @@
+/* ===== ÁREA SFIA ===== */
 var areas = JSON.parse(localStorage.getItem('area_sfia')) || [];
-var editando = null;
+var editando = null; // null = registrando; número = editando esa posición
 
 function guardar() {
     localStorage.setItem('area_sfia', JSON.stringify(areas));
 }
 
 function esc(texto) {
-    return texto.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Minúsculas y sin tildes, para que "area" encuentre "ÁREA"
+function normalizar(texto) {
+    return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 function aviso(texto, tipo) {
@@ -16,29 +22,34 @@ function aviso(texto, tipo) {
 }
 
 function listar() {
-    var buscado = document.getElementById('buscar').value.toLowerCase();
+    var filtro = normalizar(document.getElementById('buscador').value.trim());
     var html = '';
-    var total = 0;
+    var mostradas = 0;
 
     for (var i = 0; i < areas.length; i++) {
         var a = areas[i];
-        var linea = (a.codigo + ' ' + a.nombre + ' ' + a.descripcion).toLowerCase();
-        if (linea.indexOf(buscado) === -1) continue;
-        total++;
+        var texto = normalizar(a.codigo + ' ' + a.nombre + ' ' + a.descripcion);
+
+        if (filtro !== '' && texto.indexOf(filtro) === -1) {
+            continue;
+        }
+
+        mostradas++;
         html += '<tr>' +
             '<td class="codigo">' + esc(a.codigo) + '</td>' +
             '<td>' + esc(a.nombre) + '</td>' +
             '<td>' + esc(a.descripcion) + '</td>' +
-            '<td><button type="button" class="btn_tabla" onclick="editar(' + i + ')">EDITAR</button></td>' +
+            '<td class="acciones"><button type="button" class="btn_tabla" data-indice="' + i + '">EDITAR</button></td>' +
             '</tr>';
     }
 
-    if (total === 0) {
-        html = '<tr><td class="vacio" colspan="4">No hay áreas para mostrar.</td></tr>';
+    if (mostradas === 0) {
+        var msg = areas.length === 0 ? 'No hay áreas para mostrar.' : 'No se encontraron áreas con esa búsqueda.';
+        html = '<tr><td class="vacio" colspan="4">' + msg + '</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-    document.getElementById('conteo').textContent = 'Mostrando ' + total + ' de ' + areas.length + ' áreas';
+    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + areas.length + ' áreas';
 }
 
 function abrirFormulario() {
@@ -64,6 +75,7 @@ function editar(i) {
 }
 
 function cerrarFormulario() {
+    editando = null;
     document.getElementById('panel_formulario').classList.add('oculto');
 }
 
@@ -101,5 +113,17 @@ function guardarArea(evento) {
     listar();
     cerrarFormulario();
 }
+
+// Eventos (sin onclick/onsubmit dentro del HTML)
+document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
+document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
+document.getElementById('formulario').addEventListener('submit', guardarArea);
+document.getElementById('buscador').addEventListener('input', listar);
+document.getElementById('cuerpo_tabla').addEventListener('click', function (evento) {
+    var boton = evento.target.closest('.btn_tabla');
+    if (boton) {
+        editar(parseInt(boton.getAttribute('data-indice'), 10));
+    }
+});
 
 listar();

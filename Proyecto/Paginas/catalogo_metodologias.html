@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
+    <title>Catálogo - Metodologías</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
-    <link rel="stylesheet" href="../estilos/Metodologias.css">
+    <link rel="stylesheet" href="../estilos/area_sfia.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <!-- Menú de navegación -->
+
     <header class="header">
         <nav class="menu">
             <input type="checkbox" id="check">
@@ -17,7 +18,7 @@
                 <i class="bx bx-menu"></i>
             </label>
             <div class="logo">
-                <img src="../imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
+                <img src="../Imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
                 <span class="logo_texto"></span>
             </div>
            <ul class="opciones">
@@ -32,7 +33,7 @@
 
     </header>
 
-    <main id="inicio">
+    <main id="metodologias">
 
         <div class="seccion-catalogo-contenedor">
             
@@ -44,85 +45,76 @@
                     <li><a href="estado_curso.html">ESTADO CURSO</a></li>
                     <li><a href="area_sfia.html">ÁREA SFIA</a></li>
                     <li><a href="tematica.html">TEMÁTICA</a></li>
-                    <li><a href="catalogo_metodologias.html" class="enlace_activo_sidebar">METODOLOGÍAS</a></li>
+                    <li><a href="catalogo_metodologias.html">METODOLOGÍAS</a></li>
                     <li><a href="nivel.html">NIVEL</a></li>
                     <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
                     <li><a href="moneda.html">MONEDA</a></li>
                 </ul>
             </nav>
 
-            <section class="catalogo_contenido">
-                <h2 class="catalogo_titulo-seccion">Registrar Nueva Metodología de Aprendizaje</h2>
-            
-                 <form action="#" class="formulario" id="formulario">
+        <section class="contenido-principal">
+            <h1 class="seccion_titulo">METODOLOGÍAS</h1>
 
-                <!-- Código automatico -->
-                <div class="formulario_grupo" id="grupo_codigo">
-                    <label class="formulario_label">Código Automatico</label>
-                    <div class="formulario_grupo-input">
-                        <input type="text" class="formulario_input" name="codigo" id="codigo" readonly placeholder="Auto-generado">
+            <div id="aviso" class="aviso oculto"></div>
+
+            <div class="barra_herramientas">
+                <div class="buscador">
+                    <label class="etiqueta" for="buscador">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscador" placeholder="Buscar por código, nombre o descripción...">
+                </div>
+                <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
+                </div>
+            </div>
+
+            <div class="panel oculto" id="panel_formulario">
+                <h2 class="panel_titulo" id="titulo_formulario">Registrar metodología</h2>
+                <form class="formulario" id="formulario">
+                    <div class="campo">
+                        <label class="etiqueta" for="codigo">CÓDIGO (AUTOMÁTICO)</label>
+                        <input type="text" class="entrada" id="codigo" placeholder="Auto-generado" readonly>
                     </div>
-                </div>
 
-                <!-- Name de la Metodología -->
-                <div class="formulario_grupo" id="grupo_nombre">
-                    <label class="formulario_label">Nombre de la Metodología</label>
-                    <div class="formulario_grupo-input">
-                        <input type="text" class="formulario_input" name="nombre" id="nombre" placeholder="Ej. Aprendizaje Basado en Proyectos">
-                        <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                    <div class="campo">
+                        <label class="etiqueta" for="nombre">NOMBRE</label>
+                        <input type="text" class="entrada" id="nombre" placeholder="Ej. Aprendizaje Basado en Proyectos" maxlength="100">
                     </div>
-                    <p class="formulario_input-error">El nombre de la metodología es obligatoria (mínimo 3 caracteres).</p>
-                </div>
 
-                <!-- Descripción metodologia -->
-              <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion">
-                    <label class="formulario_label">Descripcin</label>
-                    <div class="formulario_grupo-input">
-                        <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la metodología..."></textarea>
+                    <div class="campo campo_completo">
+                        <label class="etiqueta" for="descripcion">DESCRIPCIÓN</label>
+                        <textarea class="entrada" id="descripcion" placeholder="Describa la metodología..." rows="3" maxlength="500"></textarea>
                     </div>
-                </div>
 
-                    <!-- Mensaje para obligacin completar campos -->
-                        <div class="formulario_mensaje" id="formulario_mensaje">
-                            <p><b>ERROR:</b> Tiene que completar los campos, son obligatorios.</p>
-                        </div>
+                    <p class="error campo_completo" id="error_formulario"></p>
 
-                        <!-- Botón -->
-                        <div class="formulario__grupo formulario__grupo-acciones">
-                            <p class="formulario_mensaje-exito" id="formulario_mensaje-exito">¡Metodología registrada con éxito!</p>
-                            <button type="button" class="btn_cancelar">CANCELAR</button>
-                            <input class="btn_enviar" type="submit" value="GUARDAR METODOLOGÍA">
-                           </div>
+                    <div class="acciones_formulario">
+                        <button type="button" class="btn_cancelar" id="btn_cancelar">CANCELAR</button>
+                        <button type="submit" class="btn_enviar" id="btn_guardar">GUARDAR</button>
+                    </div>
 
-                    </form>
+                </form>
+            </div>
 
-           </section>
-
-            <section class="catalogo_contenido" style="margin-top: 40px;">
-                <h2 class="catalogo_titulo-seccion">Listado de Metodologías de Aprendizaje</h2>
-                
-                <div class="catalogo_acciones-superior" style="margin-bottom: 20px; display: flex; gap: 10px;">
-                    <input type="text" id="buscadorMetodologias" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
-                </div>
-
-                <table class="tabla_datos" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <div class="tabla_contenedor">
+                <table class="tabla">
                     <thead>
-                        <tr style="background-color: #064590; color: white; text-align: left;">
-                            <th style="padding: 12px; border: 1px solid #ccc;">Código</th>
-                            <th style="padding: 12px; border: 1px solid #ccc;">Nombre</th>
-                            <th style="padding: 12px; border: 1px solid #ccc;">Descripción</th>
-                            <th style="padding: 12px; border: 1px solid #ccc; text-align: center;">Acciones</th>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>NOMBRE</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th class="acciones">ACCIONES</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaMetodologiasBody">
-                        <!-- Los datos se cargan automaticamente desde el localStorage -->
-                    </tbody>
+                    <tbody id="cuerpo_tabla"></tbody>
                 </table>
-            </section>
-         </div>
+            </div>
+            <p class="conteo" id="conteo"></p>
+        </section>
+        </div>
     </main>
 
      <footer class="footer_referencia">
+        
         <div class="footer_columna">
             <p><strong>WhatsApp General: </strong></p>
             <p>+506 6000 8050</p>
@@ -162,6 +154,7 @@
             </ul>
         </div>
     </footer>
-        <script src="Metodologias.js"></script>
+
+    <script src="../Js/Metodologias.js"></script>
 </body>
 </html>

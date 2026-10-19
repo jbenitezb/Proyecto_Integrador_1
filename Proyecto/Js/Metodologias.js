@@ -1,193 +1,150 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const formulario = document.getElementById('formulario');
-    const inputCodigo = document.getElementById('codigo');
-    const inputNombre = document.getElementById('nombre');
-    const inputDescripcion = document.getElementById('descripcion');
-    
-    const grupoNombre = document.getElementById('grupo_nombre');
-    const divMensajeError = document.getElementById('formulario_mensaje');
-    const mensajeExito = document.getElementById('formulario_mensaje-exito');
+/* ===== METODOLOGÍAS ===== */
 
-    // HU-51: Elementos de la tabla y buscador
-    const tablaMetodologiasBody = document.getElementById('tablaMetodologiasBody');
-    const buscadorMetodologias = document.getElementById('buscadorMetodologias');
+var metodologias = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
+var indiceEditando = null; // null = registrando una nueva; número = modificando esa posición
 
-//HU-52: Parte de control de estado para registro o edición de la tabla
-    const tituloFormulario = document.querySelector('.catalogo_contenido .catalogo_titulo-seccion');
-    const btnEnviar = formulario.querySelector('.btn_enviar');
-    let indiceEditando = null; // Si es null, registra nuevo (HU-50). Si tiene número, modifica (HU-52).
+function guardar() {
+    localStorage.setItem('lista_metodologias', JSON.stringify(metodologias));
+}
 
-    // Generar código automático consecutivo basado en los registros almacenados (LocalStorage)
-    function generarCodigoAutomatico() {
-        let metodologiasGuardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
-        let siguienteNumero = metodologiasGuardadas.length + 1;
-        // Formato estandarizado de código (ej: MET-001, MET-002)
-        return 'MET-' + String(siguienteNumero).padStart(3, '0');
+function esc(texto) {
+    return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Minúsculas y sin tildes, para que "metodologia" encuentre "METODOLOGÍA"
+function normalizar(texto) {
+    return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function aviso(texto, tipo) {
+    var caja = document.getElementById('aviso');
+    caja.textContent = texto;
+    caja.className = 'aviso ' + tipo;
+}
+
+function generarCodigo() {
+    var mayor = 0;
+    for (var i = 0; i < metodologias.length; i++) {
+        var numero = parseInt(String(metodologias[i].codigo).replace('MET-', ''), 10);
+        if (!isNaN(numero) && numero > mayor) {
+            mayor = numero;
+        }
     }
+    return 'MET-' + String(mayor + 1).padStart(3, '0');
+}
 
-    if (inputCodigo) {
-        inputCodigo.value = generarCodigoAutomatico();
-    }
+function listar() {
+    var filtro = normalizar(document.getElementById('buscador').value.trim());
+    var html = '';
+    var mostradas = 0;
 
-    // HU-51: Cargar y mostrar datos en la tabla
-    function cargarTablaMetodologias(filtro = '') {
-        if (!tablaMetodologiasBody) return;
+    for (var i = 0; i < metodologias.length; i++) {
+        var m = metodologias[i];
+        var texto = normalizar((m.codigo || '') + ' ' + (m.nombre || '') + ' ' + (m.descripcion || ''));
 
-        let metodologiasGuardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
-        tablaMetodologiasBody.innerHTML = '';
-
-        // Filtrado seguro para evitar errores si hay datos vacíos
-        let metodologiasFiltradas = metodologiasGuardadas.map((item, originalIndex) => ({ ...item, originalIndex })) 
-        .filter(m => {
-            const codigo = (m.codigo || '').toLowerCase();
-            const nombre = (m.nombre || '').toLowerCase();
-            return codigo.includes(filtro.toLowerCase()) || nombre.includes(filtro.toLowerCase());
-        });
-
-        if (metodologiasFiltradas.length === 0) {
-            tablaMetodologiasBody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 15px; color: #666;">No hay metodologías registradas.</td></tr>`;
-            return;
+        if (filtro !== '' && texto.indexOf(filtro) === -1) {
+            continue;
         }
 
-        // Pintar las filas en la tabla dinámicamente
-        metodologiasFiltradas.forEach((metodologia) => {
-            let tr = document.createElement('tr');
-            
-            tr.innerHTML = `
-                <td style="padding: 12px; border: 1px solid #e5e7eb;">${metodologia.codigo || ''}</td>
-                <td style="padding: 12px; border: 1px solid #e5e7eb;">${metodologia.nombre || ''}</td>
-                <td style="padding: 12px; border: 1px solid #e5e7eb;">${metodologia.descripcion || ''}</td>
-                <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center;"></td>
-               <button type="button" class="btn_editar" data-index="${metodologia.originalIndex}" style="background-color: #084599; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Modificar</button>
-                </td>
-            `;
-            tablaMetodologiasBody.appendChild(tr);
-        });
+        mostradas++;
+        html += '<tr>' +
+            '<td class="codigo">' + esc(m.codigo || '') + '</td>' +
+            '<td>' + esc(m.nombre || '') + '</td>' +
+            '<td>' + esc(m.descripcion || '') + '</td>' +
+            '<td class="acciones"><button type="button" class="btn_tabla" data-indice="' + i + '">MODIFICAR</button></td>' +
+            '</tr>';
     }
 
-    // Cargar la tabla al abrir la página
-    cargarTablaMetodologias();
-
-    // HU-51: Buscador de los datos en la tabla cargados del local store
-    if (buscadorMetodologias) {
-        buscadorMetodologias.addEventListener('input', (e) => {
-            cargarTablaMetodologias(e.target.value);
-        });
+    if (mostradas === 0) {
+        var msg = metodologias.length === 0 ? 'No hay metodologías para mostrar.' : 'No se encontraron metodologías con esa búsqueda.';
+        html = '<tr><td class="vacio" colspan="4">' + msg + '</td></tr>';
     }
 
-    // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
-    if (tablaMetodologiasBody) {
-        tablaMetodologiasBody.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn_editar')) {
-                const index = parseInt(e.target.getAttribute('data-index'), 10);
-                let guardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
-                const metodologiaAEditar = guardadas[index];
+    document.getElementById('cuerpo_tabla').innerHTML = html;
+    document.getElementById('conteo').textContent = filtro === ''
+        ? 'Total: ' + metodologias.length + ' metodologías'
+        : 'Mostrando ' + mostradas + ' de ' + metodologias.length + ' metodologías';
+}
 
-                if (metodologiaAEditar) {
-                    // Pasar datos a los inputs superiores
-                    inputCodigo.value = metodologiaAEditar.codigo;
-                    inputCodigo.readOnly = true; // El código no cambia al editar
-                    inputNombre.value = metodologiaAEditar.nombre;
-                    inputDescripcion.value = metodologiaAEditar.descripcion;
+function abrirFormulario() {
+    indiceEditando = null;
+    document.getElementById('formulario').reset();
+    document.getElementById('codigo').value = generarCodigo();
+    document.getElementById('titulo_formulario').textContent = 'Registrar metodología';
+    document.getElementById('error_formulario').textContent = '';
+    document.getElementById('aviso').className = 'aviso oculto';
+    document.getElementById('panel_formulario').classList.remove('oculto');
+    document.getElementById('nombre').focus();
+}
 
-                    // Cambiar estados a modo edición (HU-52)
-                    indiceEditando = index;
-                    if (tituloFormulario) tituloFormulario.textContent = 'Modificar Metodología de Aprendizaje';
-                    if (btnEnviar) btnEnviar.value = 'ACTUALIZAR METODOLOGÍA';
+function abrirEdicion(indice) {
+    var m = metodologias[indice];
+    if (!m) { return; }
 
-                    // Subir suavemente la vista hacia el formulario
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }
-        });
+    indiceEditando = indice;
+    document.getElementById('formulario').reset();
+    document.getElementById('codigo').value = m.codigo;
+    document.getElementById('nombre').value = m.nombre;
+    document.getElementById('descripcion').value = m.descripcion;
+    document.getElementById('titulo_formulario').textContent = 'Modificar metodología';
+    document.getElementById('error_formulario').textContent = '';
+    document.getElementById('aviso').className = 'aviso oculto';
+    document.getElementById('panel_formulario').classList.remove('oculto');
+    document.getElementById('nombre').focus();
+}
+
+function cerrarFormulario() {
+    indiceEditando = null;
+    document.getElementById('panel_formulario').classList.add('oculto');
+}
+
+function guardarMetodologia(evento) {
+    evento.preventDefault();
+
+    var nombre = document.getElementById('nombre').value.trim();
+    var descripcion = document.getElementById('descripcion').value.trim();
+    var error = document.getElementById('error_formulario');
+
+    if (nombre.length < 3) {
+        error.textContent = 'El nombre es obligatorio (mínimo 3 caracteres).';
+        return;
+    }
+    if (descripcion === '') {
+        error.textContent = 'La descripción es obligatoria.';
+        return;
     }
 
-    formulario.addEventListener('submit', (e) => {
-        e.preventDefault();
+    if (indiceEditando !== null) {
+        metodologias[indiceEditando].nombre = nombre;
+        metodologias[indiceEditando].descripcion = descripcion;
+        aviso('Metodología modificada correctamente.', 'exito');
+    } else {
+        metodologias.push({
+            codigo: document.getElementById('codigo').value,
+            nombre: nombre,
+            descripcion: descripcion,
+            fechaRegistro: new Date().toISOString()
+        });
+        aviso('Metodología registrada correctamente.', 'exito');
+    }
 
-        let formIsValid = true;
+    guardar();
+    listar();
+    cerrarFormulario();
+}
 
-        // Ocultar mensajes previos
-        if (divMensajeError) divMensajeError.style.display = 'none';
-        if (mensajeExito) mensajeExito.style.display = 'none'; 
-    
-         // validarción de nombre (obligatorio, mínimo 3 caracteres.)
-        const valorNombre = inputNombre.value.trim();
-        const errorNombreP = grupoNombre ? grupoNombre.querySelector('.formulario_input-error') : null;
+// Eventos
+document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
+document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
+document.getElementById('formulario').addEventListener('submit', guardarMetodologia);
+document.getElementById('buscador').addEventListener('input', listar);
 
-        if (valorNombre === '' || valorNombre.length < 3) {
-            formIsValid = false;
-            inputNombre.style.borderColor = '#DC2626'; 
-            if (errorNombreP) errorNombreP.style.display = 'block';
-        } else {
-            inputNombre.style.borderColor = '#16A34A'; 
-            if (errorNombreP) errorNombreP.style.display = 'none';
-        }
+// Botón MODIFICAR de cada fila (delegación de eventos sobre el tbody)
+document.getElementById('cuerpo_tabla').addEventListener('click', function (evento) {
+    var boton = evento.target.closest('.btn_tabla');
+    if (boton) {
+        abrirEdicion(parseInt(boton.getAttribute('data-indice'), 10));
+    }
+});
 
-        // Validación de la descripcion como obligatorio
-        const valorDescripcion = inputDescripcion.value.trim();
-        if (valorDescripcion === '') {
-            formIsValid = false;
-            inputDescripcion.style.borderColor = '#DC2626';
-        } else {
-            inputDescripcion.style.borderColor = '#16A34A';
-        }
-
-        // validación al enviar metodología
-        if (!formIsValid) {
-            if (divMensajeError) divMensajeError.style.display = 'block'; 
-        } else {
-            // Carga datos actuales desde localStorage para validar si se edita o crea.
-              let guardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
-            //52
-                if (indiceEditando !== null) {
-                // Actualiza el registro existente
-                guardadas[indiceEditando].nombre = valorNombre;
-                guardadas[indiceEditando].descripcion = valorDescripcion;
-
-             if (mensajeExito) {
-                    mensajeExito.textContent = '¡Metodología modificada con éxito!';
-                    mensajeExito.style.display = 'block';
-                }
-            } else {
-            const nuevaMetodologia = {
-                codigo: inputCodigo.value,
-                nombre: valorNombre,
-                descripcion: valorDescripcion,
-                fechaRegistro: new Date().toISOString()
-            };
-        
-          
-            guardadas.push(nuevaMetodologia);
-             if (mensajeExito) {
-                    mensajeExito.textContent = '¡Metodología registrada con éxito!';
-                    mensajeExito.style.display = 'block';
-                }
-            } 
-
-            localStorage.setItem('lista_metodologias', JSON.stringify(guardadas));
-
-          
-            if (divMensajeError) divMensajeError.style.display = 'none';
-
-                // Actualiza la tabla de inmediato con el nuevo registro
-            cargarTablaMetodologias(buscadorMetodologias ? buscadorMetodologias.value : '');
-
-            // Se limpia  el formulario y sale del modo edición al cancelar.
-            setTimeout(() => {
-                formulario.reset();
-                indiceEditando = null; // Regresar a modo registro normal
-                if (tituloFormulario) tituloFormulario.textContent = 'Registrar Nueva Metodología de Aprendizaje';
-                if (btnEnviar) btnEnviar.value = 'GUARDAR METODOLOGÍA';
-                inputCodigo.value = generarCodigoAutomatico();
-                inputCodigo.readOnly = true;
-                inputNombre.style.borderColor = '#ccc';
-                inputDescripcion.style.borderColor = '#ccc';
-                if (mensajeExito) mensajeExito.style.display = 'none';
-            }, 2000);
-        }
-    });
-
-});  
-        
-        
+listar();
