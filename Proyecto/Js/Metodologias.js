@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-<<<<<<< HEAD
     // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
     if (tablaMetodologiasBody) {
         tablaMetodologiasBody.addEventListener('click', (e) => {
@@ -208,12 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });  
         
         
-=======
+
 listar();
-
-
-<<<<<<< HEAD
-=======
 
 //accion
 document.getElementById('btn_registrar')
@@ -238,6 +233,3 @@ document.getElementById('cuerpo_tabla')
     });
 
 listar();
-
->>>>>>> c8f7c7a668796802ad38a37405cc4ee3497c0447
->>>>>>> 00c27df6382d515e1398b073219f993f0e011c62

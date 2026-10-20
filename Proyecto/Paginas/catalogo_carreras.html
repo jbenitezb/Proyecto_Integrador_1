@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo-Escuela</title>
+    <title>Catalogo-Carreras</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
     <link rel="stylesheet" href="../estilos/area_sfia.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
@@ -39,7 +39,7 @@
             <nav class="catalogo_sidebar" aria-label="Filtros del catálogo">
                 <ul class="catalogo_menu-lateral">
                     <li><a href="catalogo_escuela.html">ESCUELAS</a></li>
-                    <li><a href="carreras.html">CARRERAS</a></li>
+                    <li><a href="catalogo_carreras.html">CARRERAS</a></li>
                     <li><a href="estado_curso.html">ESTADO CURSO</a></li>
                     <li><a href="area_sfia.html">ÁREA SFIA</a></li>
                     <li><a href="tematica.html">TEMÁTICA</a></li>
@@ -81,13 +81,9 @@
                     </div>
 
                     <div class="campo campo_completo">
-                        <label class="etiqueta" for="director">DIRECTOR</label>
-                        <select class="entrada" id="director">
-                            <option value="">Seleccione un director</option>
-                            <option value="Director 1">Director 1</option>
-                            <option value="Director 2">Director 2</option>
-                            <option value="Director 3">Director 3</option>
-                            <option value="Director 4">Director 4</option>
+                        <label class="etiqueta" for="escuela">ESCUELA ASOCIADA</label>
+                        <select class="entrada" id="escuela" required>
+                            <option value="">Seleccione una escuela</option>
                         </select>
                     </div>
 
@@ -161,6 +157,6 @@
         </div>
     </footer>
 
-     <script src=""></script>
+     <script src="../Js/carreras.js"></script>
 </body>
 </html>
