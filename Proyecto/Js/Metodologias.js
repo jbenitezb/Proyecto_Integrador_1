@@ -148,3 +148,30 @@ document.getElementById('cuerpo_tabla').addEventListener('click', function (even
 });
 
 listar();
+
+
+
+//accion
+document.getElementById('btn_registrar')
+    .addEventListener('click', abrirFormulario);
+
+document.getElementById('btn_cancelar')
+    .addEventListener('click', cerrarFormulario);
+
+document.getElementById('formulario')
+    .addEventListener('submit', guardarEscuela);
+
+document.getElementById('buscador')
+    .addEventListener('input', listar);
+
+document.getElementById('cuerpo_tabla')
+    .addEventListener('click', function (evento) {
+        var boton = evento.target.closest('.btn_tabla');
+
+        if (boton) {
+            editar(parseInt(boton.getAttribute('data-indice'), 10));
+        }
+    });
+
+listar();
+

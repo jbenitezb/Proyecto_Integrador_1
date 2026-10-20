@@ -1,17 +1,27 @@
-/* ===== ESCUELAS ===== */
+
+/* ===== CATÁLOGO DE ESCUELAS ===== */
+
 var escuelas = JSON.parse(localStorage.getItem('escuelas')) || [];
+var editando = null; // null = registrando; número = editando
 
 function guardar() {
     localStorage.setItem('escuelas', JSON.stringify(escuelas));
 }
 
 function esc(texto) {
-    return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(texto)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }
 
-// Minúsculas y sin tildes, para que "escuela" encuentre "ESCUELA"
 function normalizar(texto) {
-    return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    return String(texto)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
 }
 
 function aviso(texto, tipo) {
@@ -21,49 +31,98 @@ function aviso(texto, tipo) {
 }
 
 function listar() {
-    var filtro = normalizar(document.getElementById('buscador').value.trim());
+    var filtro = normalizar(
+        document.getElementById('buscador').value.trim()
+    );
+
     var html = '';
     var mostradas = 0;
 
     for (var i = 0; i < escuelas.length; i++) {
-        var e = escuelas[i];
-        var texto = normalizar(e.codigo + ' ' + e.nombre + ' ' + e.director);
+        var escuela = escuelas[i];
+
+        var texto = normalizar(
+            escuela.codigo + ' ' +
+            escuela.nombre + ' ' +
+            escuela.director
+        );
 
         if (filtro !== '' && texto.indexOf(filtro) === -1) {
             continue;
         }
 
         mostradas++;
-        html += '<tr>' +
-            '<td class="codigo">' + esc(e.codigo) + '</td>' +
-            '<td>' + esc(e.nombre) + '</td>' +
-            '<td>' + esc(e.director) + '</td>' +
-            '</tr>';
 
-        
+        html += '<tr>' +
+            '<td class="codigo">' + esc(escuela.codigo) + '</td>' +
+            '<td>' + esc(escuela.nombre) + '</td>' +
+            '<td>' + esc(escuela.director) + '</td>' +
+            '<td class="acciones">' +
+                '<button type="button" class="btn_tabla" data-indice="' + i + '">' +
+                    'EDITAR' +
+                '</button>' +
+            '</td>' +
+        '</tr>';
     }
 
     if (mostradas === 0) {
-        var msg = escuelas.length === 0 ? 'No hay escuelas para mostrar.' : 'No se encontraron escuelas con esa búsqueda.';
-        html = '<tr><td class="vacio" colspan="3">' + msg + '</td></tr>';
+        var mensaje = escuelas.length === 0
+            ? 'No hay escuelas para mostrar.'
+            : 'No se encontraron escuelas con esa búsqueda.';
+
+        html = '<tr><td class="vacio" colspan="4">' +
+            mensaje +
+        '</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-    document.getElementById('conteo').textContent = filtro === ''
-        ? 'Total: ' + escuelas.length + ' escuelas'
-        : 'Mostrando ' + mostradas + ' de ' + escuelas.length + ' escuelas';
+
+    document.getElementById('conteo').textContent =
+        'Mostrando ' + mostradas + ' de ' + escuelas.length + ' escuelas';
 }
 
 function abrirFormulario() {
+    editando = null;
+
+    document.getElementById('titulo_formulario').textContent =
+        'Registrar escuela';
+
     document.getElementById('formulario').reset();
+    document.getElementById('codigo').readOnly = false;
     document.getElementById('error_formulario').textContent = '';
     document.getElementById('aviso').className = 'aviso oculto';
+
     document.getElementById('panel_formulario').classList.remove('oculto');
     document.getElementById('codigo').focus();
 }
 
+function editar(i) {
+    if (i < 0 || i >= escuelas.length) {
+        return;
+    }
+
+    abrirFormulario();
+
+    editando = i;
+
+    document.getElementById('titulo_formulario').textContent =
+        'Modificar escuela';
+
+    document.getElementById('codigo').value = escuelas[i].codigo;
+    document.getElementById('nombre').value = escuelas[i].nombre;
+    document.getElementById('director').value = escuelas[i].director;
+
+    // El código no se puede cambiar al editar
+    document.getElementById('codigo').readOnly = true;
+
+    document.getElementById('nombre').focus();
+}
+
 function cerrarFormulario() {
+    editando = null;
+
     document.getElementById('panel_formulario').classList.add('oculto');
+    document.getElementById('error_formulario').textContent = '';
 }
 
 function guardarEscuela(evento) {
@@ -80,24 +139,51 @@ function guardarEscuela(evento) {
     }
 
     for (var i = 0; i < escuelas.length; i++) {
-        if (escuelas[i].codigo === codigo) {
+        if (escuelas[i].codigo.toUpperCase() === codigo && i !== editando) {
             error.textContent = 'Ya existe una escuela con este código.';
             return;
         }
     }
 
-    escuelas.push({ codigo: codigo, nombre: nombre, director: director });
-    aviso('Escuela registrada correctamente.', 'exito');
+    var escuela = {
+        codigo: codigo,
+        nombre: nombre,
+        director: director
+    };
+
+    if (editando === null) {
+        escuelas.push(escuela);
+        aviso('Escuela registrada correctamente.', 'exito');
+    } else {
+        escuelas[editando] = escuela;
+        aviso('Escuela modificada correctamente.', 'exito');
+    }
 
     guardar();
     listar();
     cerrarFormulario();
 }
 
-// Eventos
-document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
-document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
-document.getElementById('formulario').addEventListener('submit', guardarEscuela);
-document.getElementById('buscador').addEventListener('input', listar);
+//accion
+document.getElementById('btn_registrar')
+    .addEventListener('click', abrirFormulario);
+
+document.getElementById('btn_cancelar')
+    .addEventListener('click', cerrarFormulario);
+
+document.getElementById('formulario')
+    .addEventListener('submit', guardarEscuela);
+
+document.getElementById('buscador')
+    .addEventListener('input', listar);
+
+document.getElementById('cuerpo_tabla')
+    .addEventListener('click', function (evento) {
+        var boton = evento.target.closest('.btn_tabla');
+
+        if (boton) {
+            editar(parseInt(boton.getAttribute('data-indice'), 10));
+        }
+    });
 
 listar();
