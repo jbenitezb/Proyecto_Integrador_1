@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar la tabla al abrir la página
     cargarTablaMetodologias();
 
-    // HU-51: Buscador de los datos en la tabla cargados del local store
+    // HU-51 and 54: Buscador de los datos en la tabla cargados del local store
     if (buscadorMetodologias) {
         buscadorMetodologias.addEventListener('input', (e) => {
             cargarTablaMetodologias(e.target.value);
@@ -187,6 +187,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         }
     });
+
+        const btnCancelar = document.querySelector('.btn_cancelar');
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', () => {
+            formulario.reset();
+            indiceEditando = null; 
+            if (tituloFormulario) tituloFormulario.textContent = 'Registrar Nueva Metodología de Aprendizaje';
+            if (btnEnviar) btnEnviar.value = 'GUARDAR METODOLOGÍA';
+            inputCodigo.value = generarCodigoAutomatico();
+            inputCodigo.readOnly = true;
+            inputNombre.style.borderColor = '#ccc';
+            inputDescripcion.style.borderColor = '#ccc';
+            if (divMensajeError) divMensajeError.style.display = 'none';
+            if (mensajeExito) mensajeExito.style.display = 'none';
+        });
+    }
 
 });  
         
