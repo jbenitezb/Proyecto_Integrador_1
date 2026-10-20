@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+<<<<<<< HEAD
     // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
     if (tablaMetodologiasBody) {
         tablaMetodologiasBody.addEventListener('click', (e) => {
@@ -207,3 +208,33 @@ document.addEventListener('DOMContentLoaded', () => {
 });  
         
         
+=======
+listar();
+
+
+
+//accion
+document.getElementById('btn_registrar')
+    .addEventListener('click', abrirFormulario);
+
+document.getElementById('btn_cancelar')
+    .addEventListener('click', cerrarFormulario);
+
+document.getElementById('formulario')
+    .addEventListener('submit', guardarEscuela);
+
+document.getElementById('buscador')
+    .addEventListener('input', listar);
+
+document.getElementById('cuerpo_tabla')
+    .addEventListener('click', function (evento) {
+        var boton = evento.target.closest('.btn_tabla');
+
+        if (boton) {
+            editar(parseInt(boton.getAttribute('data-indice'), 10));
+        }
+    });
+
+listar();
+
+>>>>>>> c8f7c7a668796802ad38a37405cc4ee3497c0447
