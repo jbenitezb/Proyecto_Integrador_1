@@ -53,6 +53,39 @@
             <!-- Contenido del registro de escuelas -->
             <section class="contenido-principal">
             <h1 class="seccion_titulo">MONEDA</h1>
+
+            <div id="aviso" class="aviso oculto"></div>
+
+            <div class="barra_herramientas">
+                
+                <div class="buscador">
+                    <label class="etiqueta" for="buscador">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscador" placeholder="Buscar por nombre">
+                </div>
+            </div>
+
+             <div class="tabla_contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>SIMBOLO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DOLARES</td>
+                            <td>$</td>
+                        </tr>
+                        <tr>
+                            <td>COLONES</td>
+                            <td>₡</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="conteo" id="conteo"></p>
+
         </div>
     </main>
 
@@ -98,6 +131,6 @@
         </div>
     </footer>
 
-     <script src="../Js/escuelas.js"></script>
+     <script src="../Js/moneda.js"></script>
 </body>
 </html>
