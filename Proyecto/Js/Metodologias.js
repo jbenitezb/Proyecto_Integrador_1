@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Carga datos actuales desde localStorage para validar si se edita o crea.
               let guardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
-            //52
+            //Hu-52
                 if (indiceEditando !== null) {
                 // Actualiza el registro existente
                 guardadas[indiceEditando].nombre = valorNombre;
