@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo-Carreras</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/area_sfia.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <nav class="menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            <div class="logo">
+                <img src="../Imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
+                <span class="logo_texto"></span>
+            </div>
+           <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
+            </ul>
+        </nav>
+
+    </header>
+<!--hola-->
+    <main id="carreras">
+
+        <div class="seccion-catalogo-contenedor">
+
+            <!-- Barra lateral -->
+            <nav class="catalogo_sidebar" aria-label="Filtros del catálogo">
+                <ul class="catalogo_menu-lateral">
+                    <li><a href="catalogo_escuela.html">ESCUELAS</a></li>
+                    <li><a href="catalogo_carreras.html">CARRERAS</a></li>
+                    <li><a href="estado_curso.html">ESTADO CURSO</a></li>
+                    <li><a href="area_sfia.html">ÁREA SFIA</a></li>
+                    <li><a href="tematica.html">TEMÁTICA</a></li>
+                    <li><a href="catalogo_metodologias.html">METODOLOGÍAS</a></li>
+                    <li><a href="nivel.html">NIVEL</a></li>
+                    <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
+                    <li><a href="catalogo_moneda.html">MONEDA</a></li>
+                </ul>
+            </nav>
+
+            <!-- Contenido del registro de escuelas -->
+            <section class="contenido-principal">
+            <h1 class="seccion_titulo">CARRERAS</h1>
+
+            <div id="aviso" class="aviso oculto"></div>
+
+            <div class="barra_herramientas">
+                
+                <div class="buscador">
+                    <label class="etiqueta" for="buscador">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscador" placeholder="Buscar por código, nombre o escuela asociada">
+                </div>
+                <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
+                </div>
+            </div>
+
+            <div class="panel oculto" id="panel_formulario">
+                <h2 class="panel_titulo" id="titulo_formulario">Registrar carrera</h2>
+                <form class="formulario" id="formulario">
+                    <div class="campo">
+                        <label class="etiqueta" for="codigo">CÓDIGO</label>
+                        <input type="text" class="entrada" id="codigo" placeholder="Ej. SOF" maxlength="20">
+                    </div>
+
+                    <div class="campo">
+                        <label class="etiqueta" for="nombre">NOMBRE</label>
+                        <input type="text" class="entrada" id="nombre" placeholder="NOMBRE" maxlength="100">
+                    </div>
+
+                    <div class="campo campo_completo">
+                        <label class="etiqueta" for="escuela">ESCUELA ASOCIADA</label>
+                        <select class="entrada" id="escuela" required>
+                            <option value="">Seleccione una escuela</option>
+                        </select>
+                    </div>
+
+                    <p class="error campo_completo" id="error_formulario"></p>
+
+                    <div class="acciones_formulario">
+                        <button type="button" class="btn_cancelar" id="btn_cancelar">CANCELAR</button>
+                        <button type="submit" class="btn_enviar" id="btn_guardar">GUARDAR</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="tabla_contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>NOMBRE</th>
+                            <th>ESCUELA ASOCIADA</th>
+                            <th class="acciones">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo_tabla"></tbody>
+                </table>
+            </div>
+            <p class="conteo" id="conteo"></p>
+        </section>
+        </div>
+    </main>
+
+    <footer class="footer_referencia">
+        
+        <div class="footer_columna">
+            <p><strong>WhatsApp General: </strong></p>
+            <p>+506 6000 8050</p>
+            <p><strong>Correo electrónico: </strong></p>
+            <p>info@ucenfotec.ac.cr</p>
+            <p><strong>Dirección:</strong></p>
+            <p>
+                Barrio Francisco Peralta, sobre Avenida Central y Calle 33, 
+                10104 San José, Provincia de San José, Costa Rica.
+            </p>
+        </div>
+
+        <div class="footer_columna">
+            <h3>REDES SOCIALES</h3>
+            <div class="footer_redes">
+                <div class="footer_redes">
+                    <a href="https://www.facebook.com/UCenfotec">f</a>
+                    <a href="https://x.com/ucenfotec">𝕏</a>
+                    <a href="https://www.youtube.com/@UniversidadCenfotec/videos">▶</a>
+                    <a href="https://www.instagram.com/ucenfotec">回</a>
+                    <a href="https://www.linkedin.com/school/universidad-cenfotec/">in</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>BUSCAR</h3>
+            <div class="footer_buscador">
+                <input type="text" placeholder="Buscar...">
+                <button>🔍</button>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>VÍNCULOS DE INTERÉS</h3>
+            <ul>
+                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">> Centro de Asistencia</a></li>
+            </ul>
+        </div>
+    </footer>
+
+     <script src="../Js/carreras.js"></script>
+</body>
+</html>
