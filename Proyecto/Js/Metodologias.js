@@ -17,18 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEnviar = formulario.querySelector('.btn_enviar');
     let indiceEditando = null; // Si es null, registra nuevo (HU-50). Si tiene número, modifica (HU-52).
 
-    // Generar código automático consecutivo basado en los registros almacenados (LocalStorage)
-    function generarCodigoAutomatico() {
-        let metodologiasGuardadas = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
-        let siguienteNumero = metodologiasGuardadas.length + 1;
-        // Formato estandarizado de código (ej: MET-001, MET-002)
-        return 'MET-' + String(siguienteNumero).padStart(3, '0');
-    }
-
     if (inputCodigo) {
-        inputCodigo.value = generarCodigoAutomatico();
+        inputCodigo.value = '';
+        inputCodigo.readOnly = false;
     }
-
     // HU-51: Cargar y mostrar datos en la tabla
     function cargarTablaMetodologias(filtro = '') {
         if (!tablaMetodologiasBody) return;
@@ -74,8 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
             cargarTablaMetodologias(e.target.value);
         });
     }
-
-<<<<<<< HEAD
     // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
     if (tablaMetodologiasBody) {
         tablaMetodologiasBody.addEventListener('click', (e) => {
@@ -87,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (metodologiaAEditar) {
                     // Pasar datos a los inputs superiores
                     inputCodigo.value = metodologiaAEditar.codigo;
-                    inputCodigo.readOnly = true; // El código no cambia al editar
+                    inputCodigo.readOnly = flase; // El código no cambia al editar
                     inputNombre.value = metodologiaAEditar.nombre;
                     inputDescripcion.value = metodologiaAEditar.descripcion;
 
@@ -143,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             //Hu-52
                 if (indiceEditando !== null) {
                 // Actualiza el registro existente
+                guardadas[indiceEditando].codigo = inputCodigo.value;
                 guardadas[indiceEditando].nombre = valorNombre;
                 guardadas[indiceEditando].descripcion = valorDescripcion;
 
@@ -157,8 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 descripcion: valorDescripcion,
                 fechaRegistro: new Date().toISOString()
             };
-        
-          
+    
             guardadas.push(nuevaMetodologia);
              if (mensajeExito) {
                     mensajeExito.textContent = '¡Metodología registrada con éxito!';
@@ -167,7 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } 
 
             localStorage.setItem('lista_metodologias', JSON.stringify(guardadas));
-
           
             if (divMensajeError) divMensajeError.style.display = 'none';
 
@@ -180,15 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 indiceEditando = null; // Regresar a modo registro normal
                 if (tituloFormulario) tituloFormulario.textContent = 'Registrar Nueva Metodología de Aprendizaje';
                 if (btnEnviar) btnEnviar.value = 'GUARDAR METODOLOGÍA';
-                inputCodigo.value = generarCodigoAutomatico();
-                inputCodigo.readOnly = true;
+                inputCodigo.value = '';
+                inputCodigo.readOnly = false;
                 inputNombre.style.borderColor = '#ccc';
                 inputDescripcion.style.borderColor = '#ccc';
                 if (mensajeExito) mensajeExito.style.display = 'none';
             }, 2000);
         }
     });
-
         const btnCancelar = document.querySelector('.btn_cancelar');
     if (btnCancelar) {
         btnCancelar.addEventListener('click', () => {
@@ -196,8 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             indiceEditando = null; 
             if (tituloFormulario) tituloFormulario.textContent = 'Registrar Nueva Metodología de Aprendizaje';
             if (btnEnviar) btnEnviar.value = 'GUARDAR METODOLOGÍA';
-            inputCodigo.value = generarCodigoAutomatico();
-            inputCodigo.readOnly = true;
+            inputCodigo.value = '';
+            inputCodigo.readOnly = false;
             inputNombre.style.borderColor = '#ccc';
             inputDescripcion.style.borderColor = '#ccc';
             if (divMensajeError) divMensajeError.style.display = 'none';
@@ -207,34 +195,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });  
         
-        
-=======
-listar();
-
-
-
-//accion
-document.getElementById('btn_registrar')
-    .addEventListener('click', abrirFormulario);
-
-document.getElementById('btn_cancelar')
-    .addEventListener('click', cerrarFormulario);
-
-document.getElementById('formulario')
-    .addEventListener('submit', guardarEscuela);
-
-document.getElementById('buscador')
-    .addEventListener('input', listar);
-
-document.getElementById('cuerpo_tabla')
-    .addEventListener('click', function (evento) {
-        var boton = evento.target.closest('.btn_tabla');
-
-        if (boton) {
-            editar(parseInt(boton.getAttribute('data-indice'), 10));
-        }
-    });
-
-listar();
-
->>>>>>> c8f7c7a668796802ad38a37405cc4ee3497c0447
+     

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
-    <link rel="stylesheet" href="Metodologias.css">
+    <link rel="stylesheet" href="../estilos/Metodologias.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -42,7 +42,9 @@
                     <li><a href="carreras.html">CARRERAS</a></li>
                     <li><a href="estado_curso.html">ESTADO CURSO</a></li>
                     <li><a href="area_sfia.html">ÁREA SFIA</a></li>
-                    <li><a href="tematica.html">TEMÁTICA</a></li>
+                    
+                     <li><a href="tematica.html">TEMÁTICA</a></li>
+
                     <li><a href="metodologias.html" class="enlace_activo_sidebar">METODOLOGÍAS</a></li>
                     <li><a href="nivel.html">NIVEL</a></li>
                     <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
@@ -50,20 +52,21 @@
                 </ul>
             </aside>
 
+
+
             <!-- Contenedor principal -->
             <div class="catalogo_contenedor-principal">
-
            <!--Formulario de Registro de Metodología (HU-50) -->
-            <section class="catalogo_contenido">
-                <h2 class="catalogo_titulo-seccion">Registrar Nueva Metodología de Aprendizaje</h2>
+           <section class="seccion_contenedor">
+                <h2 class="seccion_titulo">Registrar Nueva Metodología de Aprendizaje</h2>
             
                  <form action="#" class="formulario" id="formulario">
 
-                <!-- Código automatico -->
+                <!-- Código metodología -->
                 <div class="formulario_grupo" id="grupo_codigo">
-                    <label class="formulario_label">Código Automatico</label>
+                 <label class="formulario_label">Código de Metodología</label>
                     <div class="formulario_grupo-input">
-                        <input type="text" class="formulario_input" name="codigo" id="codigo" readonly placeholder="Auto-generado">
+                        <input type="text" class="formulario_input" name="codigo" id="codigo" placeholder="Ej: MET-001">
                     </div>
                 </div>
 
@@ -79,7 +82,7 @@
 
                 <!-- Descripción metodologia -->
               <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion">
-                    <label class="formulario_label">Descripcin</label>
+                    <label class="formulario_label">Descripción</label>
                     <div class="formulario_grupo-input">
                         <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la metodología..."></textarea>
                     </div>
@@ -98,16 +101,13 @@
                            </div>
 
                     </form>
-
-           </section>
-
-            <!--Hu-51 (Listado y Tabla) -->
-            <section class="catalogo_contenido" style="margin-top: 40px;">
-                <h2 class="catalogo_titulo-seccion">Listado de Metodologías de Aprendizaje</h2>
-                
+                <h2 class="seccion_titulo" style="margin-top: 40px;">Listado de Metodologías de Aprendizaje</h2>
+                <!--Hu-51 (Listado y Tabla) -->              
                 <div class="catalogo_acciones-superior" style="margin-bottom: 20px; display: flex; gap: 10px;">
                     <input type="text" id="buscadorMetodologias" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
-                </div>
+                </div> 
+
+                <div class="tabla_contenedor">
 
                 <table class="tabla_datos" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                     <thead>
@@ -122,6 +122,11 @@
                         <!-- Los datos se cargan automaticamente desde el localStorage -->
                     </tbody>
                 </table>
+                </div>
+
+                <!-- Conteo de elementos al pie de la tabla-->
+                    <p class="conteo" id="conteo" style="margin-top: 10px; font-size: 0.85rem; color: #666;"></p>
+              
             </section>
 
 
@@ -154,6 +159,6 @@
             </ul>
         </div>
     </footer>
-        <script src="Metodologias.js"></script>
+        <script src="../js/Metodologias.js"></script>
 </body>
 </html>
