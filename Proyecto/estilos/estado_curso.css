@@ -391,3 +391,37 @@ body {
         width: 100%;
     }
 }
+
+/* Hu-36 estilos para la tabla del listado */
+
+.tabla_contenedor {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.tabla_datos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+.tabla_datos th {
+    background-color: #084599;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+}
+
+.tabla_datos td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+.tabla_datos tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
