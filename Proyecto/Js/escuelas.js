@@ -133,8 +133,18 @@ function guardarEscuela(evento) {
     var director = document.getElementById('director').value;
     var error = document.getElementById('error_formulario');
 
-    if (codigo === '' || nombre === '' || director === '') {
-        error.textContent = 'El código, el nombre y el director son obligatorios.';
+    if (codigo === '') {
+        error.textContent = 'Ingrese un código válido.';
+        return;
+    }
+
+    if (nombre === '' || nombre.length < 3) {
+        error.textContent = 'Ingrese el nombre de la escuela (mínimo 3 caracteres).';
+        return;
+    }
+
+    if (director === '') {
+        error.textContent = 'Ingrese el nombre del director (mínimo 3 caracteres).';
         return;
     }
 
