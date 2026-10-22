@@ -66,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cargarTablaMetodologias(e.target.value);
         });
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95042e6cb643ec7a8dc0359c884985c50609b87f
     // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
     if (tablaMetodologiasBody) {
         tablaMetodologiasBody.addEventListener('click', (e) => {
@@ -194,4 +198,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });  
+<<<<<<< HEAD
         
+=======
+        
+listar();
+
+//accion
+document.getElementById('btn_registrar')
+    .addEventListener('click', abrirFormulario);
+
+document.getElementById('btn_cancelar')
+    .addEventListener('click', cerrarFormulario);
+
+document.getElementById('formulario')
+    .addEventListener('submit', guardarEscuela);
+
+document.getElementById('buscador')
+    .addEventListener('input', listar);
+
+document.getElementById('cuerpo_tabla')
+    .addEventListener('click', function (evento) {
+        var boton = evento.target.closest('.btn_tabla');
+
+        if (boton) {
+            editar(parseInt(boton.getAttribute('data-indice'), 10));
+        }
+    });
+
+listar();
+>>>>>>> 95042e6cb643ec7a8dc0359c884985c50609b87f
