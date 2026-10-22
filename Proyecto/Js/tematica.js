@@ -1,16 +1,15 @@
-/* ===== ÁREA SFIA ===== */
-var areas = JSON.parse(localStorage.getItem('area_sfia')) || [];
+/* ===== Tematica ===== */
+var tematicas = JSON.parse(localStorage.getItem('tematica')) || [];
 var editando = null; // null = registrando; número = editando esa posición
 
 function guardar() {
-    localStorage.setItem('area_sfia', JSON.stringify(areas));
+    localStorage.setItem('tematica', JSON.stringify(tematicas));
 }
 
 function esc(texto) {
     return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Minúsculas y sin tildes, para que "area" encuentre "ÁREA"
 function normalizar(texto) {
     return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
@@ -26,8 +25,8 @@ function listar() {
     var html = '';
     var mostradas = 0;
 
-    for (var i = 0; i < areas.length; i++) {
-        var a = areas[i];
+    for (var i = 0; i < tematicas.length; i++) {
+        var a = tematicas[i];
         var texto = normalizar(a.codigo + ' ' + a.nombre + ' ' + a.descripcion);
 
         if (filtro !== '' && texto.indexOf(filtro) === -1) {
@@ -44,12 +43,12 @@ function listar() {
     }
 
     if (mostradas === 0) {
-        var msg = areas.length === 0 ? 'No hay áreas para mostrar.' : 'No se encontraron áreas con esa búsqueda.';
+        var msg = tematicas.length === 0 ? 'No hay áreas para mostrar.' : 'No se encontraron áreas con esa búsqueda.';
         html = '<tr><td class="vacio" colspan="4">' + msg + '</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + areas.length + ' áreas';
+    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + tematicas.length + ' áreas';
 }
 
 function abrirFormulario() {
@@ -66,10 +65,10 @@ function abrirFormulario() {
 function editar(i) {
     abrirFormulario();
     editando = i;
-    document.getElementById('titulo_formulario').textContent = 'Modificar área SFIA';
-    document.getElementById('codigo').value = areas[i].codigo;
-    document.getElementById('nombre').value = areas[i].nombre;
-    document.getElementById('descripcion').value = areas[i].descripcion;
+    document.getElementById('titulo_formulario').textContent = 'Modificar Tematica';
+    document.getElementById('codigo').value = tematicas[i].codigo;
+    document.getElementById('nombre').value = tematicas[i].nombre;
+    document.getElementById('descripcion').value = tematicas[i].descripcion;
     document.getElementById('codigo').readOnly = true;
     document.getElementById('nombre').focus();
 }
@@ -79,7 +78,7 @@ function cerrarFormulario() {
     document.getElementById('panel_formulario').classList.add('oculto');
 }
 
-function guardarArea(evento) {
+function guardarTematica(evento) {
     evento.preventDefault();
 
     var codigo = document.getElementById('codigo').value.trim().toUpperCase();
@@ -87,25 +86,55 @@ function guardarArea(evento) {
     var descripcion = document.getElementById('descripcion').value.trim();
     var error = document.getElementById('error_formulario');
 
-    if (codigo === '' || nombre === '') {
+    if (codigo === '' && nombre === '' && descripcion === '') {
+    error.textContent = 'El código, el nombre y la descripción son obligatorios.';
+    return;
+    }
+
+    if (codigo === '' && nombre === '') {
         error.textContent = 'El código y el nombre son obligatorios.';
         return;
     }
 
-    for (var i = 0; i < areas.length; i++) {
-        if (areas[i].codigo === codigo && i !== editando) {
+    if (codigo === '' && descripcion === '') {
+        error.textContent = 'El código y la descripción son obligatorios.';
+        return;
+    }
+
+    if (nombre === '' && descripcion === '') {
+        error.textContent = 'El nombre y la descripción son obligatorios.';
+        return;
+    }
+
+    if (codigo === '') {
+        error.textContent = 'El código es obligatorio.';
+        return;
+    }
+
+    if (nombre === '') {
+        error.textContent = 'El nombre es obligatorio.';
+        return;
+    }
+
+    if (descripcion === '') {
+        error.textContent = 'La descripción es obligatoria.';
+        return;
+    }
+
+    for (var i = 0; i < tematicas.length; i++) {
+        if (tematicas[i].codigo === codigo && i !== editando) {
             error.textContent = 'Ya existe un área con este código.';
             return;
         }
     }
 
-    var area = { codigo: codigo, nombre: nombre, descripcion: descripcion };
+    var tematica = { codigo: codigo, nombre: nombre, descripcion: descripcion };
 
     if (editando === null) {
-        areas.push(area);
+        tematicas.push(tematica);
         aviso('Área registrada correctamente.', 'exito');
     } else {
-        areas[editando] = area;
+        tematicas[editando] = tematica;
         aviso('Área modificada correctamente.', 'exito');
     }
 
@@ -117,7 +146,7 @@ function guardarArea(evento) {
 // Eventos (sin onclick/onsubmit dentro del HTML)
 document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
 document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
-document.getElementById('formulario').addEventListener('submit', guardarArea);
+document.getElementById('formulario').addEventListener('submit', guardarTematica);
 document.getElementById('buscador').addEventListener('input', listar);
 document.getElementById('cuerpo_tabla').addEventListener('click', function (evento) {
     var boton = evento.target.closest('.btn_tabla');
