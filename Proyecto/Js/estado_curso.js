@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const divMensajeError = document.getElementById('formulario_mensaje');
     const mensajeExito = document.getElementById('formulario_mensaje-exito');
     const btnCancelar = document.querySelector('.btn_cancelar');
-
+    cargarEstados();
+    
     if (formulario) {
         formulario.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (divMensajeError) divMensajeError.style.display = 'none';
+                cargarEstados();
 
                 // Limpiar el formulario tras 2 segundos
                 setTimeout(() => {
@@ -79,4 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mensajeExito) mensajeExito.style.display = 'none';
         });
     }
+    // carga la lista de estados en la tabla
+  
 });
+  const cargarEstados = () => {
+        const tablaBody = document.getElementById('tablaEstadosBody');
+        if (!tablaBody) return;
+
+        tablaBody.innerHTML = '';
+        const estadosGuardados = JSON.parse(localStorage.getItem('lista_estados_curso')) || [];
+
+        estadosGuardados.forEach(estado => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td style="padding: 12px; border: 1px solid #ccc;">${estado.codigo}</td>
+                <td style="padding: 12px; border: 1px solid #ccc;">${estado.nombre}</td>
+            `;
+            tablaBody.appendChild(fila);
+        });
+    };

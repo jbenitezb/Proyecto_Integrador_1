@@ -391,9 +391,7 @@ body {
         width: 100%;
     }
 }
-
-/* Hu-36 estilos para la tabla del listado */
-
+/*Hu-36 estilo tabla*/
 .tabla_contenedor {
     width: 100%;
     overflow-x: auto;
