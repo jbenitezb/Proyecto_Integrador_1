@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cargarTablaMetodologias(e.target.value);
         });
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 95042e6cb643ec7a8dc0359c884985c50609b87f
     // Hu-52 Escuecha el  clic en el botn de modificar de la tabla
     if (tablaMetodologiasBody) {
         tablaMetodologiasBody.addEventListener('click', (e) => {
@@ -195,6 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });  
+<<<<<<< HEAD
+        
+=======
         
 listar();
 
@@ -221,3 +227,4 @@ document.getElementById('cuerpo_tabla')
     });
 
 listar();
+>>>>>>> 95042e6cb643ec7a8dc0359c884985c50609b87f

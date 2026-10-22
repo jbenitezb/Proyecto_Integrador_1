@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Estado del Curso - Sistema Curricular CENFOTEC</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../estilos/estado_curso.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -92,6 +92,8 @@
 
                     </form>
 
+                   <!-- Hu-36 parte que lista estado del curso -->
+
                     <h2 class="seccion_titulo" style="margin-top: 40px;">Listado de Estados del Curso</h2>
                     
                     <div class="tabla_contenedor">
@@ -100,6 +102,7 @@
                                 <tr style="background-color: #064590; color: white; text-align: left;">
                                     <th style="padding: 12px; border: 1px solid #ccc;">Código</th>
                                     <th style="padding: 12px; border: 1px solid #ccc;">Nombre del Estado</th>
+                                    <th style="padding: 12px; border: 1px solid #ccc; text-align: center;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaEstadosBody">
@@ -110,6 +113,7 @@
 
                     <!-- Conteo de elementos al pie de la tabla -->
                     <p class="conteo" id="conteo" style="margin-top: 10px; font-size: 0.85rem; color: #666;"></p>
+
                </section>
             </div>
         </div>
@@ -141,6 +145,6 @@
         </div>
     </footer>
 
-    <script src=".js"></script>
+    <script src="../js/estado_curso.js"></script>
 </body>
-</html>+
+</html>
