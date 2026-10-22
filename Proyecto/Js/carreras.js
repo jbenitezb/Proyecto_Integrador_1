@@ -74,9 +74,6 @@ function cargarEscuelas() {
 function listar() {
     actualizarEscuelas();
 
-    var filtro = normalizar(
-        document.getElementById('buscador').value.trim()
-    );
 
     var html = '';
     var mostradas = 0;
@@ -84,16 +81,6 @@ function listar() {
     for (var i = 0; i < carreras.length; i++) {
         var carrera = carreras[i];
         var nombreEscuela = obtenerNombreEscuela(carrera.escuela);
-
-        var texto = normalizar(
-            carrera.codigo + ' ' +
-            carrera.nombre + ' ' +
-            nombreEscuela
-        );
-
-        if (filtro !== '' && !texto.includes(filtro)) {
-            continue;
-        }
 
         mostradas++;
 
@@ -196,18 +183,26 @@ function guardarCarrera(evento) {
 
     var error = document.getElementById('error_formulario');
 
-    if (codigo === '' || nombre === '' || escuela === '') {
-        error.textContent =
-            'El código, el nombre y la escuela asociada son obligatorios.';
+    if (codigo === '') {
+        error.textContent = 'Ingrese un código válido.';
         return;
     }
 
+    if (nombre === '' || nombre.length < 3) {
+        error.textContent = 'Ingrese el nombre de la escuela (mínimo 3 caracteres).';
+        return;
+    }
+
+    if (escuela === '') {
+        error.textContent = 'Seleccione una escuela válida.';
+        return;
+    }
+
+    
+
     // Evitar códigos duplicados
     for (var i = 0; i < carreras.length; i++) {
-        if (
-            carreras[i].codigo.toUpperCase() === codigo &&
-            i !== editando
-        ) {
+        if (carreras[i].codigo.toUpperCase() === codigo && i !== editando) {
             error.textContent =
                 'Ya existe una carrera con este código.';
             return;
