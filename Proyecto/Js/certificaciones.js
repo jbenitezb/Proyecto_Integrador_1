@@ -1,0 +1,151 @@
+document.addEventListener('DOMContentLoaded', () => {
+    
+    let certificaciones = JSON.parse(localStorage.getItem('lista_certificaciones')) || [];
+
+    const formulario = document.getElementById('formulario');
+    const inputCodigo = document.getElementById('codigo');
+    const inputNombre = document.getElementById('nombre');
+    const inputDescripcion = document.getElementById('descripcion');
+    const inputArchivo = document.getElementById('archivoExcel');
+    const tituloFormulario = document.getElementById('titulo_formulario');
+    const panelFormulario = document.getElementById('panel_formulario');
+    const btnRegistrar = document.getElementById('btn_registrar');
+    const btnCancelar = document.querySelector('.btn_cancelar');
+    const divMensajeError = document.getElementById('formulario_mensaje');
+    const mensajeExito = document.getElementById('formulario_mensaje-exito');
+
+    const guardarEnStorage = () => {
+        localStorage.setItem('lista_certificaciones', JSON.stringify(certificaciones));
+    };
+
+    const mostrarError = (mensaje) => {
+        if (divMensajeError) {
+            divMensajeError.style.display = 'block';
+            divMensajeError.querySelector('p').innerHTML = `<b>ERROR:</b> ${mensaje}`;
+        }
+        if (mensajeExito) mensajeExito.style.display = 'none';
+    };
+
+    const ocultarMensajes = () => {
+        if (divMensajeError) divMensajeError.style.display = 'none';
+        if (mensajeExito) mensajeExito.style.display = 'none';
+    };
+
+    // Control de apertura y cierre del panel de registro
+    const abrirFormulario = () => {
+        if (tituloFormulario) tituloFormulario.textContent = 'Registrar Casa Certificadora o Certificación';
+        if (formulario) formulario.reset();
+        ocultarMensajes();
+        if (panelFormulario) panelFormulario.classList.remove('oculto');
+        if (inputCodigo) inputCodigo.focus();
+    };
+
+    const cerrarFormulario = () => {
+        if (panelFormulario) panelFormulario.classList.add('oculto');
+        ocultarMensajes();
+    };
+
+    // Procesamiento de Carga Masiva csv
+    const procesarCargaMasiva = (archivo) => {
+        const lector = new FileReader();
+
+        lector.onload = (e) => {
+            const lineas = e.target.result.split(/\r\n|\n/);
+            let agregados = 0;
+
+            lineas.forEach((linea, index) => {
+                const cols = linea.split(',').map(c => c.trim().replace(/^["']|["']$/g, ''));
+                
+                // Omite la fila de cabecera si contiene la palabra código
+                if (index === 0 && cols[0].toLowerCase().includes('codigo')) return;
+
+                if (cols.length >= 2) {
+                    const [codigo, nombre, descripcion = ''] = cols;
+                    if (codigo && nombre && !certificaciones.some(c => c.codigo === codigo)) {
+                        certificaciones.push({ codigo, nombre, descripcion });
+                        agregados++;
+                    }
+                }
+            });
+
+            guardarEnStorage();
+
+            if (agregados > 0) {
+                if (mensajeExito) {
+                    mensajeExito.textContent = `¡Se importaro ${agregados} registros correctamente!`;
+                    mensajeExito.style.display = 'block';
+                }
+                setTimeout(() => {
+                    cerrarFormulario();
+                }, 1500);
+            } else {
+                mostrarError('Seleccione un archivo CSV o excel válido con la estructura requerida.');
+            }
+        };
+
+        lector.onerror = () => {
+            mostrarError('Seleccione un archivo CSV o excel válido con la estructura requerida.');
+        };
+
+        lector.readAsText(archivo);
+    };
+
+    // guardado manual o masivo
+    const guardarCertificacion = (evento) => {
+        evento.preventDefault();
+        ocultarMensajes();
+
+        // Validar si se seleccionó un archivo para carga masiva
+        if (inputArchivo && inputArchivo.files && inputArchivo.files[0]) {
+            const archivo = inputArchivo.files[0];
+            const nombreArchivo = archivo.name.toLowerCase();
+            
+            if (!nombreArchivo.endsWith('.csv') && !nombreArchivo.endsWith('.xlsx') && !nombreArchivo.endsWith('.xls')) {
+                mostrarError('Seleccione un archivo CSV o excel válido con la estructura requerida.');
+                return;
+            }
+            procesarCargaMasiva(archivo);
+            return;
+        }
+
+        // Validación de campos obligatorios para registro manual
+        const codigo = inputCodigo.value.trim();
+        const nombre = inputNombre.value.trim();
+        const descripcion = inputDescripcion.value.trim();
+
+        if (codigo === '') {
+            mostrarError('Ingrese un código válido.');
+            return;
+        }
+
+        if (nombre === '' || nombre.length < 3) {
+            mostrarError('Ingrese un nombre válido (mínimo 3 caracteres).');
+            return;
+        }
+
+        // Validar que el código no esté duplicado
+        const codigoDuplicado = certificaciones.some(c => c.codigo === codigo);
+        if (codigoDuplicado) {
+            mostrarError('El código ingresado ya está en uso por otro registro.');
+            return;
+        }
+
+        // Registrar nuevo elemento
+        const nuevoItem = { codigo, nombre, descripcion };
+        certificaciones.push(nuevoItem);
+        guardarEnStorage();
+
+        if (mensajeExito) {
+            mensajeExito.textContent = '¡Registro guardado satisfactoriamente!';
+            mensajeExito.style.display = 'block';
+        }
+
+        setTimeout(() => {
+            cerrarFormulario();
+        }, 1500);
+    };
+
+    if (btnRegistrar) btnRegistrar.addEventListener('click', abrirFormulario);
+    if (btnCancelar) btnCancelar.addEventListener('click', cerrarFormulario);
+    if (formulario) formulario.addEventListener('submit', guardarCertificacion);
+});
