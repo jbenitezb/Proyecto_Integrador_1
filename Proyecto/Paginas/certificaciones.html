@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Casas Certificadoras y Certificaciones - Sistema Curricular CENFOTEC</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/certificaciones.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <header class="header">
+        <nav class="menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            <div class="logo">
+                <img src="../imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
+                <span class="logo_texto"></span>
+            </div>
+             <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <div class="seccion-catalogo-contenedor">
+            
+            <!-- Barra lateral de navegación de catálogos -->
+            <nav class="catalogo_sidebar" aria-label="Filtros del catálogo">
+                <ul class="catalogo_menu-lateral">
+                    <li><a href="catalogo_escuela.html">ESCUELAS</a></li>
+                    <li><a href="catalogo_carreras.html">CARRERAS</a></li>
+                    <li><a href="estado_curso.html">ESTADO CURSO</a></li>
+                    <li><a href="area_sfia.html">ÁREA SFIA</a></li>
+                    <li><a href="tematica.html">TEMÁTICA</a></li>
+                    <li><a href="catalogo_metodologias.html">METODOLOGÍAS</a></li>
+                    <li><a href="nivel.html">NIVEL</a></li>
+                    <li><a href="certificaciones.html" class="enlace_activo_sidebar">CERTIFICACIONES</a></li>
+                    <li><a href="catalogo_moneda.html">MONEDA</a></li>
+                </ul>
+            </nav>
+
+            <!-- Contenedor principal -->
+            <div class="catalogo_contenedor-principal">
+                <section class="seccion_contenedor">
+                    <h2 class="seccion_titulo">Casas Certificadoras y Certificaciones</h2>
+                    
+                    <!-- BARRA DE HERRAMIENTAS CON BUSCADOR Y BOTÓN REGISTRAR -->
+                    <div class="barra_herramientas" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <div class="catalogo_acciones-superior" style="margin-bottom: 0;">
+                            <input type="text" id="buscadorCertificaciones" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
+                        </div> 
+                        <div class="acciones_barra">
+                            <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
+                        </div>
+                    </div>
+
+                    <!-- Panel del formulario -->
+                    <div class="panel oculto" id="panel_formulario" style="margin-bottom: 30px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fff;">
+                        <h2 class="seccion_titulo" id="titulo_formulario" style="font-size: 1.2rem; margin-bottom: 15px;">Registrar Casa Certificadora o Certificación</h2>
+
+                        <form action="#" class="formulario" id="formulario" novalidate>
+                   
+                            <!-- Código -->
+                            <div class="formulario_grupo" id="grupo_codigo">
+                                <label class="formulario_label">Código</label>
+                                <div class="formulario_grupo-input">
+                                    <input type="text" class="formulario_input" name="codigo" id="codigo" placeholder="Ej: 6001">
+                                </div>
+                                <p class="formulario_input-error">Ingrese un código válido.</p>
+                            </div>
+
+                            <!-- Nombre -->
+                            <div class="formulario_grupo" id="grupo_nombre">
+                                <label class="formulario_label">Nombre</label>
+                                <div class="formulario_grupo-input">
+                                    <input type="text" class="formulario_input" name="nombre" id="nombre" placeholder="Ej: AWS Certified Solutions Architect">
+                                    <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                                </div>
+                                <p class="formulario_input-error">Ingrese un nombre válido (mínimo 3 caracteres).</p>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion" style="grid-column: span 2;">
+                                <label class="formulario_label">Descripción</label>
+                                <div class="formulario_grupo-input">
+                                    <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la certificación o casa certificadora..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Carga Excel / CSV (Opcional Masivo) -->
+                            <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_archivo" style="grid-column: span 2;">
+                                <label class="formulario_label">Carga Excel / CSV (Importación masiva)</label>
+                                <div class="formulario_grupo-input">
+                                    <input type="file" class="formulario_input" name="archivoExcel" id="archivoExcel" accept=".csv, .xlsx, .xls" style="padding: 6px;">
+                                </div>
+                                <p class="formulario_input-error" style="font-size: 0.75rem; color: #666; display: block; margin-top: 4px;">Seleccione un archivo CSV o Excel válido con la estructura requerida.</p>
+                            </div>
+
+                            <!-- Mensaje de error general -->
+                            <div class="formulario_mensaje" id="formulario_mensaje" style="grid-column: span 2;">
+                                <p><b>ERROR:</b> Tiene que completar los campos obligatorios correctamente.</p>
+                            </div>
+
+                            <!-- Botones -->
+                            <div class="formulario__grupo formulario__grupo-acciones" style="grid-column: span 2;">
+                                <p class="formulario_mensaje-exito" id="formulario_mensaje-exito">¡Registro guardado satisfactoriamente !</p>
+                                <button type="button" class="btn_cancelar">CANCELAR</button>
+                                <input class="btn_enviar" type="submit" value="GUARDAR">
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <h2 class="seccion_titulo" style="margin-top: 40px;">Listado de Casas Certificadoras y Certificaciones</h2>
+                    
+                    <div class="tabla_contenedor">
+                        <table class="tabla_datos" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background-color: #064590; color: white; text-align: left;">
+                                    <th style="padding: 12px; border: 1px solid #ccc;">Código</th>
+                                    <th style="padding: 12px; border: 1px solid #ccc;">Nombre</th>
+                                    <th style="padding: 12px; border: 1px solid #ccc;">Descripción</th>
+                                    <th style="padding: 12px; border: 1px solid #ccc; text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaCertificacionesBody">
+                                <!-- Los datos se cargan automáticamente desde el localStorage -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Conteo de elementos al pie de la tabla -->
+                    <p class="conteo" id="conteo" style="margin-top: 10px; font-size: 0.85rem; color: #666;"></p>
+             
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer_referencia">
+        <div class="footer_columna">
+            <h3>REDES SOCIALES</h3>
+            <div class="footer_redes">
+                <a href="#">f</a>
+                <a href="#">𝕏</a>
+                <a href="#">▶</a>
+                <a href="#">in</a>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>BUSCAR</h3>
+            <div class="footer_buscador">
+                <input type="text" placeholder="Buscar...">
+                <button>🔍</button>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>VÍNCULOS DE INTERÉS</h3>
+            <ul>
+                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">> Centro de Asistencia</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script src="../js/certificaciones.js"></script>
+</body>
+</html>

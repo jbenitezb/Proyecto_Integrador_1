@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cargarEstados = () => {
         if (!tablaBody) return;
         tablaBody.innerHTML = '';
+
         //Hu-39
             const textoBusqueda = inputBuscar ? inputBuscar.value.toLowerCase().trim() : '';
         //  Filtrar el arreglo según la búsqueda
