@@ -58,6 +58,7 @@
     border-color: #084599;
 }
 
+.formulario_grupo-descripcion,
 .formulario_mensaje,
 .formulario__grupo-acciones {
     grid-column: span 2;
@@ -71,20 +72,23 @@
 }
 
 .formulario_mensaje {
-    display: none; 
+display: none;
+    color: #DC2626;
     background-color: #FEE2E2;
-    border: 1px solid #DC2626;
-    color: #991B1B;
     padding: 10px;
-    border-radius: 4px;
-    font-size: 0.85rem;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #FCA5A5;
 }
 
 .formulario_mensaje-exito {
     display: none;
-    color: #059669;
-    font-size: 0.9rem;
-    font-weight: bold;
+    color: #16A34A;
+    background-color: #DCFCE7;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #86EFAC;
 }
 
 .formulario__grupo-acciones {
@@ -176,4 +180,21 @@
 .tabla_datos th:last-child,
 .tabla_datos td:last-child {
     text-align: center;
+}
+
+.oculto {
+    display: none !important;
+}
+
+.btn_eliminar {
+    background-color: #DC2626;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn_eliminar:hover {
+    background-color: #B91C1C;
 }

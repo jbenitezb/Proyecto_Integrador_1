@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     let estadosGuardados = JSON.parse(localStorage.getItem('lista_estados_curso')) || [];
-    let editando = null; // Controla si estamos registrando (null) o editando (índice)
+    let editando = null; 
 
     const formulario = document.getElementById('formulario');
     const inputCodigo = document.getElementById('codigo');
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajeExito = document.getElementById('formulario_mensaje-exito');
     const btnCancelar = document.querySelector('.btn_cancelar');
     const tablaBody = document.getElementById('tablaEstadosBody');
-  // Guarda los datos en el localStorage
+    const inputBuscar = document.getElementById('buscador');  // Guarda los datos en el localStorage
     const guardarEnStorage = () => {
         localStorage.setItem('lista_estados_curso', JSON.stringify(estadosGuardados));
     };
@@ -19,14 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const cargarEstados = () => {
         if (!tablaBody) return;
         tablaBody.innerHTML = '';
+        //Hu-39
+            const textoBusqueda = inputBuscar ? inputBuscar.value.toLowerCase().trim() : '';
+        //  Filtrar el arreglo según la búsqueda
+            const estadosFiltrados = estadosGuardados.filter(estado => {
+                const codigoCoincide = estado.codigo.toLowerCase().includes(textoBusqueda);
+                const nombreCoincide = estado.nombre.toLowerCase().includes(textoBusqueda);
+                
+                return codigoCoincide || nombreCoincide;
+            });
 
-        estadosGuardados.forEach((estado, index) => {
+        estadosFiltrados.forEach((estado) => {
+
+            const indiceOriginal = estadosGuardados.indexOf(estado);
             const fila = document.createElement('tr');
             fila.innerHTML = `
                 <td style="padding: 12px; border: 1px solid #ccc;">${estado.codigo}</td>
                 <td style="padding: 12px; border: 1px solid #ccc;">${estado.nombre}</td>
                 <td style="padding: 12px; border: 1px solid #ccc; text-align: center;">
-                    <button type="button" class="btn_editar" data-indice="${index}">EDITAR</button>
+                    <button type="button" class="btn_editar" data-indice="${indiceOriginal}">EDITAR</button>
                 </td>
             `;
             tablaBody.appendChild(fila);
@@ -42,8 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (inputCodigo) {
             inputCodigo.value = estadoAEditar.codigo || '';
-            inputCodigo.readOnly = true; // Bloquea el código para proteger la clave principal
-            inputCodigo.style.backgroundColor = '#e9ecef';
+            inputCodigo.readOnly = false; 
+            inputCodigo.style.backgroundColor = '#fff';
         }
         if (inputNombre) {
             inputNombre.value = estadoAEditar.nombre || '';
@@ -102,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 //  HU-37 Modificar estado existente
+                estadosGuardados[editando].codigo = valorCodigo;
                 estadosGuardados[editando].nombre = valorNombre;
 
                 if (mensajeExito) {
@@ -146,7 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Eventos
     if (formulario) formulario.addEventListener('submit', guardarEstado);
     if (btnCancelar) btnCancelar.addEventListener('click', cancelarEdicion);
-
+    if (inputBuscar) {
+        inputBuscar.addEventListener('input', cargarEstados);
+    }
     if (tablaBody) {
         tablaBody.addEventListener('click', (evento) => {
             const boton = evento.target.closest('.btn_editar');
@@ -157,6 +171,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Carga inicial
     cargarEstados();
 });
