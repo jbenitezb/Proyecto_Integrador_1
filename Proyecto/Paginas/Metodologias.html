@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
     <link rel="stylesheet" href="../estilos/Metodologias.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -19,9 +20,9 @@
                 <img src="../imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
                 <span class="logo_texto"></span>
             </div>
-           <ul class="opciones">
+             <ul class="opciones">
                 <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
-                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="metodologias.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
                 <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
                 <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
                 <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
@@ -36,39 +37,50 @@
         <div class="seccion-catalogo-contenedor">
             
             <!-- Barra lateral de navegación de catálogos -->
-            <aside class="catalogo_sidebar">
+            <nav class="catalogo_sidebar" aria-label="Filtros del catálogo">
                 <ul class="catalogo_menu-lateral">
-                    <li><a href="escuelas.html">ESCUELAS</a></li>
-                    <li><a href="carreras.html">CARRERAS</a></li>
+                    <li><a href="catalogo_escuela.html">ESCUELAS</a></li>
+                    <li><a href="catalogo_carreras.html">CARRERAS</a></li>
                     <li><a href="estado_curso.html">ESTADO CURSO</a></li>
                     <li><a href="area_sfia.html">ÁREA SFIA</a></li>
-                    
-                     <li><a href="tematica.html">TEMÁTICA</a></li>
-
-                    <li><a href="metodologias.html" class="enlace_activo_sidebar">METODOLOGÍAS</a></li>
+                    <li><a href="tematica.html">TEMÁTICA</a></li>
+                    <li><a href="catalogo_metodologias.html">METODOLOGÍAS</a></li>
                     <li><a href="nivel.html">NIVEL</a></li>
                     <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
-                    <li><a href="moneda.html">MONEDA</a></li>
+                    <li><a href="catalogo_moneda.html">MONEDA</a></li>
                 </ul>
-            </aside>
-
-
+            </nav>
 
             <!-- Contenedor principal -->
             <div class="catalogo_contenedor-principal">
            <!--Formulario de Registro de Metodología (HU-50) -->
-           <section class="seccion_contenedor">
+                <section class="seccion_contenedor">
                 <h2 class="seccion_titulo">Registrar Nueva Metodología de Aprendizaje</h2>
-            
-                 <form action="#" class="formulario" id="formulario">
-
-                <!-- Código metodología -->
-                <div class="formulario_grupo" id="grupo_codigo">
-                 <label class="formulario_label">Código de Metodología</label>
-                    <div class="formulario_grupo-input">
-                        <input type="text" class="formulario_input" name="codigo" id="codigo" placeholder="Ej: MET-001">
+                    <!-- BARRA DE HERRAMIENTAS CON BUSCADOR Y BOTÓN REGISTRAR -->
+                <div class="barra_herramientas" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div class="catalogo_acciones-superior" style="margin-bottom: 0;">
+                        <input type="text" id="buscadorMetodologias" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
+                    </div> 
+                    <div class="acciones_barra">
+                        <!--  Se agregó el ID 'btn_registrar' para que JavaScript pueda detectar el clic -->
+                        <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
                     </div>
                 </div>
+
+                <!-- Se agregó el contenedor con la clase 'panel oculto' para que el formulario inicie oculto y se despliegue al hacer clic en Registrar -->
+                <div class="panel oculto" id="panel_formulario" style="margin-bottom: 30px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fff;">
+                    <h2 class="seccion_titulo" id="titulo_formulario" style="font-size: 1.2rem; margin-bottom: 15px;">Registrar Nueva Metodología de Aprendizaje</h2>
+
+                      <form action="#" class="formulario" id="formulario" novalidate >
+                 
+                        <!-- Código metodología -->
+                        <div class="formulario_grupo" id="grupo_codigo">
+                            <label class="formulario_label">Código de Metodología</label>
+                            <div class="formulario_grupo-input">
+                                <input type="text" class="formulario_input" name="codigo" id="codigo" placeholder="Ej: MET-001">
+                            </div>
+                        </div>
+                        </form>
 
                 <!-- Name de la Metodología -->
                 <div class="formulario_grupo" id="grupo_nombre">
@@ -81,7 +93,7 @@
                 </div>
 
                 <!-- Descripción metodologia -->
-              <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion">
+                 <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion">
                     <label class="formulario_label">Descripción</label>
                     <div class="formulario_grupo-input">
                         <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la metodología..."></textarea>
@@ -101,6 +113,8 @@
                            </div>
 
                     </form>
+        
+                    
                 <h2 class="seccion_titulo" style="margin-top: 40px;">Listado de Metodologías de Aprendizaje</h2>
                 <!--Hu-51 (Listado y Tabla) -->              
                 <div class="catalogo_acciones-superior" style="margin-bottom: 20px; display: flex; gap: 10px;">

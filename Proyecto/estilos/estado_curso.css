@@ -423,3 +423,20 @@ body {
 .tabla_datos tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+/* Hu-37 estilo para el botón de editar en la tabla */
+.btn_editar {
+    background-color: #084599;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn_editar:hover {
+    background-color: #03265A;
+}

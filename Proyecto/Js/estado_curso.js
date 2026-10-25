@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajeExito = document.getElementById('formulario_mensaje-exito');
     const btnCancelar = document.querySelector('.btn_cancelar');
     cargarEstados();
-    
+
     if (formulario) {
         formulario.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -99,4 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             tablaBody.appendChild(fila);
         });
+        
+        
     };
+    
