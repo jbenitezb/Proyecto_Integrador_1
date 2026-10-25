@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     let certificaciones = JSON.parse(localStorage.getItem('lista_certificaciones')) || [];
-
+    let editandoCodigo = null;
+    
     const formulario = document.getElementById('formulario');
     const inputCodigo = document.getElementById('codigo');
     const inputNombre = document.getElementById('nombre');
@@ -20,6 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const guardarEnStorage = () => {
         localStorage.setItem('lista_certificaciones', JSON.stringify(certificaciones));
+    };
+
+    const prepararEdicion = (codigo) => {
+        const certAEditar = certificaciones.find(c => c.codigo === codigo);
+        if (!certAEditar) return;
+
+        // Activamos el modo edición guardando el código actual
+        editandoCodigo = codigo;
+
+        // Cambiar el título del formulario visualmente
+        if (tituloFormulario) tituloFormulario.textContent = 'Modificar Casa Certificadora o Certificación';
+        
+        // Cargar los datos actuales en los inputs
+        if (inputCodigo) {
+            inputCodigo.value = certAEditar.codigo;
+            inputCodigo.disabled = false; // Bloquear el código para que no se modifique la llave primaria
+        }
+        if (inputNombre) inputNombre.value = certAEditar.nombre;
+        if (inputDescripcion) inputDescripcion.value = certAEditar.descripcion || '';
+
+        ocultarMensajes();
+        if (panelFormulario) panelFormulario.classList.remove('oculto');
+        if (inputNombre) inputNombre.focus();
     };
 
     // Hu-61 renderizar dinámicamente la tabla y actualizar el contador
@@ -45,8 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${cert.codigo}</td>
                 <td>${cert.nombre}</td>
                 <td>${cert.descripcion || '-'}</td>
-                <td><!-- Acciones --></td>
+                <td class="columna_acciones"></td>
             `;
+
+            // Hu-62 agrega el botón de editar a cada fila
+            const celdaAcciones = fila.querySelector('.columna_acciones');
+            const btnEditar = document.createElement('button');
+            btnEditar.type = 'button';
+            btnEditar.className = 'btn_editar';
+            btnEditar.textContent = 'Editar';
+            btnEditar.addEventListener('click', () => prepararEdicion(cert.codigo));
+            celdaAcciones.appendChild(btnEditar);
+
             tablaBody.appendChild(fila);
         });
 
@@ -71,6 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Control de apertura y cierre del panel de registro
     const abrirFormulario = () => {
+        // HU-62 restablece el estado de edición
+        editandoCodigo = null;
+        if (inputCodigo) inputCodigo.disabled = false;
         if (tituloFormulario) tituloFormulario.textContent = 'Registrar Casa Certificadora o Certificación';
         if (formulario) formulario.reset();
         ocultarMensajes();
@@ -79,6 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const cerrarFormulario = () => {
+
+        // HU-62 Al cerrar se limpia la variable
+        editandoCodigo = null;
+        if (inputCodigo) inputCodigo.disabled = false;
         if (panelFormulario) panelFormulario.classList.add('oculto');
         ocultarMensajes();
     };
@@ -146,6 +187,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             procesarCargaMasiva(archivo);
             return;
+        }
+
+        // HU-62 actualiza el registro modificado en la lista
+        if (editandoCodigo !== null) {
+            const nombre = inputNombre.value.trim();
+            const descripcion = inputDescripcion.value.trim();
+
+            if (nombre === '' || nombre.length < 3) {
+                mostrarError('Ingrese un nombre válido (mínimo 3 caracteres).');
+                return;
+            }
+
+            const index = certificaciones.findIndex(c => c.codigo === editandoCodigo);
+            if (index !== -1) {
+                certificaciones[index].nombre = nombre;
+                certificaciones[index].descripcion = descripcion;
+            }
+
+            guardarEnStorage();
+            mostrarCertificaciones(certificaciones);
+
+            if (mensajeExito) {
+                mensajeExito.textContent = '¡Registro modificado satisfactoriamente!';
+                mensajeExito.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                cerrarFormulario();
+            }, 1500);
+            return; 
         }
 
         // Validación de campos obligatorios para registro manual
