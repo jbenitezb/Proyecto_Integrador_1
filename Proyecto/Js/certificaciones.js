@@ -13,9 +13,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancelar = document.querySelector('.btn_cancelar');
     const divMensajeError = document.getElementById('formulario_mensaje');
     const mensajeExito = document.getElementById('formulario_mensaje-exito');
+    
+    // Hu-61 listado y contador
+    const tablaBody = document.getElementById('tablaCertificacionesBody');
+    const elementoConteo = document.getElementById('conteo');
 
     const guardarEnStorage = () => {
         localStorage.setItem('lista_certificaciones', JSON.stringify(certificaciones));
+    };
+
+    // Hu-61 renderizar dinámicamente la tabla y actualizar el contador
+    const mostrarCertificaciones = (lista) => {
+        if (!tablaBody) return; 
+        tablaBody.innerHTML = ''; 
+        
+        // Hu-61 Si la lista está vacía, muestra un mensaje en la tabla
+        if (lista.length === 0) {
+            tablaBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="tabla_vacia">No hay casas certificadoras o certificaciones registradas.</td>
+                </tr>
+            `;
+            if (elementoConteo) elementoConteo.textContent = 'Mostrando 0 registros';
+            return;
+        }
+
+        // Hu-61 recorre la lista para crear y llenar la fila 
+        lista.forEach(cert => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${cert.codigo}</td>
+                <td>${cert.nombre}</td>
+                <td>${cert.descripcion || '-'}</td>
+                <td><!-- Acciones --></td>
+            `;
+            tablaBody.appendChild(fila);
+        });
+
+        // Hu-61 actualiza contador 
+        if (elementoConteo) {
+            elementoConteo.textContent = `Mostrando ${lista.length} de ${certificaciones.length} registro(s)`;
+        }
     };
 
     const mostrarError = (mensaje) => {
@@ -69,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             guardarEnStorage();
+            // Hu-61 refrescar automáticamente la tabla despues de la importación masiva
+            mostrarCertificaciones(certificaciones);
 
             if (agregados > 0) {
                 if (mensajeExito) {
@@ -134,6 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const nuevoItem = { codigo, nombre, descripcion };
         certificaciones.push(nuevoItem);
         guardarEnStorage();
+        // Hu-61 Refrescar automáticamente la tabla despues de completar el registro manual
+        mostrarCertificaciones(certificaciones);
 
         if (mensajeExito) {
             mensajeExito.textContent = '¡Registro guardado satisfactoriamente!';
@@ -148,4 +190,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnRegistrar) btnRegistrar.addEventListener('click', abrirFormulario);
     if (btnCancelar) btnCancelar.addEventListener('click', cerrarFormulario);
     if (formulario) formulario.addEventListener('submit', guardarCertificacion);
+    mostrarCertificaciones(certificaciones);
 });
