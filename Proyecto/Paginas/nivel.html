@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área SFIA - Sistema de Desarrollo Curricular y Docente</title>
+    <title>Nivel de Complejidad - Sistema de Desarrollo Curricular y Docente</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
-    <link rel="stylesheet" href="../estilos/area_sfia.css">
+    <link rel="stylesheet" href="../estilos/nivel.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -31,7 +31,7 @@
 
     </header>
 
-    <main id="area_sfia">
+    <main id="nivel">
 
         <div class="seccion-catalogo-contenedor">
 
@@ -52,14 +52,14 @@
 
             <!-- Contenido del registro de escuelas -->
             <section class="contenido-principal">
-                <h1 class="seccion_titulo">ÁREA SFIA</h1>
+                <h1 class="seccion_titulo">NIVEL DE COMPLEJIDAD</h1>
 
                 <div id="aviso" class="aviso oculto"></div>
 
                 <div class="barra_herramientas">
                     <div class="buscador">
                         <label class="etiqueta" for="buscador">BUSCAR</label>
-                        <input type="text" class="entrada" id="buscador" placeholder="Buscar por código, nombre o descripción...">
+                        <input type="text" class="entrada" id="buscador" placeholder="Buscar por código o nombre...">
                     </div>
                     <div class="acciones_barra">
                         <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="panel oculto" id="panel_formulario">
-                    <h2 class="panel_titulo" id="titulo_formulario">Registrar área SFIA</h2>
+                    <h2 class="panel_titulo" id="titulo_formulario">Registrar Nivel de Complejidad</h2>
                     <form class="formulario" id="formulario">
                         <div class="campo">
                             <label class="etiqueta" for="codigo">CÓDIGO</label>
@@ -76,7 +76,13 @@
 
                         <div class="campo">
                             <label class="etiqueta" for="nombre">NOMBRE</label>
-                            <input type="text" class="entrada" id="nombre" placeholder="NOMBRE" maxlength="100">
+                            <select class="entrada" id="nombre">
+                                <option value="">SELECCIONE UN NIVEL</option>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado</option>
+                                <option value="Certificación">Certificación</option>
+                            </select>
                         </div>
 
                         <div class="campo campo_completo">
@@ -153,6 +159,6 @@
         </div>
     </footer>
 
-     <script src="../Js/area_sfia.js"></script>
+     <script src="../Js/nivel.js"></script>
 </body>
 </html>

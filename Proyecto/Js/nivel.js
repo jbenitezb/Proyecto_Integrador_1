@@ -1,16 +1,14 @@
-/* ===== ÁREA SFIA ===== */
-var areas = JSON.parse(localStorage.getItem('area_sfia')) || [];
+var niveles = JSON.parse(localStorage.getItem('nivel')) || [];
 var editando = null; // null = registrando; número = editando esa posición
 
 function guardar() {
-    localStorage.setItem('area_sfia', JSON.stringify(areas));
+    localStorage.setItem('nivel', JSON.stringify(niveles));
 }
 
 function esc(texto) {
     return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Minúsculas y sin tildes, para que "area" encuentre "ÁREA"
 function normalizar(texto) {
     return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
@@ -26,9 +24,9 @@ function listar() {
     var html = '';
     var mostradas = 0;
 
-    for (var i = 0; i < areas.length; i++) {
-        var a = areas[i];
-        var texto = normalizar(a.codigo + ' ' + a.nombre + ' ' + a.descripcion);
+    for (var i = 0; i < niveles.length; i++) {
+        var a = niveles[i];
+        var texto = normalizar(a.codigo + ' ' + a.nombre);
 
         if (filtro !== '' && texto.indexOf(filtro) === -1) {
             continue;
@@ -44,17 +42,17 @@ function listar() {
     }
 
     if (mostradas === 0) {
-        var msg = areas.length === 0 ? 'No hay áreas para mostrar.' : 'No se encontraron áreas con esa búsqueda.';
+        var msg = niveles.length === 0 ? 'No hay niveles de complejidad para mostrar.' : 'No se encontraron niveles con esa búsqueda.';
         html = '<tr><td class="vacio" colspan="4">' + msg + '</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + areas.length + ' áreas';
+    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + niveles.length + ' niveles';
 }
 
 function abrirFormulario() {
     editando = null;
-    document.getElementById('titulo_formulario').textContent = 'Registrar área SFIA';
+    document.getElementById('titulo_formulario').textContent = 'Registrar Nivel de Complejidad';
     document.getElementById('formulario').reset();
     document.getElementById('codigo').readOnly = false;
     document.getElementById('error_formulario').textContent = '';
@@ -66,10 +64,10 @@ function abrirFormulario() {
 function editar(i) {
     abrirFormulario();
     editando = i;
-    document.getElementById('titulo_formulario').textContent = 'Modificar área SFIA';
-    document.getElementById('codigo').value = areas[i].codigo;
-    document.getElementById('nombre').value = areas[i].nombre;
-    document.getElementById('descripcion').value = areas[i].descripcion;
+    document.getElementById('titulo_formulario').textContent = 'Modificar Nivel de Complejidad';
+    document.getElementById('codigo').value = niveles[i].codigo;
+    document.getElementById('nombre').value = niveles[i].nombre;
+    document.getElementById('descripcion').value = niveles[i].descripcion;
     document.getElementById('codigo').readOnly = true;
     document.getElementById('nombre').focus();
 }
@@ -79,7 +77,7 @@ function cerrarFormulario() {
     document.getElementById('panel_formulario').classList.add('oculto');
 }
 
-function guardarArea(evento) {
+function guardarNivel(evento) {
     evento.preventDefault();
 
     var codigo = document.getElementById('codigo').value.trim().toUpperCase();
@@ -122,21 +120,21 @@ function guardarArea(evento) {
         return;
     }
 
-    for (var i = 0; i < areas.length; i++) {
-        if (areas[i].codigo === codigo && i !== editando) {
-            error.textContent = 'Ya existe un área con este código.';
+    for (var i = 0; i < niveles.length; i++) {
+        if (niveles[i].codigo === codigo && i !== editando) {
+            error.textContent = 'Ya existe un nivel de complejidad con este código.';
             return;
         }
     }
 
-    var area = { codigo: codigo, nombre: nombre, descripcion: descripcion };
+    var nivel = { codigo: codigo, nombre: nombre, descripcion: descripcion };
 
     if (editando === null) {
-        areas.push(area);
-        aviso('Área registrada correctamente.', 'exito');
+        niveles.push(nivel);
+        aviso('Nivel de complejidad registrado correctamente.', 'exito');
     } else {
-        areas[editando] = area;
-        aviso('Área modificada correctamente.', 'exito');
+        niveles[editando] = nivel;
+        aviso('Nivel de complejidad modificado correctamente.', 'exito');
     }
 
     guardar();
@@ -147,7 +145,7 @@ function guardarArea(evento) {
 // Eventos (sin onclick/onsubmit dentro del HTML)
 document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
 document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
-document.getElementById('formulario').addEventListener('submit', guardarArea);
+document.getElementById('formulario').addEventListener('submit', guardarNivel);
 document.getElementById('buscador').addEventListener('input', listar);
 document.getElementById('cuerpo_tabla').addEventListener('click', function (evento) {
     var boton = evento.target.closest('.btn_tabla');
