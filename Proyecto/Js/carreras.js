@@ -187,6 +187,8 @@ function cerrarFormulario() {
 function guardarCarrera(evento) {
     evento.preventDefault();
 
+    document.getElementById('formulario').noValidate = true;
+
     var codigo = document.getElementById('codigo')
         .value.trim().toUpperCase();
 
@@ -196,6 +198,9 @@ function guardarCarrera(evento) {
     var escuela = document.getElementById('escuela').value;
 
     var error = document.getElementById('error_formulario');
+
+    error.textContent = '';
+
 
      if (codigo === '') {
         error.textContent = 'Ingrese un código válido.';

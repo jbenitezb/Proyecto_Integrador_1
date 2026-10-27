@@ -128,10 +128,15 @@ function cerrarFormulario() {
 function guardarEscuela(evento) {
     evento.preventDefault();
 
+    var formulario = document.getElementById('formulario');
+    formulario.noValidate = true;
+
     var codigo = document.getElementById('codigo').value.trim().toUpperCase();
     var nombre = document.getElementById('nombre').value.trim();
     var director = document.getElementById('director').value;
     var error = document.getElementById('error_formulario');
+
+    error.textContent = '';
 
     if (codigo === '') {
         error.textContent = 'Ingrese un código válido.';
@@ -144,34 +149,9 @@ function guardarEscuela(evento) {
     }
 
     if (director === '') {
-        error.textContent = 'Ingrese el nombre del director (mínimo 3 caracteres).';
+        error.textContent = 'Debe seleccionar un director.';
         return;
     }
-
-    for (var i = 0; i < escuelas.length; i++) {
-        if (escuelas[i].codigo.toUpperCase() === codigo && i !== editando) {
-            error.textContent = 'Ya existe una escuela con este código.';
-            return;
-        }
-    }
-
-    var escuela = {
-        codigo: codigo,
-        nombre: nombre,
-        director: director
-    };
-
-    if (editando === null) {
-        escuelas.push(escuela);
-        aviso('Escuela registrada correctamente.', 'exito');
-    } else {
-        escuelas[editando] = escuela;
-        aviso('Escuela modificada correctamente.', 'exito');
-    }
-
-    guardar();
-    listar();
-    cerrarFormulario();
 }
 
 //accion
