@@ -303,3 +303,59 @@ body {
   color: white; 
 }
 
+body {
+    font-family: Arial, sans-serif;
+    color: #102b50;
+    background-color: #ffffff;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Menú de navegación de la página de inicio */
+.header .enlace_menu {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.header .enlace_menu:hover,
+.header .enlace_activo {
+    border-bottom: 2px solid #ffffff;
+}
+
+/* Botón Iniciar sesión */
+.header .btn-login {
+    background-color: #DC2626; 
+  color: #ffffff; 
+  border: none; 
+  border-radius: 8px; 
+}
+
+.header .btn-login:hover {
+    background-color: #eeeeee;
+}
+
+
+.menu { 
+  display: flex; 
+  list-style: none; 
+  gap: 20px; 
+  align-items: center; 
+}
+
+.menu { 
+  text-decoration: none; 
+  padding: 5px 10px; 
+  font-weight: bold; 
+  font-size: 0.9rem; 
+  transition: 0.3s; 
+}
