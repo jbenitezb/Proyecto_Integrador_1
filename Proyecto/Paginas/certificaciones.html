@@ -51,22 +51,24 @@
 
             <!-- Contenedor principal -->
             <div class="catalogo_contenedor-principal">
-                <section class="seccion_contenedor">
-                    <h2 class="seccion_titulo">Casas Certificadoras y Certificaciones</h2>
-                    
-                    <!-- BARRA DE HERRAMIENTAS CON BUSCADOR Y BOTÓN REGISTRAR -->
-                    <div class="barra_herramientas" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <div class="catalogo_acciones-superior" style="margin-bottom: 0;">
-                            <input type="text" id="buscadorCertificaciones" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
-                        </div> 
-                        <div class="acciones_barra">
-                            <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
-                        </div>
-                    </div>
+                <section class="seccion_contenedor"> 
+                    <h1 class="seccion_titulo">CASAS CERTIFICADORAS Y CERTIFICACIONES</h1>
+                    <div id="aviso" class="aviso oculto"></div>
+
+
+         <div class="barra_herramientas">
+            <div class="buscador">
+                    <label class="etiqueta" for="buscadorCertificaciones">BUSCAR</label>
+                    <input type="text" id="buscadorCertificaciones" class="entrada" placeholder="Buscar por código, nombre o descripción...">
+            </div>
+            <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
+                </div>
+         </div>
 
                     <!-- Panel del formulario -->
                     <div class="panel oculto" id="panel_formulario" style="margin-bottom: 30px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fff;">
-                        <h2 class="seccion_titulo" id="titulo_formulario" style="font-size: 1.2rem; margin-bottom: 15px;">Registrar Casa Certificadora o Certificación</h2>
+                        <h2 class="seccion_titulo" id="titulo_formulario" style="font-size: 1.2rem; margin-bottom: 15px;">REGISTRAR CASA CERTIFICDORA O CERTIFICACIÓN</h2>
 
                         <form action="#" class="formulario" id="formulario" novalidate>
                    
@@ -123,15 +125,16 @@
 
                     <h2 class="seccion_titulo" style="margin-top: 40px;">Listado de Casas Certificadoras y Certificaciones</h2>
                     
-                    <div class="tabla_contenedor">
-                        <table class="tabla_datos" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
-                            <thead>
-                                <tr style="background-color: #064590; color: white; text-align: left;">
-                                    <th style="padding: 12px; border: 1px solid #ccc;">Código</th>
-                                    <th style="padding: 12px; border: 1px solid #ccc;">Nombre</th>
-                                    <th style="padding: 12px; border: 1px solid #ccc;">Descripción</th>
-                                    <th style="padding: 12px; border: 1px solid #ccc; text-align: center;">Acciones</th>
-                                </tr>
+                <!-- SECCIÓN DE LA TABLA LIMPIA (Sin estilos en línea) -->
+                <div class="tabla_contenedor">
+                    <table class="tabla_datos">
+                        <thead>
+                            <tr>
+                                <th>CÓDIGO</th>
+                                <th>NOMBRE</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>Acciones</th>
+                            </tr>
                             </thead>
                             <tbody id="tablaCertificacionesBody">
                                 <!-- Los datos se cargan automáticamente desde el localStorage -->

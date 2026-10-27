@@ -1,12 +1,10 @@
 
 .seccion_contenedor {
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    background-color: #f9f9f9; /* o #ffffff */
-}
-.catalogo_sidebar {
-    width: 220px;
-    flex-shrink: 0;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .catalogo_contenedor-principal {
@@ -15,23 +13,26 @@
     flex-direction: column;
     gap: 20px;
 }
-
-.seccion_contenedor {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
 /*botones, herramientas*/
 .barra_herramientas {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 15px;
+    align-items: flex-end;
+    margin-bottom: 25px;
+    gap: 20px;
+    width: 100%;
 }
-
+.buscador {
+    flex: 1;
+    max-width: 420px;
+}
+.etiqueta {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
 .catalogo_acciones-superior {
     display: flex;
     gap: 10px;
@@ -50,25 +51,7 @@
     margin-bottom: 30px;
 }
 
-.formulario {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
-
-.formulario_grupo {
-    grid-column: span 1;
-}
-
-.formulario_label {
-    display: block;
-    font-size: 0.8rem;
-    color: #4b5563;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.formulario_input {
+.entrada, .formulario_input {
     width: 100%;
     background: #ffffff;
     border: 1px solid #cbd5e1;
@@ -81,7 +64,7 @@
     transition: border-color 0.2s ease;
 }
 
-.formulario_input:focus {
+.formulario_input:focus, .entrada:focus {
     border-color: #084599;
 }
 
@@ -165,13 +148,6 @@
 }
 
 /*tabla que muestra los datos*/
-.tabla_contenedor {
-    width: 100%;
-    overflow-x: auto;
-    background-color: #ffffff;
-    border-radius: 4px;
-    margin-top: 10px;
-}
 
 .tabla_datos {
     width: 100%;
@@ -204,7 +180,6 @@
     text-align: center;
 }
 
-
 .conteo {
     margin-top: 10px;
     font-size: 0.85rem;
@@ -213,16 +188,22 @@
 
 .btn_editar {
     padding: 6px 12px;
-    background-color: #084599;
-    color: #ffffff;
-    border: none;
+    background-color: #ffffff;
+    color: #084599;
+    border: 1px solid #084599;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: bold;
     transition: background-color 0.2s ease;
 }
 
 .btn_editar:hover {
     background-color: #084599;
+    color: #ffffff;
+}
+/* Estilo institucional para la columna de código (Azul y Negrita) */
+.codigo {
+    color: #084599;
+    font-weight: bold;
 }

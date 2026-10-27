@@ -295,3 +295,10 @@ main {
     padding: 30px;
     background-color: #ffffff;
 }
+.seccion_titulo {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #084599;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}

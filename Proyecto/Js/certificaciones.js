@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hu-61 listado y contador
     const tablaBody = document.getElementById('tablaCertificacionesBody');
     const elementoConteo = document.getElementById('conteo');
+    
+    // Hu-64 buscador
+    const inputBuscador = document.getElementById('buscadorCertificaciones'); 
+
 
     const guardarEnStorage = () => {
         localStorage.setItem('lista_certificaciones', JSON.stringify(certificaciones));
@@ -62,11 +66,24 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+            // Hu-64: filtrar
+        if (inputBuscador) { 
+            inputBuscador.addEventListener('input', (e) => { 
+                const textoBusqueda = e.target.value.toLowerCase().trim(); 
+                const filtradas = certificaciones.filter(c => // 
+                    c.codigo.toLowerCase().includes(textoBusqueda) || 
+                    c.nombre.toLowerCase().includes(textoBusqueda) // 
+                ); 
+                mostrarCertificaciones(filtradas); 
+            }); 
+        } 
+
         // Hu-61 recorre la lista para crear y llenar la fila 
         lista.forEach(cert => {
+            const indiceOriginal = certificaciones.indexOf(cert);
             const fila = document.createElement('tr');
             fila.innerHTML = `
-                <td>${cert.codigo}</td>
+                <td class="codigo">${cert.codigo}</td>
                 <td>${cert.nombre}</td>
                 <td>${cert.descripcion || '-'}</td>
                 <td class="columna_acciones"></td>
