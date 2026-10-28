@@ -6,6 +6,7 @@
     <title>Perfil de Usuario - Sistema Curricular CENFOTEC</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
     <link rel="stylesheet" href="../registrar.css">
+     <link rel="stylesheet" href="../estilos/perfil_usuario.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -40,7 +41,7 @@
                     <h2 class="seccion_titulo">Perfil Personal de Usuario</h2>
                     <p style="margin-bottom: 20px; color: #666; font-size: 0.95rem;">Complete o actualice los datos de su perfil de usuario en el sistema...</p>
 
-                    <form action="#" class="formulario" id="formulario_perfil" novalidate>
+                    <form action="#" method="POST" class="formulario" id="formulario_perfil" novalidate>
                         
                         <!-- Nombre -->
                         <div class="formulario_grupo" id="grupo_nombre">
@@ -99,7 +100,7 @@
                                 <input type="date" class="formulario_input" name="fecha_nacimiento" id="fecha_nacimiento">
                                 <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
-                            <p class="formulario_input-error">Seleccione una fecha de nacimiento  que sea válida.</p>
+                            <p class="formulario_input-error">Seleccione una fecha de nacimiento qe sea válida.</p>
                         </div>
 
                         <!-- Sexo -->

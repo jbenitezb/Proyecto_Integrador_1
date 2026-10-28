@@ -214,7 +214,7 @@
     color: #B91C1C; 
 }
 
-/* 1. Ocultar los botones nativos de los navegadores (Edge, IE, Chrome) */
+/* 1. Ocultar los botones nativos de los navegador */
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear,
 input[type="password"]::-webkit-credentials-auto-fill-button {
