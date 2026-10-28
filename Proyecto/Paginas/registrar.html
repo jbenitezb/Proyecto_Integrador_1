@@ -6,7 +6,7 @@
     <title>Registro de Cuenta - Sistema Curricular CENFOTEC</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
     <link rel="stylesheet" href="../registrar.css">
-    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <!-- Menú de navegación institucional -->
@@ -85,8 +85,9 @@
                         <!-- Contraseña -->
                         <div class="formulario_grupo" id="grupo_contrasena">
                             <label for="contrasena" class="formulario_label">Contraseña</label>
-                            <div class="formulario_grupo-input">
-                                <input type="password" class="formulario_input" name="contrasena" id="contrasena" placeholder="8 a 16 caracteres (Mayús, minús, número)">
+                            <div class="formulario_grupo-input" style ="position: relative;">
+                                <input type="password" class="formulario_input" name="contrasena" id="contrasena" placeholder="8 a 16 caracteres (Mayús, minús, número)" autocomplete="new-password">
+                                <i class="bx bx-show" id="togglePassword" class="icono-password-toggle"></i>
                                 <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
                             <p class="formulario_input-error">La contraseña que ingresó no cumple con los requisitos obligatorios.</p>
@@ -94,7 +95,7 @@
 
                         <!-- Mensaje de error general -->
                         <div class="formulario_mensaje" id="formulario_mensaje">
-                            <p><b>ERROR:</b> Por favor, llene correctamente los campos obligatorios.</p>
+                        <p class="error campo_completo oculto" id="error_formulario"></p>
                         </div>
 
                         <!-- Botones de Acción -->

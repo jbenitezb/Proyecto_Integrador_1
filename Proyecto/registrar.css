@@ -206,3 +206,41 @@
     font-size: 0.85rem;
     color: #666;
 }
+.error {
+    display: block;
+    min-height: 1rem;
+    margin-top: 3px;
+    font-size: 0.75rem;
+    color: #B91C1C; 
+}
+
+/* 1. Ocultar los botones nativos de los navegadores (Edge, IE, Chrome) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* 2. Dar espacio a la derecha en el input de contraseña para que el texto no choque con el icono */
+#contrasena {
+    padding-right: 45px !important;
+}
+
+/* 3. Posicionamiento exacto y exclusivo para el ojito de Boxicons */
+#togglePassword {
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    cursor: pointer !important;
+    color: #666 !important;
+    font-size: 1.2rem !important;
+    z-index: 10 !important;
+}
+
+/* 4. Asegurar que el icono de validación de estado no se Monte sobre el ojito */
+#grupo_contrasena .formulario_validacion-estado {
+    right: 40px !important;
+}
