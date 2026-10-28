@@ -9,19 +9,11 @@ function guardar() {
 }
 
 function esc(texto) {
-    return String(texto)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+    return String(texto).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 function normalizar(texto) {
-    return String(texto)
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
+    return String(texto).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 function aviso(texto, tipo) {
@@ -175,20 +167,11 @@ function guardarEscuela(evento) {
 }
 
 //accion
-document.getElementById('btn_registrar')
-    .addEventListener('click', abrirFormulario);
-
-document.getElementById('btn_cancelar')
-    .addEventListener('click', cerrarFormulario);
-
-document.getElementById('formulario')
-    .addEventListener('submit', guardarEscuela);
-
-document.getElementById('buscador')
-    .addEventListener('input', listar);
-
-document.getElementById('cuerpo_tabla')
-    .addEventListener('click', function (evento) {
+document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
+document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
+document.getElementById('formulario').addEventListener('submit', guardarEscuela);
+document.getElementById('buscador').addEventListener('input', listar);
+document.getElementById('cuerpo_tabla').addEventListener('click', function (evento) {
         var boton = evento.target.closest('.btn_tabla');
 
         if (boton) {

@@ -43,17 +43,17 @@ function listar() {
     }
 
     if (mostradas === 0) {
-        var msg = tematicas.length === 0 ? 'No hay áreas para mostrar.' : 'No se encontraron áreas con esa búsqueda.';
+        var msg = tematicas.length === 0 ? 'No hay temáticas para mostrar.' : 'No se encontraron temáticas con esa búsqueda.';
         html = '<tr><td class="vacio" colspan="4">' + msg + '</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + tematicas.length + ' áreas';
+    document.getElementById('conteo').textContent = 'Mostrando ' + mostradas + ' de ' + tematicas.length + ' temáticas';
 }
 
 function abrirFormulario() {
     editando = null;
-    document.getElementById('titulo_formulario').textContent = 'Registrar área SFIA';
+    document.getElementById('titulo_formulario').textContent = 'Registrar temática';
     document.getElementById('formulario').reset();
     document.getElementById('codigo').readOnly = false;
     document.getElementById('error_formulario').textContent = '';
@@ -123,7 +123,7 @@ function guardarTematica(evento) {
 
     for (var i = 0; i < tematicas.length; i++) {
         if (tematicas[i].codigo === codigo && i !== editando) {
-            error.textContent = 'Ya existe un área con este código.';
+            error.textContent = 'Ya existe una temática con este código.';
             return;
         }
     }
@@ -132,10 +132,10 @@ function guardarTematica(evento) {
 
     if (editando === null) {
         tematicas.push(tematica);
-        aviso('Área registrada correctamente.', 'exito');
+        aviso('Temática registrada correctamente.', 'exito');
     } else {
         tematicas[editando] = tematica;
-        aviso('Área modificada correctamente.', 'exito');
+        aviso('Temática modificada correctamente.', 'exito');
     }
 
     guardar();

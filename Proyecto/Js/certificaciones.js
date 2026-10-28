@@ -1,282 +1,214 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    let certificaciones = JSON.parse(localStorage.getItem('lista_certificaciones')) || [];
-    let editandoCodigo = null;
-    
-    const formulario = document.getElementById('formulario');
-    const inputCodigo = document.getElementById('codigo');
-    const inputNombre = document.getElementById('nombre');
-    const inputDescripcion = document.getElementById('descripcion');
-    const inputArchivo = document.getElementById('archivoExcel');
-    const tituloFormulario = document.getElementById('titulo_formulario');
-    const panelFormulario = document.getElementById('panel_formulario');
-    const btnRegistrar = document.getElementById('btn_registrar');
-    const btnCancelar = document.querySelector('.btn_cancelar');
-    const divMensajeError = document.getElementById('formulario_mensaje');
-    const mensajeExito = document.getElementById('formulario_mensaje-exito');
-    
-    // Hu-61 listado y contador
-    const tablaBody = document.getElementById('tablaCertificacionesBody');
-    const elementoConteo = document.getElementById('conteo');
-    
-    // Hu-64 buscador
-    const inputBuscador = document.getElementById('buscadorCertificaciones'); 
 
+/* ===== CATÁLOGO DE CERTIFICACIONES ===== */
 
-    const guardarEnStorage = () => {
-        localStorage.setItem('lista_certificaciones', JSON.stringify(certificaciones));
-    };
+let certificaciones = JSON.parse(localStorage.getItem('certificaciones')) || [];
+let editando = null; // null = registrando; número = editando esa posición
 
-    const prepararEdicion = (codigo) => {
-        const certAEditar = certificaciones.find(c => c.codigo === codigo);
-        if (!certAEditar) return;
+function guardar() {
+    localStorage.setItem('certificaciones', JSON.stringify(certificaciones));
+}
 
-        // Activamos el modo edición guardando el código actual
-        editandoCodigo = codigo;
+function esc(texto) {
+    return String(texto)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 
-        // Cambiar el título del formulario visualmente
-        if (tituloFormulario) tituloFormulario.textContent = 'Modificar Casa Certificadora o Certificación';
-        
-        // Cargar los datos actuales en los inputs
-        if (inputCodigo) {
-            inputCodigo.value = certAEditar.codigo;
-            inputCodigo.disabled = false; // Bloquear el código para que no se modifique la llave primaria
+// Minúsculas y sin tildes, para facilitar la búsqueda
+function normalizar(texto) {
+    return String(texto)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+}
+
+function aviso(texto, tipo) {
+    const caja = document.getElementById('aviso');
+    caja.textContent = texto;
+    caja.className = 'aviso ' + tipo;
+}
+
+function listar() {
+    const filtro = normalizar(
+        document.getElementById('buscadorCertificaciones').value.trim()
+    );
+
+    let html = '';
+    let mostradas = 0;
+
+    for (let i = 0; i < certificaciones.length; i++) {
+        const certificacion = certificaciones[i];
+
+        const texto = normalizar(
+            certificacion.codigo + ' ' +
+            certificacion.nombre + ' ' +
+            certificacion.descripcion
+        );
+
+        if (filtro !== '' && texto.indexOf(filtro) === -1) {
+            continue;
         }
-        if (inputNombre) inputNombre.value = certAEditar.nombre;
-        if (inputDescripcion) inputDescripcion.value = certAEditar.descripcion || '';
 
-        ocultarMensajes();
-        if (panelFormulario) panelFormulario.classList.remove('oculto');
-        if (inputNombre) inputNombre.focus();
-    };
+        mostradas++;
 
-    // Hu-61 renderizar dinámicamente la tabla y actualizar el contador
-    const mostrarCertificaciones = (lista) => {
-        if (!tablaBody) return; 
-        tablaBody.innerHTML = ''; 
-        
-        // Hu-61 Si la lista está vacía, muestra un mensaje en la tabla
-        if (lista.length === 0) {
-            tablaBody.innerHTML = `
-                <tr>
-                    <td colspan="4" class="tabla_vacia">No hay casas certificadoras o certificaciones registradas.</td>
-                </tr>
-            `;
-            if (elementoConteo) elementoConteo.textContent = 'Mostrando 0 registros';
+        html += '<tr>' +
+            '<td class="codigo">' + esc(certificacion.codigo) + '</td>' +
+            '<td>' + esc(certificacion.nombre) + '</td>' +
+            '<td>' + esc(certificacion.descripcion) + '</td>' +
+            '<td class="acciones">' +
+                '<button type="button" class="btn_tabla" data-indice="' + i + '">' +
+                    'EDITAR' +
+                '</button>' +
+            '</td>' +
+        '</tr>';
+    }
+
+    if (mostradas === 0) {
+        const mensaje = certificaciones.length === 0
+            ? 'No hay certificaciones para mostrar.'
+            : 'No se encontraron certificaciones con esa búsqueda.';
+
+        html = '<tr><td class="vacio" colspan="4">' +
+            mensaje +
+        '</td></tr>';
+    }
+
+    document.getElementById('tablaCertificacionesBody').innerHTML = html;
+
+    document.getElementById('conteo').textContent ='Mostrando ' + mostradas + ' de ' + certificaciones.length + ' certificaciones';
+}
+
+function abrirFormulario() {
+    editando = null;
+
+    document.getElementById('titulo_formulario').textContent =
+        'Registrar casa certificadora o certificación';
+
+    document.getElementById('formulario').reset();
+    document.getElementById('codigo').readOnly = false;
+    document.getElementById('error_formulario').textContent = '';
+    document.getElementById('aviso').className = 'aviso oculto';
+
+    document.getElementById('panel_formulario').classList.remove('oculto');
+    document.getElementById('codigo').focus();
+}
+
+function editar(i) {
+    if (i < 0 || i >= certificaciones.length) {
+        return;
+    }
+
+    abrirFormulario();
+
+    editando = i;
+
+    document.getElementById('titulo_formulario').textContent =
+        'Modificar casa certificadora o certificación';
+
+    document.getElementById('codigo').value = certificaciones[i].codigo;
+    document.getElementById('nombre').value = certificaciones[i].nombre;
+    document.getElementById('descripcion').value = certificaciones[i].descripcion;
+
+    // El código no se puede cambiar al editar
+    document.getElementById('codigo').readOnly = true;
+
+    document.getElementById('nombre').focus();
+}
+
+function cerrarFormulario() {
+    editando = null;
+
+    document.getElementById('panel_formulario').classList.add('oculto');
+    document.getElementById('error_formulario').textContent = '';
+}
+
+function guardarCertificacion(evento) {
+    evento.preventDefault();
+
+    const codigo = document.getElementById('codigo').value.trim().toUpperCase();
+    const nombre = document.getElementById('nombre').value.trim();
+    const descripcion = document.getElementById('descripcion').value.trim();
+    const error = document.getElementById('error_formulario');
+
+    error.textContent = '';
+
+    if (codigo === '' && nombre === '' && descripcion === '') {
+        error.textContent = 'El código, el nombre y la descripción son obligatorios.';
+        return;
+    }
+
+    if (codigo === '' && nombre === '') {
+        error.textContent = 'El código y el nombre son obligatorios.';
+        return;
+    }
+
+    if (codigo === '' && descripcion === '') {
+        error.textContent = 'El código y la descripción son obligatorios.';
+        return;
+    }
+
+    if (nombre === '' && descripcion === '') {
+        error.textContent = 'El nombre y la descripción son obligatorios.';
+        return;
+    }
+
+    if (codigo === '') {
+        error.textContent = 'El código es obligatorio.';
+        return;
+    }
+
+    if (nombre === '') {
+        error.textContent = 'El nombre es obligatorio.';
+        return;
+    }
+
+    if (descripcion === '') {
+        error.textContent = 'La descripción es obligatoria.';
+        return;
+    }
+
+    for (let i = 0; i < certificaciones.length; i++) {
+        if (
+            certificaciones[i].codigo.toUpperCase() === codigo &&
+            i !== editando
+        ) {
+            error.textContent = 'Ya existe una certificación con este código.';
             return;
         }
+    }
 
-            // Hu-64: filtrar
-        if (inputBuscador) { 
-            inputBuscador.addEventListener('input', (e) => { 
-                const textoBusqueda = e.target.value.toLowerCase().trim(); 
-                const filtradas = certificaciones.filter(c => // 
-                    c.codigo.toLowerCase().includes(textoBusqueda) || 
-                    c.nombre.toLowerCase().includes(textoBusqueda) // 
-                ); 
-                mostrarCertificaciones(filtradas); 
-            }); 
-        } 
-
-        // Hu-61 recorre la lista para crear y llenar la fila 
-        lista.forEach(cert => {
-            const indiceOriginal = certificaciones.indexOf(cert);
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td class="codigo">${cert.codigo}</td>
-                <td>${cert.nombre}</td>
-                <td>${cert.descripcion || '-'}</td>
-                <td class="columna_acciones"></td>
-            `;
-
-            // Hu-62 agrega el botón de editar a cada fila
-            const celdaAcciones = fila.querySelector('.columna_acciones');
-            const btnEditar = document.createElement('button');
-            btnEditar.type = 'button';
-            btnEditar.className = 'btn_editar';
-            btnEditar.textContent = 'Editar';
-            btnEditar.addEventListener('click', () => prepararEdicion(cert.codigo));
-            celdaAcciones.appendChild(btnEditar);
-
-            tablaBody.appendChild(fila);
-        });
-
-        // Hu-61 actualiza contador 
-        if (elementoConteo) {
-            elementoConteo.textContent = `Mostrando ${lista.length} de ${certificaciones.length} registro(s)`;
-        }
+    const certificacion = {
+        codigo: codigo,
+        nombre: nombre,
+        descripcion: descripcion
     };
 
-    const mostrarError = (mensaje) => {
-        if (divMensajeError) {
-            divMensajeError.style.display = 'block';
-            divMensajeError.querySelector('p').innerHTML = `<b>ERROR:</b> ${mensaje}`;
+    if (editando === null) {
+        certificaciones.push(certificacion);
+        aviso('Certificación registrada correctamente.', 'exito');
+    } else {
+        certificaciones[editando] = certificacion;
+        aviso('Certificación modificada correctamente.', 'exito');
+    }
+
+    guardar();
+    listar();
+    cerrarFormulario();
+}
+// Acciones
+document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
+document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
+document.getElementById('formulario').addEventListener('submit', guardarCertificacion);
+document.getElementById('buscadorCertificaciones').addEventListener('input', listar);
+document.getElementById('tablaCertificacionesBody').addEventListener('click', function (evento) {
+        const boton = evento.target.closest('.btn_tabla');
+
+        if (boton) {
+            editar(parseInt(boton.getAttribute('data-indice'), 10));
         }
-        if (mensajeExito) mensajeExito.style.display = 'none';
-    };
+    });
 
-    const ocultarMensajes = () => {
-        if (divMensajeError) divMensajeError.style.display = 'none';
-        if (mensajeExito) mensajeExito.style.display = 'none';
-    };
-
-    // Control de apertura y cierre del panel de registro
-    const abrirFormulario = () => {
-        // HU-62 restablece el estado de edición
-        editandoCodigo = null;
-        if (inputCodigo) inputCodigo.disabled = false;
-        if (tituloFormulario) tituloFormulario.textContent = 'Registrar Casa Certificadora o Certificación';
-        if (formulario) formulario.reset();
-        ocultarMensajes();
-        if (panelFormulario) panelFormulario.classList.remove('oculto');
-        if (inputCodigo) inputCodigo.focus();
-    };
-
-    const cerrarFormulario = () => {
-
-        // HU-62 Al cerrar se limpia la variable
-        editandoCodigo = null;
-        if (inputCodigo) inputCodigo.disabled = false;
-        if (panelFormulario) panelFormulario.classList.add('oculto');
-        ocultarMensajes();
-    };
-
-    // Procesamiento de Carga Masiva csv
-    const procesarCargaMasiva = (archivo) => {
-        const lector = new FileReader();
-
-        lector.onload = (e) => {
-            const lineas = e.target.result.split(/\r\n|\n/);
-            let agregados = 0;
-
-            lineas.forEach((linea, index) => {
-                const cols = linea.split(',').map(c => c.trim().replace(/^["']|["']$/g, ''));
-                
-                // Omite la fila de cabecera si contiene la palabra código
-                if (index === 0 && cols[0].toLowerCase().includes('codigo')) return;
-
-                if (cols.length >= 2) {
-                    const [codigo, nombre, descripcion = ''] = cols;
-                    if (codigo && nombre && !certificaciones.some(c => c.codigo === codigo)) {
-                        certificaciones.push({ codigo, nombre, descripcion });
-                        agregados++;
-                    }
-                }
-            });
-
-            guardarEnStorage();
-            // Hu-61 refrescar automáticamente la tabla despues de la importación masiva
-            mostrarCertificaciones(certificaciones);
-
-            if (agregados > 0) {
-                if (mensajeExito) {
-                    mensajeExito.textContent = `¡Se importaro ${agregados} registros correctamente!`;
-                    mensajeExito.style.display = 'block';
-                }
-                setTimeout(() => {
-                    cerrarFormulario();
-                }, 1500);
-            } else {
-                mostrarError('Seleccione un archivo CSV o excel válido con la estructura requerida.');
-            }
-        };
-
-        lector.onerror = () => {
-            mostrarError('Seleccione un archivo CSV o excel válido con la estructura requerida.');
-        };
-
-        lector.readAsText(archivo);
-    };
-
-    // guardado manual o masivo
-    const guardarCertificacion = (evento) => {
-        evento.preventDefault();
-        ocultarMensajes();
-
-        // Validar si se seleccionó un archivo para carga masiva
-        if (inputArchivo && inputArchivo.files && inputArchivo.files[0]) {
-            const archivo = inputArchivo.files[0];
-            const nombreArchivo = archivo.name.toLowerCase();
-            
-            if (!nombreArchivo.endsWith('.csv') && !nombreArchivo.endsWith('.xlsx') && !nombreArchivo.endsWith('.xls')) {
-                mostrarError('Seleccione un archivo CSV o excel válido con la estructura requerida.');
-                return;
-            }
-            procesarCargaMasiva(archivo);
-            return;
-        }
-
-        // HU-62 actualiza el registro modificado en la lista
-        if (editandoCodigo !== null) {
-            const nombre = inputNombre.value.trim();
-            const descripcion = inputDescripcion.value.trim();
-
-            if (nombre === '' || nombre.length < 3) {
-                mostrarError('Ingrese un nombre válido (mínimo 3 caracteres).');
-                return;
-            }
-
-            const index = certificaciones.findIndex(c => c.codigo === editandoCodigo);
-            if (index !== -1) {
-                certificaciones[index].nombre = nombre;
-                certificaciones[index].descripcion = descripcion;
-            }
-
-            guardarEnStorage();
-            mostrarCertificaciones(certificaciones);
-
-            if (mensajeExito) {
-                mensajeExito.textContent = '¡Registro modificado satisfactoriamente!';
-                mensajeExito.style.display = 'block';
-            }
-
-            setTimeout(() => {
-                cerrarFormulario();
-            }, 1500);
-            return; 
-        }
-
-        // Validación de campos obligatorios para registro manual
-        const codigo = inputCodigo.value.trim();
-        const nombre = inputNombre.value.trim();
-        const descripcion = inputDescripcion.value.trim();
-
-        if (codigo === '') {
-            mostrarError('Ingrese un código válido.');
-            return;
-        }
-
-        if (nombre === '' || nombre.length < 3) {
-            mostrarError('Ingrese un nombre válido (mínimo 3 caracteres).');
-            return;
-        }
-
-        // Validar que el código no esté duplicado
-        const codigoDuplicado = certificaciones.some(c => c.codigo === codigo);
-        if (codigoDuplicado) {
-            mostrarError('El código ingresado ya está en uso por otro registro.');
-            return;
-        }
-
-        // Registrar nuevo elemento
-        const nuevoItem = { codigo, nombre, descripcion };
-        certificaciones.push(nuevoItem);
-        guardarEnStorage();
-        // Hu-61 Refrescar automáticamente la tabla despues de completar el registro manual
-        mostrarCertificaciones(certificaciones);
-
-        if (mensajeExito) {
-            mensajeExito.textContent = '¡Registro guardado satisfactoriamente!';
-            mensajeExito.style.display = 'block';
-        }
-
-        setTimeout(() => {
-            cerrarFormulario();
-        }, 1500);
-    };
-
-    if (btnRegistrar) btnRegistrar.addEventListener('click', abrirFormulario);
-    if (btnCancelar) btnCancelar.addEventListener('click', cerrarFormulario);
-    if (formulario) formulario.addEventListener('submit', guardarCertificacion);
-    mostrarCertificaciones(certificaciones);
-});
+listar();
