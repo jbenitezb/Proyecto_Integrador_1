@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Cuenta - Sistema Curricular CENFOTEC</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../registrar.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Menú de navegación institucional -->
+    <header class="header">
+        <nav class="menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            <div class="logo">
+                <img src="../imagenes/images-removebg-preview.png" alt="Logo CENFOTEC" class="imagen">
+                <span class="logo_texto"></span>
+            </div>
+            <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="usuarios.html">USUARIOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <div class="seccion-catalogo-contenedor" style="justify-content: center; padding: 20px;">
+            
+            <!--HU-10: Registrar una nueva cuenta de usuario -->
+            <div class="catalogo_contenedor-principal" style="width: 100%; max-width: 800px;">
+                <section class="seccion_contenedor">
+                    <h2 class="seccion_titulo">Registrar Nueva Cuenta de Usuario</h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.95rem;">Complete los campos requeridos para establecer su cuenta en el sistema...</p>
+
+                    <form action="#" class="formulario" id="formulario_registro" novalidate>
+                        
+                        <!-- Nombre -->
+                        <div class="formulario_grupo" id="grupo_nombre">
+                            <label for="nombre" class="formulario_label">Nombre</label>
+                            <div class="formulario_grupo-input">
+                                <input type="text" class="formulario_input" name="nombre" id="nombre" placeholder="Ingrese su nombre (mínimo 3 letras)">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                            </div>
+                            <p class="formulario_input-error">Ingrese su nombre (mínimo 3 letras).</p>
+                        </div>
+
+                        <!-- Apellidos -->
+                        <div class="formulario_grupo" id="grupo_apellidos">
+                            <label for="apellidos" class="formulario_label">Apellidos</label>
+                            <div class="formulario_grupo-input">
+                                <input type="text" class="formulario_input" name="apellidos" id="apellidos" placeholder="Ingrese sus apellidos (mínimo 3 letras)">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                            </div>
+                            <p class="formulario_input-error">Ingrese sus apellidos (mínimo 3 letras).</p>
+                        </div>
+
+                        <!-- Identificación -->
+                        <div class="formulario_grupo" id="grupo_identificacion">
+                            <label for="identificacion" class="formulario_label">Identificación</label>
+                            <div class="formulario_grupo-input">
+                                <input type="text" class="formulario_input" name="identificacion" id="identificacion" placeholder="Ej: 112340567">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                            </div>
+                            <p class="formulario_input-error">Ingrese un número de identificación válido.</p>
+                        </div>
+
+                        <!-- Correo Electrónico -->
+                        <div class="formulario_grupo" id="grupo_correo">
+                            <label for="correo" class="formulario_label">Correo Electrónico</label>
+                            <div class="formulario_grupo-input">
+                                <input type="email" class="formulario_input" name="correo" id="correo" placeholder="usuario@ucenfotec.ac.cr">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                            </div>
+                            <p class="formulario_input-error">Ingrese un correo con formato válido (admin@dominio.com).</p>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="formulario_grupo" id="grupo_contrasena">
+                            <label for="contrasena" class="formulario_label">Contraseña</label>
+                            <div class="formulario_grupo-input">
+                                <input type="password" class="formulario_input" name="contrasena" id="contrasena" placeholder="8 a 16 caracteres (Mayús, minús, número)">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                            </div>
+                            <p class="formulario_input-error">La contraseña que ingresó no cumple con los requisitos obligatorios.</p>
+                        </div>
+
+                        <!-- Mensaje de error general -->
+                        <div class="formulario_mensaje" id="formulario_mensaje">
+                            <p><b>ERROR:</b> Por favor, llene correctamente los campos obligatorios.</p>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="formulario__grupo formulario__grupo-acciones" style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px;">
+                            <p class="formulario_mensaje-exito" id="formulario_mensaje-exito">¡Su cuenta fué creada con éxito!</p>
+                            <button type="button" class="btn_cancelar" onclick="window.location.href='usuarios.html'">CANCELAR</button>
+                            <input class="btn_enviar" type="submit" value="REGISTRAR CUENTA">
+                        </div>
+
+                    </form>
+                </section>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer_referencia">
+        <div class="footer_columna">
+            <h3>REDES SOCIALES</h3>
+            <div class="footer_redes">
+                <a href="#">f</a>
+                <a href="#">𝕏</a>
+                <a href="#">▶</a>
+                <a href="#">in</a>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>BUSCAR</h3>
+            <div class="footer_buscador">
+                <input type="text" placeholder="Buscar...">
+                <button>🔍</button>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>VÍNCULOS DE INTERÉS</h3>
+            <ul>
+                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">> Centro de Asistencia</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../js/registrar.js"></script>
+</body>
+</html>

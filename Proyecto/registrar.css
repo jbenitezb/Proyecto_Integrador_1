@@ -1,0 +1,208 @@
+
+.seccion-catalogo-contenedor {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.seccion_contenedor {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.seccion_titulo {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #084599;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Formulario y validaciones */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulario_grupo {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.formulario_label {
+    font-size: 0.85rem;
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formulario_grupo-input {
+    position: relative;
+}
+
+.formulario_input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.formulario_input:focus {
+    border-color: #084599;
+}
+
+.formulario_validacion-estado {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0;
+}
+
+.formulario_input-error {
+    font-size: 0.75rem;
+    color: #DC2626;
+    margin-top: 4px;
+    display: none;
+}
+
+/* Estados controlados por JS */
+.formulario_grupo-incorrecto .formulario_input {
+    border: 2px solid #DC2626;
+}
+.formulario_grupo-incorrecto .formulario_validacion-estado {
+    color: #DC2626;
+    opacity: 1;
+}
+.formulario_grupo-incorrecto .formulario_input-error {
+    display: block;
+}
+
+.formulario_grupo-correcto .formulario_input {
+    border: 2px solid #16A34A;
+}
+.formulario_grupo-correcto .formulario_validacion-estado {
+    color: #16A34A;
+    opacity: 1;
+}
+
+/* Avisos y mensajes */
+.aviso {
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.aviso.error {
+    background-color: #FEE2E2;
+    color: #DC2626;
+    border: 1px solid #F87171;
+}
+
+.aviso.exito {
+    background-color: #DCFCE7;
+    color: #16A34A;
+    border: 1px solid #4ADE80;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* Botones de acción */
+.formulario__grupo-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn_enviar {
+    padding: 10px 22px;
+    background-color: #084599;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn_enviar:hover {
+    background-color: #03265A;
+}
+
+.btn_cancelar {
+    padding: 10px 22px;
+    background-color: #cbd5e0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn_cancelar:hover {
+    background-color: #a0aec0;
+}
+
+.btn_tabla {
+    padding: 6px 12px;
+    background-color: #084599;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.btn_tabla:hover {
+    background-color: #03265A;
+}
+
+/* Tabla de usuarios */
+.tabla_contenedor {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.tabla_datos {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.tabla_datos th, .tabla_datos td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.tabla_datos th {
+    background-color: #084599;
+    color: white;
+    font-weight: bold;
+}
+
+.conteo {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #666;
+}
