@@ -1,7 +1,4 @@
 /* ===== CATÁLOGO DE METODOLOGÍAS ===== */
-
-console.log('METODOLOGÍAS: archivo actualizado');
-
 let metodologias = JSON.parse(localStorage.getItem('lista_metodologias')) || [];
 let editando = null;
 
