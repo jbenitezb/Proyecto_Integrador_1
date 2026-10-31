@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Metodologías - Sistema Curricular CENFOTEC</title>
+    <title>Catálogo - Metodologías</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
-    <link rel="stylesheet" href="../estilos/Metodologias.css">
-    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../estilos/area_sfia.css">
 </head>
 <body>
-    <!-- Menú de navegación -->
+ 
     <header class="header">
         <nav class="menu">
             <input type="checkbox" id="check">
@@ -17,10 +17,10 @@
                 <i class="bx bx-menu"></i>
             </label>
             <div class="logo">
-                <img src="../imagenes/images-removebg-preview.png" alt="Logo" class="imagen">
+                <img src="../img/images-removebg-preview.png" alt="Logo" class="imagen">
                 <span class="logo_texto"></span>
             </div>
-             <ul class="opciones">
+           <ul class="opciones">
                 <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
                 <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
                 <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
@@ -29,11 +29,11 @@
                 <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
             </ul>
         </nav>
-
+ 
     </header>
-
-    <main id="inicio">
-
+ 
+    <main id="metodologias">
+ 
         <div class="seccion-catalogo-contenedor">
             
             <!-- Barra lateral de navegación de catálogos -->
@@ -44,110 +44,74 @@
                     <li><a href="estado_curso.html">ESTADO CURSO</a></li>
                     <li><a href="area_sfia.html">ÁREA SFIA</a></li>
                     <li><a href="tematica.html">TEMÁTICA</a></li>
-                    <li><a href="catalogo_metodologias.html">METODOLOGÍAS</a></li>
+                    <li><a href="Metodologias.html">METODOLOGÍAS</a></li>
                     <li><a href="nivel.html">NIVEL</a></li>
                     <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
                     <li><a href="catalogo_moneda.html">MONEDA</a></li>
                 </ul>
             </nav>
-
-            <!-- Contenedor principal -->
-            <div class="catalogo_contenedor-principal">
-           <!--Formulario de Registro de Metodología (HU-50) -->
-                <section class="seccion_contenedor">
-                <h2 class="seccion_titulo">Registrar Nueva Metodología de Aprendizaje</h2>
-                    <!-- BARRA DE HERRAMIENTAS CON BUSCADOR Y BOTÓN REGISTRAR -->
-                <div class="barra_herramientas" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <div class="catalogo_acciones-superior" style="margin-bottom: 0;">
-                        <input type="text" id="buscadorMetodologias" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
-                    </div> 
-                    <div class="acciones_barra">
-                        <!--  Se agregó el ID 'btn_registrar' para que JavaScript pueda detectar el clic -->
-                        <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
-                    </div>
+ 
+        <section class="contenido-principal">
+            <h1 class="seccion_titulo">METODOLOGÍAS</h1>
+ 
+            <div id="aviso" class="aviso oculto"></div>
+ 
+            <div class="barra_herramientas">
+                <div class="buscador">
+                    <label class="etiqueta" for="buscadorMetodologias">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscadorMetodologias" placeholder="Buscar por código, nombre o descripción...">
                 </div>
-
-                <!-- Se agregó el contenedor con la clase 'panel oculto' para que el formulario inicie oculto y se despliegue al hacer clic en Registrar -->
-                <div class="panel oculto" id="panel_formulario" style="margin-bottom: 30px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fff;">
-                    <h2 class="seccion_titulo" id="titulo_formulario" style="font-size: 1.2rem; margin-bottom: 15px;">Registrar Nueva Metodología de Aprendizaje</h2>
-
-                      <form action="#" class="formulario" id="formulario" novalidate >
-                 
-                        <!-- Código metodología -->
-                        <div class="formulario_grupo" id="grupo_codigo">
-                            <label class="formulario_label">Código de Metodología</label>
-                            <div class="formulario_grupo-input">
-                                <input type="text" class="formulario_input" name="codigo" id="codigo" placeholder="Ej: MET-001">
-                            </div>
-                        </div>
-                        </form>
-
-                <!-- Name de la Metodología -->
-                <div class="formulario_grupo" id="grupo_nombre">
-                    <label class="formulario_label">Nombre de la Metodología</label>
-                    <div class="formulario_grupo-input">
-                        <input type="text" class="formulario_input" name="nombre" id="nombre" placeholder="Ej. Aprendizaje Basado en Proyectos">
-                        <i class="formulario_validacion-estado bx bx-x-circle"></i>
-                    </div>
-                    <p class="formulario_input-error">El nombre de la metodología es obligatoria (mínimo 3 caracteres).</p>
+                <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
                 </div>
-
-                <!-- Descripción metodologia -->
-                 <div class="formulario_grupo formulario_grupo-descripcion" id="grupo_descripcion">
-                    <label class="formulario_label">Descripción</label>
-                    <div class="formulario_grupo-input">
-                        <textarea class="formulario_input" name="descripcion" id="descripcion" rows="3" placeholder="Describa la metodología..."></textarea>
+            </div>
+ 
+            <div class="panel oculto" id="panel_formulario">
+                <h2 class="panel_titulo" id="titulo_formulario">Registrar metodología</h2>
+                <form class="formulario" id="formulario" novalidate>
+                    <div class="campo">
+                        <label class="etiqueta" for="codigo">CÓDIGO</label>
+                        <input type="text" class="entrada" id="codigo" placeholder="Ej. MET-001">
                     </div>
-                </div>
-
-                    <!-- Mensaje para obligacin completar campos -->
-                        <div class="formulario_mensaje" id="formulario_mensaje">
-                            <p><b>ERROR:</b> Tiene que completar los campos, son obligatorios.</p>
-                        </div>
-
-                        <!-- Botón -->
-                        <div class="formulario__grupo formulario__grupo-acciones">
-                            <p class="formulario_mensaje-exito" id="formulario_mensaje-exito">¡Metodología registrada con éxito!</p>
-                            <button type="button" class="btn_cancelar">CANCELAR</button>
-                            <input class="btn_enviar" type="submit" value="GUARDAR METODOLOGÍA">
-                           </div>
-
-                    </form>
-        
-                    
-                <h2 class="seccion_titulo" style="margin-top: 40px;">Listado de Metodologías de Aprendizaje</h2>
-                <!--Hu-51 (Listado y Tabla) -->              
-                <div class="catalogo_acciones-superior" style="margin-bottom: 20px; display: flex; gap: 10px;">
-                    <input type="text" id="buscadorMetodologias" class="formulario_input" placeholder="Buscar por código o nombre..." style="max-width: 300px;">
-                </div> 
-
-                <div class="tabla_contenedor">
-
-                <table class="tabla_datos" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+ 
+                    <div class="campo">
+                        <label class="etiqueta" for="nombre">NOMBRE</label>
+                        <input type="text" class="entrada" id="nombre" placeholder="Ej. Aprendizaje Basado en Proyectos" maxlength="100">
+                    </div>
+ 
+                    <div class="campo campo_completo">
+                        <label class="etiqueta" for="descripcion">DESCRIPCIÓN</label>
+                        <textarea class="entrada" id="descripcion" placeholder="Describa la metodología..." rows="3" maxlength="500"></textarea>
+                    </div>
+ 
+                    <p class="error campo_completo" id="error_formulario"></p>
+ 
+                    <div class="acciones_formulario">
+                        <button type="button" class="btn_cancelar" id="btn_cancelar">CANCELAR</button>
+                        <button type="submit" class="btn_enviar" id="btn_guardar">GUARDAR</button>
+                    </div>
+ 
+                </form>
+            </div>
+ 
+            <div class="tabla_contenedor">
+                <table class="tabla">
                     <thead>
                         <tr>
                             <th>CÓDIGO</th>
                             <th>NOMBRE</th>
                             <th>DESCRIPCIÓN</th>
-                            <th>Acciones</th>
+                            <th class="acciones">ACCIONES</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaMetodologiasBody">
-                        <!-- Los datos se cargan automaticamente desde el localStorage -->
-                    </tbody>
+                    <tbody id="tablaMetodologiasBody"></tbody>
                 </table>
-                </div>
-
-                <!-- Conteo de elementos al pie de la tabla-->
-                    <p class="conteo" id="conteo" style="margin-top: 10px; font-size: 0.85rem; color: #666;"></p>
-              
-            </section>
-
-
-         </div>
-
+            </div>
+            <p class="conteo" id="conteo"></p>
+        </section>
+        </div>
     </main>
-
+ 
      <footer class="footer_referencia">
         
         <div class="footer_columna">
@@ -159,7 +123,7 @@
                 10104 San José, Provincia de San José, Costa Rica.
             </p>
         </div>
-
+ 
         <div class="footer_columna">
             <h3>REDES SOCIALES</h3>
             <div class="footer_redes">
@@ -187,6 +151,8 @@
             </ul>
         </div>
     </footer>
-        <script src="../js/Metodologias.js"></script>
+ 
+    <script src="../js/Metodologias.js"></script>
+    <script src="../Js/cerrar_session.js"></script>
 </body>
 </html>

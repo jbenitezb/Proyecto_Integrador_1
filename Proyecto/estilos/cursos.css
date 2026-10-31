@@ -1,0 +1,213 @@
+/* Lo global (header, footer, botones, .entrada, .etiqueta, .tabla, .aviso...) vive en estilos.css y area_sfia.css.
+   Este archivo solo agrega lo propio de cursos.html y formulario_curso.html. */
+ 
+.cursos_contenedor {
+    width: 92%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+ 
+a.btn_enviar,
+a.btn_cancelar {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+ 
+/* ===== Pestañas del listado ===== */
+.pestanas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+}
+ 
+.pestana {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #666;
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+ 
+.pestana:hover {
+    color: #084599;
+}
+ 
+.pestana.activa {
+    color: #084599;
+    border-bottom-color: #084599;
+}
+ 
+.pestana:focus-visible {
+    outline: 2px solid #084599;
+    outline-offset: 2px;
+}
+ 
+.pestana_cont {
+    min-width: 22px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    background-color: #e2e8f0;
+    color: #333;
+    font-size: 0.75rem;
+    text-align: center;
+}
+ 
+.pestana.activa .pestana_cont {
+    background-color: #084599;
+    color: #ffffff;
+}
+ 
+.pestanas_ayuda {
+    margin: 0 0 18px;
+    min-height: 1.1rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+ 
+/* ===== Estados del curso ===== */
+.estado {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+ 
+.estado_borrador { background-color: #e2e8f0; color: #4a5568; }
+.estado_en-desarrollo { background-color: #fef3c7; color: #92400e; }
+.estado_aprobado { background-color: #dbeafe; color: #1e40af; }
+.estado_en-produccion { background-color: #dcfce7; color: #166534; }
+.estado_inactivo { background-color: #fee2e2; color: #991b1b; }
+ 
+.pendiente_codigo {
+    font-style: italic;
+    font-weight: normal;
+    color: #92400e;
+}
+ 
+/* ===== Detalle desplegable de cada curso ===== */
+.fila_detalle td {
+    background-color: #f8fafc;
+}
+ 
+.detalle_lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px 24px;
+    margin: 0;
+}
+ 
+.detalle_lista dt {
+    font-size: 0.75rem;
+    color: #666;
+}
+ 
+.detalle_lista dd {
+    margin: 2px 0 0;
+    color: #333;
+    overflow-wrap: anywhere;
+}
+ 
+/* ===== Formulario de curso ===== */
+.formulario_curso {
+    display: block;
+}
+ 
+.grupo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 0 0 20px;
+    padding: 18px 20px 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-left: 4px solid #084599;
+    border-radius: 4px;
+}
+ 
+.grupo legend {
+    padding: 0 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #084599;
+}
+ 
+.grupo .campo_completo {
+    grid-column: 1 / -1;
+}
+ 
+.contador {
+    margin-top: 3px;
+    font-size: 0.75rem;
+    color: #666;
+    text-align: right;
+}
+ 
+.contador.limite {
+    color: #B91C1C;
+    font-weight: bold;
+}
+ 
+.ayuda {
+    margin-top: 3px;
+    font-size: 0.75rem;
+    color: #666;
+}
+ 
+.entrada.invalida {
+    border-color: #B91C1C;
+}
+ 
+.check_linea {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+ 
+.lista_checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    padding: 8px 0;
+}
+ 
+.sin_datos {
+    font-size: 0.85rem;
+    color: #666;
+}
+ 
+.sin_datos a {
+    color: #084599;
+}
+
+.enlace_volver {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    color: #084599;
+    text-decoration: none;
+}
+ 
+.enlace_volver:hover {
+    text-decoration: underline;
+}
+ 
+.ayuda_inicial {
+    margin: -10px 0 18px;
+}
