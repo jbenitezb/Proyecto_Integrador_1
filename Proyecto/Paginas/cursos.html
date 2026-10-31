@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/area_sfia.css">
+    <link rel="stylesheet" href="../estilos/cursos.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <nav class="menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            <div class="logo">
+                <img src="../img/images-removebg-preview.png" alt="Logo" class="imagen">
+                <span class="logo_texto"></span>
+            </div>
+            <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="usuarios.html">USUARIOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="cursos.html">CURSOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
+            </ul>
+        </nav>
+    </header>
+ 
+    <main id="cursos">
+        <section class="cursos_contenedor">
+            <h1 class="seccion_titulo">CURSOS</h1>
+ 
+            <div id="aviso" class="aviso oculto" role="status"></div>
+ 
+            <div class="barra_herramientas">
+                <div class="buscador">
+                    <label class="etiqueta" for="buscador">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscador" placeholder="Buscar por código, nombre, escuela, carrera, estado o temática...">
+                </div>
+                <div class="acciones_barra">
+                    <a class="btn_enviar" id="btn_registrar" href="formulario_curso.html">REGISTRAR</a>
+                </div>
+            </div>
+ 
+            <div class="pestanas" role="tablist" aria-label="Filtrar cursos por estado">
+                <button type="button" class="pestana activa" role="tab" aria-selected="true" data-pestana="todos">
+                    TODOS <span class="pestana_cont" id="cont_todos">0</span>
+                </button>
+                <button type="button" class="pestana" role="tab" aria-selected="false" data-pestana="pendientes">
+                    PENDIENTES <span class="pestana_cont" id="cont_pendientes">0</span>
+                </button>
+                <button type="button" class="pestana" role="tab" aria-selected="false" data-pestana="produccion">
+                    EN PRODUCCIÓN <span class="pestana_cont" id="cont_produccion">0</span>
+                </button>
+                <button type="button" class="pestana" role="tab" aria-selected="false" data-pestana="inactivos">
+                    INACTIVOS <span class="pestana_cont" id="cont_inactivos">0</span>
+                </button>
+            </div>
+            <p class="pestanas_ayuda" id="ayuda_pestana"></p>
+ 
+            <div class="tabla_contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>NOMBRE</th>
+                            <th>ESCUELA</th>
+                            <th>CARRERA</th>
+                            <th>TEMÁTICA</th>
+                            <th>ESTADO</th>
+                            <th>DETALLE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo_tabla"></tbody>
+                </table>
+            </div>
+            <p class="conteo" id="conteo"></p>
+        </section>
+    </main>
+ 
+    <footer class="footer_referencia">
+ 
+        <div class="footer_columna">
+            <p><strong>Correo electrónico: </strong></p>
+            <p>info@ucenfotec.ac.cr</p>
+            <p><strong>Dirección:</strong></p>
+            <p>
+                Barrio Francisco Peralta, sobre Avenida Central y Calle 33,
+                10104 San José, Provincia de San José, Costa Rica.
+            </p>
+        </div>
+ 
+        <div class="footer_columna">
+            <h3>REDES SOCIALES</h3>
+            <div class="footer_redes">
+                <div class="footer_redes">
+                    <a href="https://www.facebook.com/UCenfotec">f</a>
+                    <a href="https://x.com/ucenfotec">𝕏</a>
+                    <a href="https://www.youtube.com/@UniversidadCenfotec/videos">▶</a>
+                    <a href="https://www.instagram.com/ucenfotec">回</a>
+                    <a href="https://www.linkedin.com/school/universidad-cenfotec/">in</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>BUSCAR</h3>
+            <div class="footer_buscador">
+                <input type="text" placeholder="Buscar...">
+                <button>🔍</button>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>VÍNCULOS DE INTERÉS</h3>
+            <ul>
+                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">> Centro de Asistencia</a></li>
+            </ul>
+        </div>
+    </footer>
+ 
+    <script src="../js/cursos_comun.js"></script>
+    <script src="../js/cursos.js"></script>
+</body>
+</html>
