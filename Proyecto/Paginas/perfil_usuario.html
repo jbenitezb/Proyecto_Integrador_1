@@ -53,14 +53,24 @@
                             <p class="formulario_input-error">Ingrese su nombre (mínimo 3 letras).</p>
                         </div>
 
-                        <!-- Apellidos -->
-                        <div class="formulario_grupo" id="grupo_apellidos">
-                            <label for="apellidos" class="formulario_label">Apellidos</label>
+                        <!-- Primer apellido -->
+                        <div class="formulario_grupo" id="grupo_primer_apellido">
+                            <label for="primer_apellido" class="formulario_label">Primer Apellido</label>
                             <div class="formulario_grupo-input">
-                                <input type="text" class="formulario_input" name="apellidos" id="apellidos" placeholder="Ingrese sus apellidos (mínimo 3 letras)">
+                                <input type="text" class="formulario_input" name="primer_apellido" id="primer_apellido" placeholder="Ingrese su primer apellido (mínimo 3 letras)">
                                 <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
                             <p class="formulario_input-error">Ingrese sus apellidos (mínimo 3 letras).</p>
+                        </div>
+
+                        <!-- Segundo Apellido -->
+                        <div class="formulario_grupo" id="grupo_segundo_apellido">
+                            <label for="segundo_apellido" class="formulario_label">Segundo Apellido</label>
+                            <div class="formulario_grupo-input">
+                                <input type="text" class="formulario_input" name="segundo_apellido" id="segundo_apellido" placeholder="Ingrese su segundo apellido">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
+                            </div>
+                            <p class="formulario_input-error">Ingrese su segundo apellido (mínimo 3 letras).</p>
                         </div>
 
                         <!-- Identificación -->
@@ -117,14 +127,14 @@
                             <label for="sexo" class="formulario_label">Sexo</label>
                             <div class="formulario_grupo-input">
                                 <select class="formulario_input" name="sexo" id="sexo">
-                                    <option value="">Seleccione una opción</option>
+                                    <option value="" disabled selected>Seleccione una opción</option>
                                     <option value="Femenino">Femenino</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Prefiero no decir">Prefiero no decir</option>
                                 </select>
                                 <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
-                            <p class="formulario_input-error">Seleccione una opción de la lista.</p>
+                            <p class="formulario_input-error">Por favor, seleccione una opción de la lista.</p>
                         </div>
 
                         <!-- Imagen de Perfil -->

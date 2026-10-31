@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Referencias del formulario y campos de la HU-11
     const formulario = document.getElementById('formulario_perfil');
     const inputNombre = document.getElementById('nombre');
-    const inputApellidos = document.getElementById('apellidos');
+    const inputPrimerApellido = document.getElementById('primer_apellido');
+    const inputSegundoApellido = document.getElementById('segundo_apellido');
     const inputIdentificacion = document.getElementById('identificacion');
     const inputCorreo = document.getElementById('correo');
     const inputTelefono = document.getElementById('telefono');
@@ -96,7 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
             evento.preventDefault();
 
             const nombre = inputNombre ? inputNombre.value.trim() : '';
-            const apellidos = inputApellidos ? inputApellidos.value.trim() : '';
+            const primerApellido = inputPrimerApellido ? inputPrimerApellido.value.trim() : '';
+            const segundoApellido = inputSegundoApellido ? inputSegundoApellido.value.trim() : '';
+            const edadCalculada = inputEdadCalculada ? inputEdadCalculada.value.trim() : calcularEdad(fechaNacimiento);
             const identificacion = inputIdentificacion ? inputIdentificacion.value.trim() : '';
             const correo = inputCorreo ? inputCorreo.value.trim() : '';
             const telefono = inputTelefono ? inputTelefono.value.trim() : '';
@@ -118,12 +121,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            if (apellidos === '') {
-                mostrarError('Por favor, ingrese sus apellidos.', inputApellidos);
+          if (primerApellido === '') {
+                mostrarError('Por favor, ingrese su primer apellido.', inputPrimerApellido);
+                return;
+             }
+          if (primerApellido.length < 3) {
+                mostrarError('El primer apellido debe tener al menos 3 caracteres.', inputPrimerApellido);
+                return;
+             }
+
+            if (segundoApellido === '') {
+                mostrarError('Por favor, ingrese su segundo apellido.', inputSegundoApellido);
                 return;
             }
-            if (apellidos.length < 3) {
-                mostrarError('Los apellidos deben tener al menos 3 caracteres.', inputApellidos);
+            if (segundoApellido.length < 3) {
+                mostrarError('El segundo apellido debe tener al menos 3 caracteres.', inputSegundoApellido);
                 return;
             }
 
@@ -196,11 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Guardar el perfil completo en el LocalStorage
             const nuevoPerfil = { 
                 nombre, 
-                apellidos, 
+                primerApellido, 
+                segundoApellido,
                 identificacion, 
                 correo, 
                 telefono, 
                 fechaNacimiento, 
+                edadCalculada,
                 sexo, 
                 imagenPerfil, 
                 contrasena 
