@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputIdentificacion = document.getElementById('identificacion');
     const inputCorreo = document.getElementById('correo');
     const inputContrasena = document.getElementById('contrasena');
+    const inputFechaNacimiento = document.getElementById('fechaNacimiento');
     const mensajeExito = document.getElementById('formulario_mensaje-exito');
 
     const togglePassword = document.getElementById('togglePassword');
@@ -63,9 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const identificacion = inputIdentificacion.value.trim();
             const correo = inputCorreo.value.trim();
             const contrasena = inputContrasena.value.trim();
+            const fechaNacimiento = inputFechaNacimiento.value.trim();
 
             // Hu-10 Validar campos vacíos
-            if (nombre === '' || apellidos === '' || identificacion === '' || correo === '' || contrasena === '') {
+            if (nombre === '' || apellidos === '' || identificacion === '' || correo === '' || contrasena === '' || fechaNacimiento === '') {
                 mostrarError('Todos los campos son obligatorios.');
                 return;
             }
@@ -107,6 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputContrasena.focus();
                 return;
             }
+            
+            //  HU-15: Validar que la fecha de nacimiento no sea una fecha futura
+            const fechaNacimientoDate = new Date(fechaNacimiento);
+            const hoy = new Date();
+            if (fechaNacimientoDate > hoy) {
+                mostrarError('La fecha de nacimiento no puede ser una fecha futura.');
+                inputFechaNacimiento.focus();
+                return;
+            }
 
             // Hu-10 Validar duplicados de identificación o correo en el Storage
             const usuarioExiste = usuarios.some(u => u.identificacion === identificacion || u.correo === correo);
@@ -115,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             //Hu-10
-            const nuevoUsuario = { nombre, apellidos, identificacion, correo, contrasena };
+            const nuevoUsuario = { nombre, apellidos, identificacion, correo, contrasena, fechaNacimiento };
             usuarios.push(nuevoUsuario);
             guardarEnStorage();
 

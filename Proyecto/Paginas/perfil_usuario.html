@@ -93,7 +93,7 @@
                             <p class="formulario_input-error">Ingrese un número de teléfono válido (8 dígitos).</p>
                         </div>
 
-                        <!-- Fecha de Nacimiento -->
+                        <!-- Fecha de Nacimiento --> 
                         <div class="formulario_grupo" id="grupo_fecha_nacimiento">
                             <label for="fecha_nacimiento" class="formulario_label">Fecha de Nacimiento</label>
                             <div class="formulario_grupo-input">
@@ -103,6 +103,15 @@
                             <p class="formulario_input-error">Seleccione una fecha de nacimiento qe sea válida.</p>
                         </div>
 
+                           <!-- Hu-15 Edad Calculada Automáticamente -->
+                        <div class="formulario_grupo" id="grupo_edad_calculada">
+                            <label class="formulario_label">Edad Actual</label>
+                            <div class="formulario_grupo-input">
+                                <input type="text" class="formulario_input" id="edad_calculada" readonly placeholder="Edad calculada">
+                            </div>
+                        </div>
+                        
+
                         <!-- Sexo -->
                         <div class="formulario_grupo" id="grupo_sexo">
                             <label for="sexo" class="formulario_label">Sexo</label>
@@ -111,7 +120,6 @@
                                     <option value="">Seleccione una opción</option>
                                     <option value="Femenino">Femenino</option>
                                     <option value="Masculino">Masculino</option>
-                                    <option value="Otro">Otro</option>
                                     <option value="Prefiero no decir">Prefiero no decir</option>
                                 </select>
                                 <i class="formulario_validacion-estado bx bx-x-circle"></i>

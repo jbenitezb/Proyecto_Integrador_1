@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const togglePassword = document.getElementById('togglePassword');
     const errorFormulario = document.getElementById('error_formulario') || document.getElementById('formulario_mensaje');
 
+    const inputEdadCalculada = document.getElementById('edad_calculada');
+    
     // Ocultar mensajes al cargar
     if (errorFormulario) {
         errorFormulario.textContent = '';
@@ -50,6 +52,30 @@ document.addEventListener('DOMContentLoaded', () => {
             mensajeExito.textContent = mensaje;
         }
     };
+    function calcularEdad(fechaNacimientoStr) {
+    if (!fechaNacimientoStr) return 'N/D';
+    const hoy = new Date();
+    const fechaNac = new Date(fechaNacimientoStr);
+    let edad = hoy.getFullYear() - fechaNac.getFullYear();
+    const mes = hoy.getMonth() - fechaNac.getMonth();
+    
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+        edad--;
+    }
+    return `${edad} años`;
+}
+
+//HU-15: Calcular y mostrar la edad de forma dinámica 
+    if (inputFechaNacimiento && inputEdadCalculada) {
+        if (inputFechaNacimiento.value) {
+            inputEdadCalculada.value = calcularEdad(inputFechaNacimiento.value);
+        }
+
+        inputFechaNacimiento.addEventListener('change', () => {
+            inputEdadCalculada.value = calcularEdad(inputFechaNacimiento.value);
+        });
+    }
+
 
     // Evento para alternar entre mostrar y ocultar contraseña con el ojito
     if (togglePassword && inputContrasena) {

@@ -1,0 +1,29 @@
+.seccion_contenedor {
+    width: 98%;
+    max-width: 1500px; 
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.tabla_datos {
+    width: 100%; 
+    border-collapse: collapse;
+    background: #fff;
+}
+.btn_tabla {
+    padding: 5px 12px;
+    background-color: #ffffff;
+    color: #084599;
+    border: 1px solid #084599;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+.btn_tabla:hover {
+    background-color: #084599;
+    color: #ffffff;
+}
