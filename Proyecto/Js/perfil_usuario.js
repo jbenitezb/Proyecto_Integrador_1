@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         errorFormulario.textContent = '';
         errorFormulario.className = 'error campo_completo oculto';
     }
-    if (mensajeExito) mensajeExito.style.display = 'none';
+    if (mensajeExito) mensajeExito.style.display = 'none';mensajeExito.textContent = '';
 
     const guardarEnStorage = () => {
         localStorage.setItem('lista_usuarios', JSON.stringify(usuarios));
@@ -36,8 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             errorFormulario.className = 'error campo_completo'; 
             errorFormulario.textContent = mensaje;
             errorFormulario.classList.remove('oculto');
+            errorFormulario.style.setProperty('color', '#DC2626', 'important');
         }
-        if (mensajeExito) mensajeExito.style.display = 'none';
+        if (mensajeExito) mensajeExito.style.display = 'none'; mensajeExito.textContent = '';
         if (elementoFoco) {
             elementoFoco.focus();
         }
@@ -49,14 +50,21 @@ document.addEventListener('DOMContentLoaded', () => {
             errorFormulario.classList.add('oculto');
         }
         if (mensajeExito) {
-            mensajeExito.style.display = 'block';
-            mensajeExito.textContent = mensaje;
+          mensajeExito.textContent = mensaje;
+            mensajeExito.classList.remove('oculto');
+            mensajeExito.style.setProperty('display', 'block', 'important');
+            mensajeExito.style.setProperty('color', '#16A34A', 'important');
         }
     };
     function calcularEdad(fechaNacimientoStr) {
     if (!fechaNacimientoStr) return 'N/D';
     const hoy = new Date();
-    const fechaNac = new Date(fechaNacimientoStr);
+    const fechaNac = new Date(fechaNacimientoStr + 'T00:00:00');
+
+    if (isNaN(fechaNac.getTime()) || fechaNac >= hoy) {
+        return ''; 
+    }
+
     let edad = hoy.getFullYear() - fechaNac.getFullYear();
     const mes = hoy.getMonth() - fechaNac.getMonth();
     
@@ -111,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const contrasena = inputContrasena ? inputContrasena.value.trim() : '';
 
-            // Validaciones individuales en orden estricto (campo por campo)
             if (nombre === '') {
                 mostrarError('Por favor, ingrese su nombre.', inputNombre);
                 return;
@@ -232,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             setTimeout(() => {
-                window.location.href = 'usuarios.html';
+                window.location.href = 'gestion_usuarios.html';
             }, 2000);
         });
     }

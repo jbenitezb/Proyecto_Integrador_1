@@ -97,27 +97,12 @@
     opacity: 1;
 }
 
-/* Avisos y mensajes */
-.aviso {
-    padding: 12px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    margin-top: 15px;
-    text-align: center;
-    font-weight: bold;
-}
-
 .aviso.error {
     background-color: #FEE2E2;
     color: #DC2626;
     border: 1px solid #F87171;
 }
 
-.aviso.exito {
-    background-color: #DCFCE7;
-    color: #16A34A;
-    border: 1px solid #4ADE80;
-}
 
 .oculto {
     display: none !important;
@@ -228,7 +213,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
     padding-right: 45px !important;
 }
 
-/* 3. Posicionamiento exacto y exclusivo para el ojito de Boxicons */
+
 #togglePassword {
     position: absolute !important;
     right: 15px !important;
@@ -239,8 +224,23 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
     font-size: 1.2rem !important;
     z-index: 10 !important;
 }
-
-/* 4. Asegurar que el icono de validación de estado no se Monte sobre el ojito */
 #grupo_contrasena .formulario_validacion-estado {
     right: 40px !important;
+}
+.formulario_mensaje-exito {
+    display: none;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    font-weight: normal !important;
+    font-size: 0.9rem !important;
+    font-family: inherit !important;
+    color: #16A34A !important;
+    text-align: left !important;
+    margin-top: 5px !important;
+}
+
+.formulario_mensaje-exito:not(.oculto) {
+    display: block !important;
 }

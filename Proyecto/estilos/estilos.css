@@ -124,14 +124,6 @@ main {
 }
 
 
-/* Barra lateral */
-.catalogo_sidebar {
-    width: 250px;
-    background-color: #03265A;
-    border-right: 2px solid #03265A;
-    flex-shrink: 0;
-}
-
 /* Lista del menú lateral */
 .catalogo_menu-lateral {
     list-style: none;
@@ -141,13 +133,7 @@ main {
     padding: 30px 15px;
 }
 
-/* Contenido a la derecha del menú */
-.contenido-principal {
-    flex: 1;
-    min-width: 0;
-    padding: 30px;
-    background-color: #ffffff;
-}
+
 
 
 .catalogo_menu-lateral {
