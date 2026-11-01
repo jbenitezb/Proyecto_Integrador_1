@@ -1,10 +1,6 @@
 /* ===== CATÁLOGO DE ESTADOS DEL CURSO ===== */
 
-const estados = [
-    "Desarrollo",
-    "Producción",
-    "Inactivo"
-];
+const estados = (JSON.parse(localStorage.getItem('estado_curso')) || []).map(estado => estado.nombre);
 
 function normalizar(texto) {
     return String(texto)

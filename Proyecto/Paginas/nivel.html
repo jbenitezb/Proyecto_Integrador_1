@@ -52,39 +52,78 @@
             <section class="contenido-principal">
                 <h1 class="seccion_titulo">NIVEL DE COMPLEJIDAD</h1>
 
+                <div id="aviso" class="aviso oculto"></div>
+
                 <div class="barra_herramientas">
                     <div class="buscador">
                         <label class="etiqueta" for="buscador">BUSCAR</label>
-                        <input
-                            type="text"
-                            class="entrada"
-                            id="buscador"
-                            placeholder="Buscar por nombre..."
-                        >
+                        <input type="text" class="entrada" id="buscador" placeholder="Buscar por código o nombre...">
+                    </div>
+
+                    <div class="acciones_barra">
+                        <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
                     </div>
                 </div>
 
+                <!-- FORMULARIO -->
+                <div class="panel oculto" id="panel_formulario">
+                    <h2 class="panel_titulo" id="titulo_formulario">Registrar nivel</h2>
+
+                    <form class="formulario" id="formulario" novalidate>
+
+                        <div class="campo">
+                            <label class="etiqueta" for="codigo">CÓDIGO</label>
+                            <input type="number" class="entrada" id="codigo" placeholder="Ej. 101">
+                            <span class="error" id="error_codigo"></span>
+                        </div>
+
+                        <div class="campo">
+                            <label class="etiqueta" for="nombre">NOMBRE</label>
+                            <input type="text" class="entrada" id="nombre" placeholder="Ingrese el nombre" maxlength="100">
+                            <span class="error" id="error_nombre"></span>
+                        </div>
+
+                        <div class="campo campo_completo">
+                            <label class="etiqueta" for="descripcion">DESCRIPCIÓN</label>
+                            <textarea class="entrada" id="descripcion" placeholder="Ingrese la descripción"></textarea>
+                            <span class="error" id="error_descripcion"></span>
+                        </div>
+
+                        <div class="campo campo_completo">
+                            <label class="etiqueta" for="nivel_complejidad">NIVEL</label>
+                            <select class="entrada" id="nivel_complejidad">
+                                <option value="">Seleccione un nivel</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado</option>
+                                <option value="Certificación">Certificación</option>
+                                <option value="Nivel variable">Nivel variable</option>
+                            </select>
+                            <span class="error" id="error_nivel"></span>
+                        </div>
+
+                        <p class="error campo_completo" id="error_formulario"></p>
+
+                        <div class="acciones_formulario">
+                            <button type="button" class="btn_cancelar" id="btn_cancelar">CANCELAR</button>
+                            <button type="submit" class="btn_enviar" id="btn_guardar">GUARDAR</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- TABLA -->
                 <div class="tabla_contenedor">
                     <table class="tabla">
                         <thead>
                             <tr>
+                                <th>CÓDIGO</th>
                                 <th>NOMBRE</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>NIVEL</th>
+                                <th>ACCIONES</th>
                             </tr>
                         </thead>
-                        <tbody id="cuerpo_tabla">
-                            <tr>
-                                <td>BÁSICO</td>
-                            </tr>
-                            <tr>
-                                <td>INTERMEDIO</td>
-                            </tr>
-                            <tr>
-                                <td>AVANZADO</td>
-                            </tr>
-                            <tr>
-                                <td>CERTIFICACIÓN</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="cuerpo_tabla"></tbody>
                     </table>
                 </div>
 
@@ -126,13 +165,13 @@
         <div class="footer_columna">
             <h3>VÍNCULOS DE INTERÉS</h3>
             <ul>
-                <li><a href="#"> Términos y condiciones de uso del sitio web</a></li>
-                <li><a href="#"> Centro de Asistencia</a></li>
+                <li><a href="#">Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">Centro de Asistencia</a></li>
             </ul>
         </div>
     </footer>
 
-    <script src="../js/nivel.js"></script>
+    <script src="../Js/nivel.js"></script>
     <script src="../Js/cerrar_session.js"></script>
 </body>
 </html>

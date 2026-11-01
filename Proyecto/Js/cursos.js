@@ -1,13 +1,13 @@
 /* ===== LISTADO DE CURSOS ===== */
  
-const COLUMNAS = 7;
+const COLUMNAS = 8;
  
 // Cada pestaña es solo un filtro sobre la misma lista guardada en localStorage
 const FILTROS_PESTANA = {
     todos: function () { return true; },
     pendientes: function (curso) { return ESTADOS_PENDIENTES.includes(curso.estado); },
-    produccion: function (curso) { return curso.estado === 'En producción'; },
-    inactivos: function (curso) { return curso.estado === 'Inactivo'; }
+    produccion: function (curso) { return curso.estado === ESTADO_PRODUCCION; },
+    inactivos: function (curso) { return curso.estado === ESTADO_INACTIVO; }
 };
  
 const AYUDA_PESTANA = {
@@ -56,17 +56,13 @@ function filaDetalle(curso, catalogos) {
         return esc(nombreDe(catalogos.metodologias, codigo) || codigo);
     }).join(', ');
  
-    const adjuntos = (curso.adjuntos || []).map(function (archivo) {
-        return esc(archivo.nombre);
-    }).join(', ');
- 
     return '<tr class="fila_detalle"><td colspan="' + COLUMNAS + '"><dl class="detalle_lista">' +
         dato('Nombre Power Campus', esc(curso.nombrePowerCampus)) +
         dato('Modalidad', esc(curso.modalidad)) +
-        dato('Nivel de complejidad', esc(curso.nivel)) +
+        dato('Nivel de complejidad', esc(nombreDe(catalogos.niveles, curso.nivel))) +
         dato('Créditos', esc(curso.creditos)) +
         dato('Horas', esc(curso.horas)) +
-        dato('Moneda', esc(curso.moneda)) +
+        dato('Moneda', esc(etiquetaMoneda(curso.moneda, catalogos.monedas))) +
         dato('Certificación', nombreCertificacion(curso.certificacion, catalogos.certificaciones)) +
         dato('Área SFIA', esc(nombreDe(catalogos.areas, curso.areaSfia))) +
         dato('Metodologías', metodologias) +
@@ -77,7 +73,6 @@ function filaDetalle(curso, catalogos) {
         dato('Capacidades', esc(curso.capacidades)) +
         dato('Perfiles', esc(curso.perfiles)) +
         dato('Metadatos', esc(curso.metadatos)) +
-        dato('Adjuntos', adjuntos) +
         '</dl></td></tr>';
 }
  
@@ -92,18 +87,17 @@ function filaCurso(curso, catalogos) {
     const carrera = nombreDe(catalogos.carreras, curso.carrera) || '—';
     const tematica = nombreDe(catalogos.tematicas, curso.tematica) || '—';
  
-    let html = '<tr>' +
-        '<td class="codigo">' + codigo + '</td>' +
-        '<td>' + esc(curso.nombre) + '</td>' +
-        '<td>' + esc(escuela) + '</td>' +
-        '<td>' + esc(carrera) + '</td>' +
-        '<td>' + esc(tematica) + '</td>' +
-        '<td><span class="estado ' + claseEstado(curso.estado) + '">' + esc(curso.estado) + '</span></td>' +
-        '<td><button type="button" class="btn_tabla" data-id="' + esc(curso.id) + '" aria-expanded="' + abierto + '">' +
-            (abierto ? 'OCULTAR' : 'VER') +
-        '</button></td>' +
-    '</tr>';
- 
+    let html = '<tr>';
+    html += '<td class="codigo">' + codigo + '</td>';
+    html += '<td>' + esc(curso.nombre) + '</td>';
+    html += '<td>' + esc(escuela) + '</td>';
+    html += '<td>' + esc(carrera) + '</td>';
+    html += '<td>' + esc(tematica) + '</td>';
+    html += '<td><span class="estado ' + claseEstado(curso.estado) + '">' + esc(curso.estado) + '</span></td>';
+    html += '<td><button type="button" class="btn_tabla" data-id="' + esc(curso.id) + '" aria-expanded="' + abierto + '">' + (abierto ? 'OCULTAR' : 'VER') + '</button></td>';
+    html += '<td class="acciones"><button type="button" class="btn_tabla" data-editar="' + esc(curso.id) + '">EDITAR</button></td>';
+    html += '</tr>';
+
     if (abierto) {
         html += filaDetalle(curso, catalogos);
     }
@@ -125,15 +119,8 @@ function textoBusqueda(curso, catalogos) {
  
 function listar() {
     const cursos = leerLista(CLAVE_CURSOS);
-    const catalogos = {
-        escuelas: leerLista('escuelas'),
-        carreras: leerLista('carreras'),
-        tematicas: leerLista('tematica'),
-        areas: leerLista('area_sfia'),
-        metodologias: leerLista('lista_metodologias'),
-        certificaciones: leerLista('certificaciones')
-    };
- 
+    const catalogos = leerCatalogos();
+
     // Contador de cada pestaña
     Object.keys(FILTROS_PESTANA).forEach(function (clave) {
         document.getElementById('cont_' + clave).textContent =
@@ -178,8 +165,8 @@ function cambiarPestana(clave) {
  
 function mostrarAvisoDeRegistro() {
     const parametros = new URLSearchParams(window.location.search);
-    if (parametros.get('registrado') === '1') {
-        aviso('Curso registrado correctamente.', 'exito');
+    if (parametros.get('registrado') === '1' || parametros.get('modificado') === '1') {
+        aviso(parametros.get('modificado') === '1' ? 'Curso modificado correctamente.' : 'Curso registrado correctamente.', 'exito');
         try {
             window.history.replaceState(null, '', window.location.pathname);
         } catch (error) {
@@ -198,7 +185,12 @@ document.querySelectorAll('.pestana').forEach(function (boton) {
 });
  
 cuerpoTabla.addEventListener('click', function (evento) {
-    const boton = evento.target.closest('.btn_tabla');
+    const botonEditar = evento.target.closest('[data-editar]');
+    if (botonEditar) {
+        window.location.href = 'formulario_curso.html?editar=' + encodeURIComponent(botonEditar.getAttribute('data-editar'));
+        return;
+    }
+    const boton = evento.target.closest('[data-id]');
     if (!boton) {
         return;
     }
