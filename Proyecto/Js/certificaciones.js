@@ -71,7 +71,7 @@ function listar() {
             ? 'No hay certificaciones para mostrar.'
             : 'No se encontraron certificaciones con esa búsqueda.';
 
-        html = '<tr><td class="vacio" colspan="4">' +
+        html = '<tr><td class="vacio" colspan="3">' +
             mensaje +
         '</td></tr>';
     }
@@ -135,11 +135,17 @@ function guardarCertificacion(evento) {
 
     error.textContent = '';
 
-    if (codigo === '' && nombre === '' && descripcion === '') {
-        error.textContent = 'El código, el nombre y la descripción son obligatorios.';
+    if (codigo === '' && nombre === '') {
+        error.textContent = 'El código y el nombre son obligatorios..';
         return;
     }
 
+    const esNumerico = /^\d+$/.test(codigo);
+    if (!esNumerico) {
+        error.textContent = 'El código debe ser estrictamente numérico.';
+        return;
+    }
+    
     if (codigo === '' && nombre === '') {
         error.textContent = 'El código y el nombre son obligatorios.';
         return;

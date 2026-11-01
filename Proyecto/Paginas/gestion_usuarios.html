@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Usuarios y Accesos - Sistema Curricular CENFOTEC</title>
+    <title>Gestión de Usuarios - Sistema Curricular CENFOTEC</title>
     <link rel="stylesheet" href="../estilos/estilos.css">
-    <link rel="stylesheet" href="../registrar.css">
+    <link rel="stylesheet" href="../estilos/registrar.css">
     <link rel="stylesheet" href="../estilos/gestion_cursos.css">
+     <link rel="stylesheet" href="../estilos/gestion_usuarios.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -38,8 +39,18 @@
             <!-- HU-13: Gestión de usuarios, solicitudes y accesos -->
             <div class="catalogo_contenedor-principal" style="width: 100%; max-width: 1350px;">                <section class="seccion_contenedor">
                     <h2 class="seccion_titulo">Gestión de Solicitudes, Usuarios y Accesos</h2>
-                    <p style="margin-bottom: 20px; color: #666; font-size: 0.95rem;">Acepte las solicitudes de registro de los usuarios, asigne roles institucionales y supervise las cuentas activas en el sistema...</p>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.95rem;">Consulte la lista de usuarios registrados en el sistema y realice búsquedas por identificación o nombre.</p>
 
+                <div class="barra_herramientas">
+                <div class="buscador">
+                    <label class="etiqueta" for="buscador_usuarios">BUSCAR</label>
+                    <input type="text" class="entrada" id="buscador_usuarios" placeholder="Buscar por identificación, nombre o correo...">
+                </div>
+
+                <div class="acciones_barra">
+                    <button type="button" class="btn_enviar" id="btn_registrar">REGISTRAR</button>
+                </div>
+            </div>
                     <!-- Mensaje global de éxito o error -->
                     <div class="formulario_mensaje" id="formulario_mensaje" style="margin-bottom: 15px;">
                         <p class="error campo_completo oculto" id="error_formulario"></p>
@@ -53,9 +64,9 @@
                                     <th>Identificación</th>
                                     <th>Nombre Completo</th>
                                     <th>Correo Electrónico</th>
-                                    <th>Estado de Solicitud</th>
-                                    <th>Rol Institucional</th>
-                                    <th>Acciones de Administración</th>
+                                    <th>Teléfono</th>
+                                    <th>Género</th>
+                                    <th>Edad</th>
                                 </tr>
                             </thead>
                             <tbody id="cuerpo_tabla_usuarios">
@@ -68,7 +79,7 @@
 
                     <!-- Botón de retorno -->
                     <div class="formulario__grupo formulario__grupo-acciones" style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px;">
-                        <button type="button" class="btn_cancelar" onclick="window.location.href='usuarios.html'">REGRESAR</button>
+                        <button type="button" class="btn_cancelar" onclick="window.location.href='inicio_para_catalogos.html'">REGRESAR</button>
                     </div>
 
                 </section>

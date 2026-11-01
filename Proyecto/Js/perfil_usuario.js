@@ -192,9 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarError('Por favor, ingrese una contraseña.', inputContrasena);
                 return;
             }
-            const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+            const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,15}$/;
             if (!regexContrasena.test(contrasena)) {
-                mostrarError('La contraseña debe tener de 8 a 16 caracteres, incluir una mayúscula, una minúscula y un número.', inputContrasena);
+                mostrarError('La contraseña debe tener de 8 a 15 caracteres, incluir una mayúscula, una minúscula y un número.', inputContrasena);
                 return;
             }
 

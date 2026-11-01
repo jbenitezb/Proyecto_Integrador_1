@@ -6,112 +6,101 @@ document.addEventListener('DOMContentLoaded', () => {
     const conteoUsuarios = document.getElementById('conteo_usuarios');
     const errorFormulario = document.getElementById('error_formulario');
 
+    const inputBuscar = document.getElementById('buscador_usuarios');
+    const btnBuscar = document.getElementById('btn_buscar');
+    const btnLimpiar = document.getElementById('btn_limpiar_busqueda');
+
     // Ocultar mensajes al cargar
     if (errorFormulario) {
         errorFormulario.textContent = '';
         errorFormulario.className = 'error campo_completo oculto';
     }
-
-    const guardarEnStorage = () => {
-        localStorage.setItem('lista_usuarios', JSON.stringify(usuarios));
-    };
-
-    const mostrarAviso = (mensaje, esExito = false) => {
-        if (errorFormulario) {
-            errorFormulario.className = esExito ? 'aviso exito campo_completo' : 'error campo_completo';
-            errorFormulario.textContent = mensaje;
-            errorFormulario.classList.remove('oculto');
-            
-            if (esExito) {
-                setTimeout(() => {
-                    errorFormulario.classList.add('oculto');
-                }, 3000);
+    // Función auxiliar para calcular la edad por si algún registro no la trae guardada
+        const calcularEdad = (fechaNacimientoStr) => {
+            if (!fechaNacimientoStr) return 'N/D';
+            const hoy = new Date();
+            const fechaNac = new Date(fechaNacimientoStr);
+            let edad = hoy.getFullYear() - fechaNac.getFullYear();
+            const mes = hoy.getMonth() - fechaNac.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+                edad--;
             }
-        }
-    };
-
-    //HU-13 Función para renderizar el panel de administración de la 
-    const cargarPanelAdministracion = () => {
+            return `${edad} años`;
+        };
+    
+    // Función para renderizar el listado en la tabla (Criterio 3)
+    const renderizarTabla = (listaAVisualizar) => {
         cuerpoTabla.innerHTML = '';
 
-        if (usuarios.length === 0) {
-            cuerpoTabla.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #666;">No hay solicitudes ni usuarios registrados en el sistema.</td></tr>`;
+        if (listaAVisualizar.length === 0) {
+            cuerpoTabla.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #666;">No hay usuarios registrados en el sistema.</td></tr>`;
             if (conteoUsuarios) conteoUsuarios.textContent = 'Total de registros en el sistema: 0';
             return;
         }
 
-        usuarios.forEach((usuario, index) => {
+        listaAVisualizar.forEach((usuario) => {
             const fila = document.createElement('tr');
-
-            const estadoActual = usuario.estado || 'Pendiente';
-            const rolActual = usuario.rol || 'Sin Asignar';
+            const edadCalculada = calcularEdad(usuario.fechaNacimiento);
 
             fila.innerHTML = `
-                <td>${usuario.identificacion}</td>
-                <td>${usuario.nombre} ${usuario.apellidos}</td>
-                <td>${usuario.correo}</td>
-                <td>
-                    <select class="formulario_input select_estado" data-index="${index}" style="padding: 6px; font-size: 0.85rem;">
-                        <option value="Pendiente" ${estadoActual === 'Pendiente' ? 'selected' : ''}>Pendiente</option>
-                        <option value="Activo" ${estadoActual === 'Activo' ? 'selected' : ''}>Activo</option>
-                        <option value="Inactivo" ${estadoActual === 'Inactivo' ? 'selected' : ''}>Inactivo</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="formulario_input select_rol" data-index="${index}" style="padding: 6px; font-size: 0.85rem;">
-                        <option value="Sin Asignar" ${rolActual === 'Sin Asignar' ? 'selected' : ''}>Seleccione...</option>
-                        <option value="Rectoría" ${rolActual === 'Rectoría' ? 'selected' : ''}>Rectoría</option>
-                        <option value="Vicerrectoría" ${rolActual === 'Vicerrectoría' ? 'selected' : ''}>Vicerrectoría</option>
-                        <option value="Desarrollo Curricular" ${rolActual === 'Desarrollo Curricular' ? 'selected' : ''}>Desarrollo Curricular</option>
-                        <option value="Director de Escuela" ${rolActual === 'Director de Escuela' ? 'selected' : ''}>Director de Escuela</option>
-                    </select>
-                </td>
-                <td>
-                    <div style="display: flex; gap: 8px; justify-content: center;">
-                        <!-- Sin estilos en línea para que use al 100% la clase .btn_tabla del CSS -->
-                        <button type="button" class="btn_tabla btn_guardar" data-index="${index}">Guardar</button>
-                    </div>
-                </td>
+                <td style="font-weight: bold; color: #084599;">${usuario.identificacion || 'N/D'}</td>
+                <td>${usuario.nombre || ''} ${usuario.apellidos || ''}</td>
+                <td>${usuario.correo || 'N/D'}</td>
+                <td>${usuario.telefono || 'N/D'}</td>
+                <td>${usuario.genero || 'N/D'}</td>
+                <td>${edadCalculada}</td>
             `;
 
             cuerpoTabla.appendChild(fila);
         });
 
         if (conteoUsuarios) {
-            conteoUsuarios.textContent = `Total de registros en el sistema: ${usuarios.length}`;
+            conteoUsuarios.textContent = `Total de registros en el sistema: ${listaAVisualizar.length}`;
+        }
+    };
+// Función de Búsqueda (Criterio 4 de la Rúbrica: identificación, nombre, apellidos o correo)
+    const ejecutarBusqueda = () => {
+        const termino = inputBuscar.value.trim().toLowerCase();
+        if (termino === '') {
+            renderizarTabla(usuarios);
+            return;
         }
 
-        // Lógica del botón Guardar actualiza Estado y Rol con validación de unicidad de Rectoría/Vicerrectoría
-        document.querySelectorAll('.btn_guardar').forEach(boton => {
-            boton.addEventListener('click', (e) => {
-                const index = e.target.getAttribute('data-index');
-                const selectEstado = document.querySelector(`.select_estado[data-index="${index}"]`);
-                const selectRol = document.querySelector(`.select_rol[data-index="${index}"]`);
-                
-                const nuevoEstado = selectEstado.value;
-                const nuevoRol = selectRol.value;
+        const resultados = usuarios.filter(u => {
+            const id = (u.identificacion || '').toLowerCase();
+            const nombre = (u.nombre || '').toLowerCase();
+            const apellidos = (u.apellidos || '').toLowerCase();
+            const correo = (u.correo || '').toLowerCase();
 
-              // 🟢 Validar regla de negocio: Roles gerenciales exclusivos únicos
-                if (nuevoRol === 'Rectoría' || nuevoRol === 'Vicerrectoría') {
-                    const rolOcupadoPorOtro = usuarios.some((u, i) => i !== parseInt(index) && u.rol === nuevoRol);
-                    if (rolOcupadoPorOtro) {
-                        mostrarAviso(`Error: Ya existe un usuario asignado con el rol exclusivo de "${nuevoRol}". Solo puede haber uno.`, false);
-                        return;
-                    }
-                }
-
-                // Actualizar datos del usuario seleccionado
-                usuarios[index].estado = nuevoEstado;
-                usuarios[index].rol = nuevoRol;
-                
-                guardarEnStorage();
-                cargarPanelAdministracion();
-
-                mostrarAviso(`¡Cambios guardados con éxito para ${usuarios[index].nombre}!`, true);
-            });
+            return id.includes(termino) || 
+                   nombre.includes(termino) || 
+                   apellidos.includes(termino) || 
+                   correo.includes(termino);
         });
+
+        renderizarTabla(resultados);
     };
 
-    // Inicializar carga al abrir la vista
-    cargarPanelAdministracion();
+    // Eventos de búsqueda
+    if (btnBuscar) {
+        btnBuscar.addEventListener('click', ejecutarBusqueda);
+    }
+
+    if (inputBuscar) {
+        inputBuscar.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                ejecutarBusqueda();
+            }
+        });
+    }
+
+    if (btnLimpiar) {
+        btnLimpiar.addEventListener('click', () => {
+            inputBuscar.value = '';
+            renderizarTabla(usuarios);
+        });
+    }
+
+    // Inicializar la tabla al cargar la vista
+    renderizarTabla(usuarios);
 });
