@@ -208,7 +208,7 @@ function guardarCarrera(evento) {
     }
 
     if (nombre === '' || nombre.length < 3) {
-        error.textContent = 'Ingrese el nombre de la escuela (mínimo 3 caracteres).';
+        error.textContent = 'Ingrese el nombre de la carrera (mínimo 3 caracteres).';
         return;
     }
 

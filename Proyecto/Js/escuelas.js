@@ -136,7 +136,7 @@ function guardarEscuela(evento) {
     }
 
     if (director === '') {
-        error.textContent = 'Ingrese el nombre del director (mínimo 3 caracteres).';
+        error.textContent = 'seleccione un director.';
         return;
     }
 
