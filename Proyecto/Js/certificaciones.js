@@ -135,17 +135,11 @@ function guardarCertificacion(evento) {
 
     error.textContent = '';
 
-    if (codigo === '' && nombre === '') {
-        error.textContent = 'El código y el nombre son obligatorios..';
-        return;
+    if (codigo === '' && nombre === '' && descripcion === '') {
+    error.textContent = 'El código, el nombre y la descripción son obligatorios.';
+    return;
     }
 
-    const esNumerico = /^\d+$/.test(codigo);
-    if (!esNumerico) {
-        error.textContent = 'El código debe ser estrictamente numérico.';
-        return;
-    }
-    
     if (codigo === '' && nombre === '') {
         error.textContent = 'El código y el nombre son obligatorios.';
         return;
@@ -161,13 +155,13 @@ function guardarCertificacion(evento) {
         return;
     }
 
-    if (codigo === '') {
-        error.textContent = 'El código es obligatorio.';
-        return;
-    }
-
     if (nombre === '') {
         error.textContent = 'El nombre es obligatorio.';
+        return;
+    }
+    const esNumerico = /^\d+$/.test(codigo);
+    if (!esNumerico) {
+        error.textContent = 'El código es obligatorio y debe ser estrictamente numérico.';
         return;
     }
 

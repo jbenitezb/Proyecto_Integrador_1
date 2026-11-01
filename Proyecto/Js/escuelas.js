@@ -125,18 +125,38 @@ function guardarEscuela(evento) {
     var director = document.getElementById('director').value;
     var error = document.getElementById('error_formulario');
 
+    if (codigo === '' && nombre === '' && director === '') {
+    error.textContent = 'El código, el nombre y el director son obligatorios.';
+    return;
+    }
+
+    if (codigo === '' && nombre === '') {
+        error.textContent = 'El código y el nombre son obligatorios.';
+        return;
+    }
+
+    if (codigo === '' && descripcion === '') {
+        error.textContent = 'El código y el director son obligatorios.';
+        return;
+    }
+
+    if (nombre === '' && descripcion === '') {
+        error.textContent = 'El nombre y el director son obligatorios.';
+        return;
+    }
+
     if (codigo === '') {
-        error.textContent = 'Ingrese un código válido.';
+        error.textContent = 'El código es obligatorio.';
         return;
     }
 
-    if (nombre === '' || nombre.length < 3) {
-        error.textContent = 'Ingrese el nombre de la escuela (mínimo 3 caracteres).';
+    if (nombre === '') {
+        error.textContent = 'El nombre es obligatorio.';
         return;
     }
 
-    if (director === '') {
-        error.textContent = 'seleccione un director.';
+    if (descripcion === '') {
+        error.textContent = 'El director es obligatoria.';
         return;
     }
 
