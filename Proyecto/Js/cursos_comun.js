@@ -2,17 +2,11 @@
  
 const CLAVE_CURSOS = 'cursos';
  
-// Estado único del curso (flujo: Borrador → En desarrollo → Aprobado → En producción)
-const ESTADOS = ['Borrador', 'En desarrollo', 'Aprobado', 'En producción', 'Inactivo'];
- 
-// "Pendientes de ejecución": cursos que todavía no están en producción ni inactivos.
-// Si el equipo decide otra definición, solo se cambia esta lista.
-const ESTADOS_PENDIENTES = ['Borrador', 'En desarrollo', 'Aprobado'];
- 
-const MODALIDADES = ['Virtual', 'Presencial', 'En vivo', 'Híbrida'];
-const NIVELES = ['Básico', 'Intermedio', 'Avanzado', 'Certificación', 'Variable'];
-const MONEDAS = ['Colones (₡)', 'Dólares ($)'];
- 
+// "Pendientes de ejecución": cursos que todavía no están en producción ni inactivos (nombres según el catálogo de estados).
+const ESTADOS_PENDIENTES = ['Borrador', 'Desarrollo', 'Aprobado'];
+const ESTADO_PRODUCCION = 'Producción';
+const ESTADO_INACTIVO = 'Inactivo';
+
 function leerLista(clave) {
     try {
         const datos = JSON.parse(localStorage.getItem(clave));
@@ -41,8 +35,28 @@ function normalizar(texto) {
 // Devuelve el nombre de un registro de catálogo a partir de su código
 function nombreDe(lista, codigo) {
     const elemento = lista.find(function (item) {
-        return item.codigo === codigo;
+        return String(item.codigo) === String(codigo);
     });
     return elemento ? elemento.nombre : '';
 }
  
+// Lee todos los catálogos desde localStorage (siempre datos frescos, nada quemado)
+function leerCatalogos() {
+    const escuelas = leerLista('escuelas');
+    const carreras = leerLista('carreras');
+    const estados = leerLista('estado_curso');
+    const modalidades = leerLista('modalidad');
+    const niveles = leerLista('nivel');
+    const monedas = leerLista('moneda');
+    const certificaciones = leerLista('certificaciones');
+    const tematicas = leerLista('tematica');
+    const areas = leerLista('area_sfia');
+    const metodologias = leerLista('lista_metodologias');
+    return { escuelas: escuelas, carreras: carreras, estados: estados, modalidades: modalidades, niveles: niveles, monedas: monedas, certificaciones: certificaciones, tematicas: tematicas, areas: areas, metodologias: metodologias };
+}
+
+// Texto de una moneda: "COLONES (₡)"
+function etiquetaMoneda(nombreMoneda, monedas) {
+    const moneda = monedas.find(item => item.nombre === nombreMoneda);
+    return moneda ? moneda.nombre + ' (' + moneda.simbolo + ')' : nombreMoneda;
+}

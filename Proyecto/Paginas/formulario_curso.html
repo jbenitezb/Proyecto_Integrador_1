@@ -31,13 +31,14 @@
         </nav>
     </header>
  
-    <main id="formulario_curso">
+    <main id="pagina_formulario_curso">
         <section class="cursos_contenedor">
             <a class="enlace_volver" href="cursos.html"> Volver a cursos</a>
-            <h1 class="seccion_titulo">REGISTRAR CURSO</h1>
+            <h1 class="seccion_titulo" id="titulo_formulario">REGISTRAR CURSO</h1>
             <p class="ayuda ayuda_inicial">Los campos marcados con * son obligatorios.</p>
  
             <div id="aviso_catalogos" class="aviso error oculto" role="alert"></div>
+            <div id="aviso_edicion" class="aviso error oculto" role="alert"></div>
  
             <form class="formulario_curso" id="formulario_curso" novalidate>
  
@@ -108,25 +109,25 @@
                     <legend>Características académicas</legend>
  
                     <div class="campo">
-                        <label class="etiqueta" for="modalidad">MODALIDAD</label>
+                        <label class="etiqueta" for="modalidad">MODALIDAD *</label>
                         <select class="entrada" id="modalidad"></select>
                         <span class="error" id="error_modalidad"></span>
                     </div>
  
                     <div class="campo">
-                        <label class="etiqueta" for="nivel">NIVEL DE COMPLEJIDAD</label>
+                        <label class="etiqueta" for="nivel">NIVEL DE COMPLEJIDAD *</label>
                         <select class="entrada" id="nivel"></select>
                         <span class="error" id="error_nivel"></span>
                     </div>
  
                     <div class="campo">
-                        <label class="etiqueta" for="creditos">CRÉDITOS</label>
+                        <label class="etiqueta" for="creditos">CRÉDITOS *</label>
                         <input type="number" class="entrada" id="creditos" min="1" max="30" step="1" placeholder="Ej. 4">
                         <span class="error" id="error_creditos"></span>
                     </div>
  
                     <div class="campo">
-                        <label class="etiqueta" for="horas">HORAS</label>
+                        <label class="etiqueta" for="horas">HORAS *</label>
                         <input type="number" class="entrada" id="horas" min="1" max="1000" step="1" placeholder="Ej. 48">
                         <span class="error" id="error_horas"></span>
                     </div>
@@ -142,7 +143,7 @@
                     <legend>Moneda y certificación</legend>
  
                     <div class="campo">
-                        <label class="etiqueta" for="moneda">MONEDA</label>
+                        <label class="etiqueta" for="moneda">MONEDA *</label>
                         <select class="entrada" id="moneda"></select>
                         <span class="error" id="error_moneda"></span>
                     </div>
@@ -158,7 +159,7 @@
                     <legend>Clasificación</legend>
  
                     <div class="campo">
-                        <label class="etiqueta" for="tematica">TEMÁTICA</label>
+                        <label class="etiqueta" for="tematica">TEMÁTICA *</label>
                         <select class="entrada" id="tematica"></select>
                         <span class="error" id="error_tematica"></span>
                     </div>
@@ -254,7 +255,8 @@
         </div>
     </footer>
  
+    <script src="../js/catalogos_fijos.js"></script>
     <script src="../js/cursos_comun.js"></script>
-    <script src="../js/formulario_curso.js "></script>
+    <script src="../js/formulario_curso.js"></script>
 </body>
 </html>

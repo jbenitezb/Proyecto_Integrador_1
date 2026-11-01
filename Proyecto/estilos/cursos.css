@@ -88,9 +88,9 @@ a.btn_cancelar {
 }
  
 .estado_borrador { background-color: #e2e8f0; color: #4a5568; }
-.estado_en-desarrollo { background-color: #fef3c7; color: #92400e; }
+.estado_desarrollo { background-color: #fef3c7; color: #92400e; }
 .estado_aprobado { background-color: #dbeafe; color: #1e40af; }
-.estado_en-produccion { background-color: #dcfce7; color: #166534; }
+.estado_produccion { background-color: #dcfce7; color: #166534; }
 .estado_inactivo { background-color: #fee2e2; color: #991b1b; }
  
 .pendiente_codigo {
