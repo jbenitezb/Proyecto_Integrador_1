@@ -7,7 +7,7 @@ function sembrarCatalogo(clave, listaInicial) {
 }
 
 const nombresEstadosIniciales = ['Desarrollo', 'Producción', 'Inactivo', 'Borrador', 'Aprobado'];
-const nombresModalidadesIniciales = ['Virtual', 'Presencial', 'En vivo', 'Híbrida'];
+const nombresModalidadesIniciales = ['Virtual', 'Presencial', 'Híbrida'];
 const monedasIniciales = [{ nombre: 'DOLARES', simbolo: '$' }, { nombre: 'COLONES', simbolo: '₡' }];
 
 sembrarCatalogo('estado_curso', nombresEstadosIniciales.map(nombre => ({ nombre: nombre })));
