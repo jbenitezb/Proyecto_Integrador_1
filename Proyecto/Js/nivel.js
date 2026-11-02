@@ -38,7 +38,7 @@ function listar() {
 
     for (var i = 0; i < niveles.length; i++) {
         var nivel = niveles[i];
-        var texto = normalizar(nivel.codigo + ' ' + nivel.nombre);
+        var texto = normalizar(nivel.codigo + ' ' + nivel.nombre + ' ' + nivel.descripcion + ' ' + nivel.nivel);
 
         if (filtro !== '' && !texto.includes(filtro)) {
             continue;
