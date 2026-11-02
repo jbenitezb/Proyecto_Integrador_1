@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnRegistrar) {
     btnRegistrar.addEventListener('click', () => {
-        window.location.href = 'registrar.html';
+        window.location.href = 'registrar_adentro.html';
     });
     }
 

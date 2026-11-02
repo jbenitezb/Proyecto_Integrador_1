@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //Si alguna validación básica fallo, se muestra aviso global y se detiene
             if (!formularioValido) {
+                console.log("¡Atención! Un campo no pasó la validación. Revisa: Nombre (>=3), Apellidos (>=3), Identificación (solo números), Correo válido, Teléfono (8 dígitos), Fecha válida, Género seleccionado y Contraseña.");
                 mostrarErrorGlobal('Por favor, verifique los campos marcados en rojo en el formulario.');
                 return; // <-- Aquí termina y frena si hay errores en los campos básicos
             }
@@ -236,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             setTimeout(() => {
-                window.location.href = 'gestion_usuarios.html';
+                window.location.href = 'inicio_para_catalogos.html';
             }, 2000);
         });
     }

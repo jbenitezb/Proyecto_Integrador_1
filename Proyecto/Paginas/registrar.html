@@ -65,7 +65,9 @@
                             <label for="segundo_apellido" class="formulario_label">Segundo Apellido</label>
                             <div class="formulario_grupo-input">
                                 <input type="text" class="formulario_input" name="segundo_apellido" id="segundo_apellido" placeholder="Ingrese su segundo apellido">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
+                                <p class="formulario_input-error">Ingrese su segundo apellido (mínimo 3 letras).</p>
                         </div>
 
                         <!-- Identificación -->
@@ -93,7 +95,9 @@
                             <label for="telefono" class="formulario_label">Teléfono</label>
                             <div class="formulario_grupo-input">
                                 <input type="tel" class="formulario_input" name="telefono" id="telefono" placeholder="Ej: 88888888">
+                                <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
+                            <p class="formulario_input-error">El teléfono debe contener exactamente 8 dígitos numéricos.</p>
                         </div>
 
                         <!--  (HU-15): Fecha de Nacimiento -->
@@ -103,6 +107,14 @@
                                 <input type="date" class="formulario_input" name="fechaNacimiento" id="fechaNacimiento">
                             </div>
                             <p class="formulario_input-error">Debe seleccionar una fecha de nacimiento válida.</p>
+                        </div>
+                         <!-- Edad Calculada -->
+                        <div class="formulario_grupo" id="grupo_edad_calculada">
+                            <label class="formulario_label">Edad Actual</label>
+                            <div class="tarjeta_edad_info">
+                               <i class="bx bx-info-circle icono_edad"></i>
+                                <span id="edad_calculada" class="texto_edad">Seleccione su fecha de nacimiento</span>
+                            </div>
                         </div>
 
                         <!-- Sexo -->
@@ -115,7 +127,9 @@
                                     <option value="Masculino">Masculino</option>
                                     <option value="Prefiero no decir">Prefiero no decir</option>
                                 </select>
+                              <i class="formulario_validacion-estado bx bx-x-circle"></i>
                             </div>
+                            <p class="formulario_input-error">Por favor, seleccione una opción de género.</p>
                         </div>
 
                         <!-- Imagen de Perfil -->
@@ -125,15 +139,6 @@
                                 <input type="file" class="formulario_input" name="imagen_perfil" id="imagen_perfil" accept="image/*">
                             </div>
                         </div>
-                        <!-- Edad Calculada -->
-                        <div class="formulario_grupo" id="grupo_edad_calculada">
-                            <label class="formulario_label">Edad Actual</label>
-                            <div class="tarjeta_edad_info">
-                               <i class="bx bx-info-circle icono_edad"></i>
-                                <span id="edad_calculada" class="texto_edad">Seleccione su fecha de nacimiento</span>
-                            </div>
-                        </div>
-                        <!-- FIN DE LO NUEVO -->
 
                         <!-- Contraseña -->
                         <div class="formulario_grupo" id="grupo_contrasena">
@@ -152,7 +157,7 @@
                         <!-- Botones de Acción -->
                         <div class="formulario__grupo formulario__grupo-acciones" style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px;">
                             <p class="formulario_mensaje-exito" id="formulario_mensaje-exito"style="display: none !important;"></p>
-                            <button type="button" class="btn_cancelar" onclick="window.location.href='gestion_usuarios.html'">CANCELAR</button>
+                            <button type="button" class="btn_cancelar" onclick="window.location.href='iniciar_session.html'">CANCELAR</button>
                             <input class="btn_enviar" type="submit" value="REGISTRAR CUENTA">
                         </div>
 
@@ -187,18 +192,7 @@
             </div>
         </div>
         <div class="footer_columna">
-            <h3>BUSCAR</h3>
-            <div class="footer_buscador">
-                <input type="text" placeholder="Buscar...">
-                <button>🔍</button>
-            </div>
-        </div>
-        <div class="footer_columna">
-            <h3>VÍNCULOS DE INTERÉS</h3>
-            <ul>
-                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
-                <li><a href="#">> Centro de Asistencia</a></li>
-            </ul>
+    
         </div>
     </footer>
 
