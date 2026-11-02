@@ -87,23 +87,8 @@ function guardarArea(evento) {
     var descripcion = document.getElementById('descripcion').value.trim();
     var error = document.getElementById('error_formulario');
 
-    if (codigo === '' && nombre === '' && descripcion === '') {
-    error.textContent = 'El código, el nombre y la descripción son obligatorios.';
-    return;
-    }
-
     if (codigo === '' && nombre === '') {
         error.textContent = 'El código y el nombre son obligatorios.';
-        return;
-    }
-
-    if (codigo === '' && descripcion === '') {
-        error.textContent = 'El código y la descripción son obligatorios.';
-        return;
-    }
-
-    if (nombre === '' && descripcion === '') {
-        error.textContent = 'El nombre y la descripción son obligatorios.';
         return;
     }
 
@@ -114,11 +99,6 @@ function guardarArea(evento) {
 
     if (nombre === '') {
         error.textContent = 'El nombre es obligatorio.';
-        return;
-    }
-
-    if (descripcion === '') {
-        error.textContent = 'La descripción es obligatoria.';
         return;
     }
 
