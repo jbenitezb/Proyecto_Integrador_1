@@ -244,3 +244,25 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 .formulario_mensaje-exito:not(.oculto) {
     display: block !important;
 }
+/* CSS */
+.tarjeta_edad_info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background-color: #f0f4f8;
+    border-left: 4px solid #084599;
+    border-radius: 4px;
+    min-height: 42px;
+}
+
+.icono_edad {
+    color: #084599;
+    font-size: 1.1rem;
+}
+
+.texto_edad {
+    font-size: 0.9rem;
+    color: #334155;
+    font-weight: 600;
+}
