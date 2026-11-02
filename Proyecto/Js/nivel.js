@@ -1,16 +1,12 @@
-/* ===== CATÁLOGO DE NIVELES ===== */
-
 var niveles = JSON.parse(localStorage.getItem('nivel')) || [];
 var editando = null;
 
-// Guardar niveles
 function guardar() {
     localStorage.setItem('nivel', JSON.stringify(niveles));
 }
 
-// Escapar texto para mostrarlo en la tabla
 function esc(texto) {
-    return String(texto)
+    return String(texto === undefined ? '' : texto)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -18,7 +14,6 @@ function esc(texto) {
         .replace(/'/g, '&#039;');
 }
 
-// Normalizar texto para buscar
 function normalizar(texto) {
     return String(texto)
         .toLowerCase()
@@ -26,28 +21,24 @@ function normalizar(texto) {
         .replace(/[\u0300-\u036f]/g, '');
 }
 
-// Mostrar avisos
 function aviso(texto, tipo) {
     var caja = document.getElementById('aviso');
     caja.textContent = texto;
     caja.className = 'aviso ' + tipo;
 }
 
-// Listar y buscar niveles
-function listar() {
-    var filtro = normalizar(
-        document.getElementById('buscador').value.trim()
-    );
+function limpiarErrores() {
+    document.getElementById('error_formulario').textContent = '';
+}
 
+function listar() {
+    var filtro = normalizar(document.getElementById('buscador').value.trim());
     var html = '';
     var mostrados = 0;
 
     for (var i = 0; i < niveles.length; i++) {
         var nivel = niveles[i];
-
-        var texto = normalizar(
-            nivel.codigo + ' ' + nivel.nombre
-        );
+        var texto = normalizar(nivel.codigo + ' ' + nivel.nombre);
 
         if (filtro !== '' && !texto.includes(filtro)) {
             continue;
@@ -71,19 +62,14 @@ function listar() {
             ? 'No hay niveles para mostrar.'
             : 'No se encontraron niveles con esa búsqueda.';
 
-        html = '<tr><td class="vacio" colspan="5">' +
-            mensaje +
-        '</td></tr>';
+        html = '<tr><td class="vacio" colspan="5">' + mensaje + '</td></tr>';
     }
 
     document.getElementById('cuerpo_tabla').innerHTML = html;
-
     document.getElementById('conteo').textContent =
-        'Mostrando ' + mostrados + ' de ' +
-        niveles.length + ' niveles';
+        'Mostrando ' + mostrados + ' de ' + niveles.length + ' niveles';
 }
 
-// Abrir formulario para registrar
 function abrirFormulario() {
     editando = null;
 
@@ -92,16 +78,11 @@ function abrirFormulario() {
     document.querySelector('#formulario button[type="submit"]').textContent = 'REGISTRAR';
 
     limpiarErrores();
-
     document.getElementById('aviso').className = 'aviso oculto';
-
-    document.getElementById('panel_formulario')
-        .classList.remove('oculto');
-
+    document.getElementById('panel_formulario').classList.remove('oculto');
     document.getElementById('codigo').focus();
 }
 
-// Abrir formulario para editar
 function editarNivel(indice) {
     editando = indice;
 
@@ -116,36 +97,22 @@ function editarNivel(indice) {
     document.querySelector('#formulario button[type="submit"]').textContent = 'ACTUALIZAR';
 
     limpiarErrores();
-
     document.getElementById('aviso').className = 'aviso oculto';
-
-    document.getElementById('panel_formulario')
-        .classList.remove('oculto');
-
+    document.getElementById('panel_formulario').classList.remove('oculto');
     document.getElementById('codigo').focus();
 }
 
-// Limpiar mensajes de error
-function limpiarErrores() {
-    document.getElementById('error_codigo').textContent = '';
-    document.getElementById('error_nombre').textContent = '';
-    document.getElementById('error_descripcion').textContent = '';
-    document.getElementById('error_nivel').textContent = '';
-}
-
-// Cerrar formulario
 function cerrarFormulario() {
-    document.getElementById('panel_formulario')
-        .classList.add('oculto');
-
+    document.getElementById('panel_formulario').classList.add('oculto');
     document.getElementById('formulario').reset();
-
     limpiarErrores();
-
     editando = null;
 }
 
-// Registrar o actualizar un nivel
+function mayuscula(texto) {
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
 function guardarNivel(evento) {
     evento.preventDefault();
 
@@ -153,90 +120,85 @@ function guardarNivel(evento) {
     var nombre = document.getElementById('nombre').value.trim();
     var descripcion = document.getElementById('descripcion').value.trim();
     var nivel = document.getElementById('nivel_complejidad').value;
+    var error = document.getElementById('error_formulario');
 
-    var errorCodigo = document.getElementById('error_codigo');
-    var errorNombre = document.getElementById('error_nombre');
-    var errorDescripcion = document.getElementById('error_descripcion');
-    var errorNivel = document.getElementById('error_nivel');
+    error.textContent = '';
 
-    limpiarErrores();
+    var faltantes = [];
 
-    if (codigo === '' || !/^\d+$/.test(codigo)) {
-        errorCodigo.textContent = 'Ingrese un código numérico válido.';
-        return;
+    if (codigo === '') {
+        faltantes.push({ texto: 'el código', adjetivo: 'obligatorio' });
     }
-
     if (nombre === '') {
-        errorNombre.textContent = 'Ingrese el nombre del nivel.';
-        return;
+        faltantes.push({ texto: 'el nombre', adjetivo: 'obligatorio' });
     }
-
     if (descripcion === '') {
-        errorDescripcion.textContent = 'Ingrese la descripción del nivel.';
-        return;
+        faltantes.push({ texto: 'la descripción', adjetivo: 'obligatoria' });
     }
-
     if (nivel === '') {
-        errorNivel.textContent = 'Seleccione un nivel de complejidad.';
+        faltantes.push({ texto: 'el nivel de complejidad', adjetivo: 'obligatorio' });
+    }
+
+    if (faltantes.length === 1) {
+        error.textContent = mayuscula(faltantes[0].texto + ' es ' + faltantes[0].adjetivo + '.');
         return;
     }
 
-    // Evitar códigos duplicados
+    if (faltantes.length > 1) {
+        var textos = faltantes.map(function (f) { return f.texto; });
+        var ultimo = textos.pop();
+        error.textContent = mayuscula(textos.join(', ') + ' y ' + ultimo + ' son obligatorios.');
+        return;
+    }
+
+    if (!/^\d+$/.test(codigo)) {
+        error.textContent = 'El código debe ser numérico.';
+        return;
+    }
+
+    var codigoNumero = Number(codigo);
+
     for (var i = 0; i < niveles.length; i++) {
-        if (String(niveles[i].codigo) === codigo && i !== editando) {
-            errorCodigo.textContent = 'Ya existe un nivel con este código.';
+        if (Number(niveles[i].codigo) === codigoNumero && i !== editando) {
+            error.textContent = 'Ya existe un nivel con este código.';
             return;
         }
     }
 
     var nuevoNivel = {
-        codigo: Number(codigo),
+        codigo: codigoNumero,
         nombre: nombre,
         descripcion: descripcion,
         nivel: nivel
     };
 
+    var mensaje;
+
     if (editando === null) {
         niveles.push(nuevoNivel);
-        aviso('Nivel registrado correctamente.', 'exito');
+        mensaje = 'Nivel registrado correctamente.';
     } else {
         niveles[editando] = nuevoNivel;
-        aviso('Nivel actualizado correctamente.', 'exito');
+        mensaje = 'Nivel actualizado correctamente.';
     }
 
     guardar();
     listar();
     cerrarFormulario();
-
-    // Volver a mostrar el aviso después de cerrar el formulario
-    aviso(
-        editando === null ? 'Nivel registrado correctamente.' : 'Nivel actualizado correctamente.',
-        'exito'
-    );
+    aviso(mensaje, 'exito');
 }
 
-// Eventos
-document.getElementById('btn_registrar')
-    .addEventListener('click', abrirFormulario);
+document.getElementById('btn_registrar').addEventListener('click', abrirFormulario);
+document.getElementById('btn_cancelar').addEventListener('click', cerrarFormulario);
+document.getElementById('formulario').addEventListener('submit', guardarNivel);
+document.getElementById('buscador').addEventListener('input', listar);
 
-document.getElementById('btn_cancelar')
-    .addEventListener('click', cerrarFormulario);
+document.getElementById('cuerpo_tabla').addEventListener('click', function (evento) {
+    var boton = evento.target.closest('[data-accion="editar"]');
 
-document.getElementById('formulario')
-    .addEventListener('submit', guardarNivel);
+    if (boton) {
+        editarNivel(Number(boton.dataset.indice));
+    }
+});
 
-document.getElementById('buscador')
-    .addEventListener('input', listar);
-
-// Evento para editar desde la tabla
-document.getElementById('cuerpo_tabla')
-    .addEventListener('click', function(evento) {
-        var boton = evento.target.closest('[data-accion="editar"]');
-
-        if (boton) {
-            editarNivel(Number(boton.dataset.indice));
-        }
-    });
-
-// Inicializar catálogo
 listar();
