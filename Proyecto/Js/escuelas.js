@@ -102,7 +102,14 @@ function editar(i) {
 
     document.getElementById('codigo').value = escuelas[i].codigo;
     document.getElementById('nombre').value = escuelas[i].nombre;
-    document.getElementById('director').value = escuelas[i].director;
+    var selectDirector = document.getElementById('director');
+
+    for (var j = 0; j < selectDirector.options.length; j++) {
+        if (selectDirector.options[j].text === escuelas[i].director) {
+            selectDirector.selectedIndex = j;
+            break;
+        }
+    }
 
     // El código no se puede cambiar al editar
     document.getElementById('codigo').readOnly = true;
@@ -122,21 +129,42 @@ function guardarEscuela(evento) {
 
     var codigo = document.getElementById('codigo').value.trim().toUpperCase();
     var nombre = document.getElementById('nombre').value.trim();
-    var director = document.getElementById('director').value;
+    var selectDirector = document.getElementById('director');
+    var director = selectDirector.options[selectDirector.selectedIndex].text;
     var error = document.getElementById('error_formulario');
 
-    if (codigo === '') {
-        error.textContent = 'Ingrese un código válido.';
+    if (codigo === '' && nombre === '' && director === '') {
+    error.textContent = 'El código, el nombre y el director son obligatorios.';
+    return;
+    }
+
+    if (codigo === '' && nombre === '') {
+        error.textContent = 'El código y el nombre son obligatorios.';
         return;
     }
 
-    if (nombre === '' || nombre.length < 3) {
-        error.textContent = 'Ingrese el nombre de la escuela (mínimo 3 caracteres).';
+    if (codigo === '' && director === '') {
+        error.textContent = 'El código y el director son obligatorios.';
+        return;
+    }
+
+    if (nombre === '' && director === '') {
+        error.textContent = 'El nombre y el director son obligatorios.';
+        return;
+    }
+
+    if (codigo === '') {
+        error.textContent = 'El código es obligatorio.';
+        return;
+    }
+
+    if (nombre === '') {
+        error.textContent = 'El nombre es obligatorio.';
         return;
     }
 
     if (director === '') {
-        error.textContent = 'seleccione un director.';
+        error.textContent = 'El director es obligatorio.';
         return;
     }
 

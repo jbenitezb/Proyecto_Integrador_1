@@ -114,18 +114,38 @@ function guardarMetodologia(evento) {
     error.textContent = '';
     document.getElementById('aviso').className = 'aviso oculto';
 
-    if (codigo === '') {
-        error.textContent = 'Ingrese un código válido.';
+if (codigo === '' && nombre === '' && descripcion === '') {
+    error.textContent = 'El código, el nombre y la descripción son obligatorios.';
+    return;
+    }
+
+    if (codigo === '' && nombre === '') {
+        error.textContent = 'El código y el nombre son obligatorios.';
         return;
     }
 
-    if (nombre === '' || nombre.length < 3) {
-        error.textContent = 'Ingrese un nombre válido (mínimo 3 caracteres).';
+    if (codigo === '' && descripcion === '') {
+        error.textContent = 'El código y la descripción son obligatorios.';
+        return;
+    }
+
+    if (nombre === '' && descripcion === '') {
+        error.textContent = 'El nombre y la descripción son obligatorios.';
+        return;
+    }
+
+    if (codigo === '') {
+        error.textContent = 'El código es obligatorio.';
+        return;
+    }
+
+    if (nombre === '') {
+        error.textContent = 'El nombre es obligatorio.';
         return;
     }
 
     if (descripcion === '') {
-        error.textContent = 'Ingrese la descripción de la metodología.';
+        error.textContent = 'La descripción es obligatoria.';
         return;
     }
 

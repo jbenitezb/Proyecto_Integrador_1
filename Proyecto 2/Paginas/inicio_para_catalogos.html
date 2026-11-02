@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/inicio_para_catalogos.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="menu">
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="bx bx-menu"></i>
+            </label>
+            <div class="logo">
+                <img src="../img/images-removebg-preview.png" alt="Logo" class="imagen">
+                <span class="logo_texto"></span>
+            </div>
+           <ul class="opciones">
+                <li class="elemento_menu"><a class="enlace_menu" href="perfil_usuario.html">USUARIOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu enlace_activo" href="inicio_para_catalogos.html">CATÁLOGOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="cursos.html">CURSOS</a></li>
+                <li class="elemento_menu"><a class="enlace_menu" href="reportes.html">REPORTES</a></li>
+                <li class="elemento_menu"><button class="btn_header btn_idioma">ES / EN</button></li>
+                <li class="elemento_menu"><button class="btn_header btn_salir">SALIR</button></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main id="inicio-catalogos">
+
+        <div class="seccion-catalogo-contenedor">
+
+            <!-- Barra lateral de navegación -->
+            <nav class="catalogo_sidebar" aria-label="Catálogos">
+                <ul class="catalogo_menu-lateral">
+                    <li><a href="catalogo_escuela.html">ESCUELAS</a></li>
+                    <li><a href="catalogo_carreras.html">CARRERAS</a></li>
+                    <li><a href="estado_curso.html">ESTADO CURSO</a></li>
+                    <li><a href="area_sfia.html">ÁREA SFIA</a></li>
+                    <li><a href="tematica.html">TEMÁTICA</a></li>
+                    <li><a href="Metodologias.html">METODOLOGÍAS</a></li>
+                    <li><a href="nivel.html">NIVEL</a></li>
+                    <li><a href="certificaciones.html">CERTIFICACIONES</a></li>
+                    <li><a href="catalogo_moneda.html">MONEDA</a></li>
+                </ul>
+            </nav>
+
+            <section class="contenido-principal">
+
+                <div class="bienvenida-catalogos">
+                    <p class="subtitulo-catalogos">ADMINISTRACIÓN ACADÉMICA</p>
+
+                    <h1>¡Bienvenido al área de catálogos!</h1>
+
+                    <p class="descripcion-catlogos">
+                        Gestioná la información que permite organizar, completar
+                        y mantener actualizados los cursos de la Universidad CENFOTEC.
+                    </p>
+                </div>
+
+                <div class="catalogos-introduccion">
+                    <h2>¿Qué podés gestionar?</h2>
+
+                    <div class="catalogos-tarjetas">
+
+                        <article class="tarjeta-catalogo">
+                            <h3>Escuelas y carreras</h3>
+                            <p>Organizá las escuelas y carreras disponibles.</p>
+                        </article>
+
+                        <article class="tarjeta-catalogo">
+                            <h3>Información académica</h3>
+                            <p>Administrá niveles, temáticas y áreas SFIA.</p>
+                        </article>
+
+                        <article class="tarjeta-catalogo">
+                            <h3>Configuración de cursos</h3>
+                            <p>Gestioná estados y metodologías de los cursos.</p>
+                        </article>
+
+                        <article class="tarjeta-catalogo">
+                            <h3>Certificaciones y moneda</h3>
+                            <p>Mantené los datos necesarios para registrar cursos.</p>
+                        </article>
+
+                    </div>
+                </div>
+
+                <div class="indicacion-catalogos">
+                    <h3>¿Cómo empezar?</h3>
+                    <p>
+                        Seleccioná una categoría en el menú lateral para consultar
+                        o administrar sus registros. Esta información se utiliza
+                        al registrar y actualizar cursos.
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+     <footer class="footer_referencia">
+        <div class="footer_columna">
+            <p><strong>Correo electrónico: </strong></p>
+            <p>info@ucenfotec.ac.cr</p>
+            <p><strong>Dirección:</strong></p>
+            <p>
+                Barrio Francisco Peralta, sobre Avenida Central y Calle 33, 
+                10104 San José, Provincia de San José, Costa Rica.
+            </p>
+        </div>
+
+        <div class="footer_columna">
+            <h3>REDES SOCIALES</h3>
+            <div class="footer_redes">
+                <div class="footer_redes">
+                    <a href="https://www.facebook.com/UCenfotec">f</a>
+                    <a href="https://x.com/ucenfotec">𝕏</a>
+                    <a href="https://www.youtube.com/@UniversidadCenfotec/videos">▶</a>
+                    <a href="https://www.instagram.com/ucenfotec">回</a>
+                    <a href="https://www.linkedin.com/school/universidad-cenfotec/">in</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>BUSCAR</h3>
+            <div class="footer_buscador">
+                <input type="text" placeholder="Buscar...">
+                <button>🔍</button>
+            </div>
+        </div>
+        <div class="footer_columna">
+            <h3>VÍNCULOS DE INTERÉS</h3>
+            <ul>
+                <li><a href="#">> Términos y condiciones de uso del sitio web</a></li>
+                <li><a href="#">> Centro de Asistencia</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../Js/cerrar_session.js"></script>
+
+</body>
+</html>

@@ -202,29 +202,41 @@ function guardarCarrera(evento) {
     error.textContent = '';
 
 
-     if (codigo === '') {
-        error.textContent = 'Ingrese un código válido.';
+    if (codigo === '' && nombre === '' && escuela === '') {
+    error.textContent = 'El código, el nombre y la escuela son obligatorios.';
+    return;
+    }
+
+    if (codigo === '' && nombre === '') {
+        error.textContent = 'El código y el nombre son obligatorios.';
         return;
     }
 
-    if (nombre === '' || nombre.length < 3) {
-        error.textContent = 'Ingrese el nombre de la carrera (mínimo 3 caracteres).';
+    if (codigo === '' && escuela === '') {
+        error.textContent = 'El código y la escuela son obligatorios.';
+        return;
+    }
+
+    if (nombre === '' && escuela === '') {
+        error.textContent = 'El nombre y la escuela son obligatorios.';
+        return;
+    }
+
+    if (codigo === '') {
+        error.textContent = 'El código es obligatorio.';
+        return;
+    }
+
+    if (nombre === '') {
+        error.textContent = 'El nombre es obligatorio.';
         return;
     }
 
     if (escuela === '') {
-        error.textContent = 'Seleccione una escuela válida.';
+        error.textContent = 'La escuela es obligatoria.';
         return;
     }
 
-    // Evitar códigos duplicados
-    for (var i = 0; i < carreras.length; i++) {
-        if (carreras[i].codigo.toUpperCase() === codigo &&i !== editando) {
-            error.textContent =
-                'Ya existe una carrera con este código.';
-            return;
-        }
-    }
 
     var carrera = {
         codigo: codigo,
