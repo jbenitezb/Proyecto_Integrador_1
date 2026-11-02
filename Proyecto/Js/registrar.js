@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputNombre = document.getElementById('nombre');
     const inputPrimerApellido = document.getElementById('primer_apellido'); 
     const inputSegundoApellido = document.getElementById('segundo_apellido'); 
-    const inputApellidos = document.getElementById('apellidos');
     const inputIdentificacion = document.getElementById('identificacion');
     const inputCorreo = document.getElementById('correo');
     const inputTelefono = document.getElementById('telefono'); 
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const togglePassword = document.getElementById('togglePassword');
     
     // Hu-10 error 
-    const errorFormulario = document.getElementById('error_formulario') || document.getElementById('formulario_mensaje');
+    const errorFormulario = document.getElementById('aviso');
     const inputEdadCalculada = document.getElementById('edad_calculada'); 
 
     // Ocultar mensajes al cargar
