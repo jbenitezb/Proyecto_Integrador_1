@@ -1,0 +1,75 @@
+.bienvenida-catalogos {
+    background-color: #f2f7fc;
+    padding: 35px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.subtitulo-catalogos {
+    color: #0866c6;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.bienvenida-catalogos h1 {
+    color: #102b50;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.descripcion-catalogos {
+    color: #526b8c;
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 700px;
+}
+
+.catalogos-introduccion h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.catalogos-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.tarjeta-catalogo {
+    padding: 22px;
+    border: 1px solid #dce6f1;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.tarjeta-catalogo h3 {
+    color: #084599;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.tarjeta-catalogo p {
+    color: #526b8c;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.indicacion-catalogos {
+    background-color: #f2f7fc;
+    border-left: 4px solid #0866c6;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 5px;
+}
+
+.indicacion-catalogos h3 {
+    margin-bottom: 8px;
+    color: #102b50;
+}
+
+.indicacion-catalogos p {
+    color: #526b8c;
+    line-height: 1.6;
+}

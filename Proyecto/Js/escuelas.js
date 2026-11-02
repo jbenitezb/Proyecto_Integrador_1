@@ -102,7 +102,14 @@ function editar(i) {
 
     document.getElementById('codigo').value = escuelas[i].codigo;
     document.getElementById('nombre').value = escuelas[i].nombre;
-    document.getElementById('director').value = escuelas[i].director;
+    var selectDirector = document.getElementById('director');
+
+    for (var j = 0; j < selectDirector.options.length; j++) {
+        if (selectDirector.options[j].text === escuelas[i].director) {
+            selectDirector.selectedIndex = j;
+            break;
+        }
+    }
 
     // El código no se puede cambiar al editar
     document.getElementById('codigo').readOnly = true;
@@ -122,7 +129,8 @@ function guardarEscuela(evento) {
 
     var codigo = document.getElementById('codigo').value.trim().toUpperCase();
     var nombre = document.getElementById('nombre').value.trim();
-    var director = document.getElementById('director').value;
+    var selectDirector = document.getElementById('director');
+    var director = selectDirector.options[selectDirector.selectedIndex].text;
     var error = document.getElementById('error_formulario');
 
     if (codigo === '' && nombre === '' && director === '') {
@@ -135,12 +143,12 @@ function guardarEscuela(evento) {
         return;
     }
 
-    if (codigo === '' && descripcion === '') {
+    if (codigo === '' && director === '') {
         error.textContent = 'El código y el director son obligatorios.';
         return;
     }
 
-    if (nombre === '' && descripcion === '') {
+    if (nombre === '' && director === '') {
         error.textContent = 'El nombre y el director son obligatorios.';
         return;
     }
@@ -155,8 +163,8 @@ function guardarEscuela(evento) {
         return;
     }
 
-    if (descripcion === '') {
-        error.textContent = 'El director es obligatoria.';
+    if (director === '') {
+        error.textContent = 'El director es obligatorio.';
         return;
     }
 

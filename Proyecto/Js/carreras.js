@@ -212,12 +212,12 @@ function guardarCarrera(evento) {
         return;
     }
 
-    if (codigo === '' && descripcion === '') {
+    if (codigo === '' && escuela === '') {
         error.textContent = 'El código y la escuela son obligatorios.';
         return;
     }
 
-    if (nombre === '' && descripcion === '') {
+    if (nombre === '' && escuela === '') {
         error.textContent = 'El nombre y la escuela son obligatorios.';
         return;
     }
@@ -232,17 +232,11 @@ function guardarCarrera(evento) {
         return;
     }
 
-    if (descripcion === '') {
+    if (escuela === '') {
         error.textContent = 'La escuela es obligatoria.';
         return;
     }
 
-    for (var i = 0; i < areas.length; i++) {
-        if (areas[i].codigo === codigo && i !== editando) {
-            error.textContent = 'Ya existe un área con este código.';
-            return;
-        }
-    }
 
     var carrera = {
         codigo: codigo,
