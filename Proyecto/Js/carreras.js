@@ -1,11 +1,12 @@
 
 /* ===== CATÁLOGO DE CARRERAS ===== */
 
+// toma formato json y lo convierte a un arreglo de esceujas js
 var carreras = JSON.parse(localStorage.getItem('carreras')) || [];
 var escuelas = JSON.parse(localStorage.getItem('escuelas')) || [];
 var editando = null;
 
-// Guardar carreras
+// Guardar carreras que es js a json y lo guarda con local storage
 function guardar() {
     localStorage.setItem('carreras', JSON.stringify(carreras));
 }
@@ -56,8 +57,7 @@ function cargarEscuelas() {
     var select = document.getElementById('escuela');
     var codigoSeleccionado = select.value;
 
-    select.innerHTML =
-        '<option value="">Seleccione una escuela</option>';
+    select.innerHTML = '<option value="">Seleccione una escuela</option>';
 
     escuelas.forEach(function(escuela) {
         var opcion = document.createElement('option');
